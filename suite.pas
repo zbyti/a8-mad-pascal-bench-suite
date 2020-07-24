@@ -56,25 +56,35 @@ begin
   DisableVBLI;
   printScore(bsort.name,0);
 
+  pause(100);
+
   startCounter(sieve.name);
   sieve.run;
   DisableVBLI;
   printScore(sieve.name,1);
+  
+  pause(100);
 
   startCounter(count_for.name);
   count_for.run;
   DisableVBLI;
   printScore(count_for.name,2);
+  
+  pause(100);
 
   startCounter(count_while.name);
   count_while.run;
   DisableVBLI;
   printScore(count_while.name,3);
+  
+  pause(100);
 
   startCounter(montecarlo.name);
   montecarlo.run;
   DisableVBLI;
   printScore(montecarlo.name,4);
+  
+  pause(100);
 
   chbas := $80;
   sdlstl := word(@dlScore);
