@@ -19,8 +19,6 @@ var
   sdlstl  : word absolute $D402;
   chbas   : byte absolute $D409;
 
-var px: TPoint;
-
 procedure dlScore():assembler;
 asm
 {
