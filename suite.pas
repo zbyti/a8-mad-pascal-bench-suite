@@ -20,13 +20,13 @@ var
   chbas   : byte absolute $D409;
 
 procedure dlScore():assembler;
-  asm
-  {
+asm
+{
   :3  .byte $70
       .byte $42,a(lms)
   :21 .byte $02
       .byte $41,a(dlScore)
-  };
+};
 end;
 
 procedure initSuite();
