@@ -11,13 +11,10 @@ const
   lms = $e000;
 
 var
-  a       : byte absolute $20;
-  b       : byte absolute $21;
-  c       : byte absolute $22;
-  d       : byte absolute $23;
-  e       : byte absolute $24;
   sdlstl  : word absolute $D402;
   chbas   : byte absolute $D409;
+
+{$i counter.inc}
 
 procedure dlScore():assembler;
 asm
@@ -36,8 +33,6 @@ begin
   FillChar(pointer($20), $28, $ff);
   FillChar(pointer(lms), $fff, 0);
 end;
-
-{$i counter.inc}
 
 procedure printScore(name: string; row: byte);
 var

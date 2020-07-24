@@ -1,3 +1,10 @@
+var
+  a       : byte absolute $20;
+  b       : byte absolute $21;
+  c       : byte absolute $22;
+  d       : byte absolute $23;
+  e       : byte absolute $24;
+
 procedure dlCouner:assembler;
 asm
 {
