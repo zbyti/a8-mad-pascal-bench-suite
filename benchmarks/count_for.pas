@@ -1,4 +1,4 @@
-unit countdown;
+unit count_for;
 
 //---------------------- INTERFACE ---------------------------------------------
 
@@ -9,7 +9,7 @@ interface
 
 //---------------------- CONSTANS ----------------------------------------------
 const
-  name      : string = 'countdown';
+  name      : string = 'count_for';
 
 //---------------------- VARIABLES ---------------------------------------------
 var
@@ -21,13 +21,13 @@ implementation
 
 procedure run;
 var
-  a         : byte absolute $30;
-  b         : byte absolute $31;
-  c         : byte absolute $32;
-  d         : byte absolute $33;
-  e         : byte absolute $34;
-  f         : byte absolute $35;
-  g         : byte absolute $36;
+  a         : byte absolute $41;
+  b         : byte absolute $42;
+  c         : byte absolute $43;
+  d         : byte absolute $44;
+  e         : byte absolute $45;
+  f         : byte absolute $46;
+  g         : byte absolute $47;
 begin
   for a:=1 downto 0 do
     for b:=9 downto 0 do

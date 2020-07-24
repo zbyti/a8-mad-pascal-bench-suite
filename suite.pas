@@ -5,7 +5,7 @@ program Suite;
 
 uses
   b_system,
-  bsort, sieve, countdown, montecarlo;
+  bsort, sieve, count_while, count_for, montecarlo;
 
 const
   lms = $e000;
@@ -68,15 +68,20 @@ begin
   DisableVBLI;
   printScore(sieve.name,1);
 
-  startCounter(countdown.name);
-  countdown.run;
+  startCounter(count_for.name);
+  count_for.run;
   DisableVBLI;
-  printScore(countdown.name,2);
+  printScore(count_for.name,2);
+
+  startCounter(count_while.name);
+  count_while.run;
+  DisableVBLI;
+  printScore(count_while.name,3);
 
   startCounter(montecarlo.name);
   montecarlo.run;
   DisableVBLI;
-  printScore(montecarlo.name,3);
+  printScore(montecarlo.name,4);
 
   chbas := $80;
   sdlstl := word(@dlScore);
