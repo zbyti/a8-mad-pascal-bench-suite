@@ -1,0 +1,1694 @@
+mads 2.1.0
+   388 					opt l+
+   101
+   102 				.print 'ZPAGE: ',fxptr,'..',zpend-1
+   102 				ZPAGE: $0080..$00D7
+   103
+   104 				.print 'RTLIB: ',RTLIB,'..',*-1
+   104 				RTLIB: $2026..$2101
+   105
+   106 				; ------------------------------------------------------------
+   107
+   108 2102			START
+   109 2102 BA				tsx
+   110 2103 8E B4 25			stx MAIN.@halt+1
+   111
+   112 					.ifdef fmulinit
+   113 					fmulinit
+   114 					eif
+   115
+   116 = 220A			VLEN	= VARDATASIZE-VARINITSIZE
+   117 = 25CD			VADR	= DATAORIGIN+VARINITSIZE
+   118
+   119 					ift VADR > $BFFF
+   120 					ert 'Invalid memory address range ',VADR
+   121 					eli (VLEN>0) && (VLEN<=256)
+   122 					ldx #256-VLEN
+   123 					lda #0
+   124 					sta:rne VADR+VLEN-256,x+
+   125 					eli VLEN>0
+   126 					@fill #VADR #VLEN #0
+   126 				 MWA #VADR @FILL.PTR1\ MWA #VLEN @FILL.PTR3\ MVA #0 @FILL.PTR2\ JSR @FILL
+   126 2106 A9 CD 85 88 A9 25 +  MWA #VADR @FILL.PTR1
+   126 210E A9 0A 85 8C A9 22 +  MWA #VLEN @FILL.PTR3
+   126 2116 A9 00 85 84		 MVA #0 @FILL.PTR2
+   126 211A 20 A6 20		 JSR @FILL
+   127 					eif
+   128
+   129 					.ifdef MAIN.@DEFINES.ROMOFF
+   130 					icl 'atari\romoff.asm'
+   131 					.endif
+   132
+   133 211D A9 D7 85 82 A9 47 + 	mwa #PROGRAMSTACK psptr
+   134
+   135 2125 A2 0F			ldx #$0f					; DOS II+/D ParamStr
+   136 2127 BD 40 03 9D B7 25 + 	mva:rpl $340,x MAIN.IOCB@COPY,x-
+   137
+   138 2130 E8				inx						; X = 0
+   139 2131 86 90			stx bp						; BP = 0
+   140
+   141 2133 8E 08 D2			stx audctl					; reset POKEY
+   142 2136 A9 03			lda #3
+   143 2138 8D 0F D2			sta skctl
+   144
+   145 213B CA				dex						; X = 255
+   146
+   147 213C				UNITINITIALIZATION
+Macro: UNITINITIALIZATION [Source: suite.a65]
+    15 213C 20 B9 22			jsr MAIN.BSORT.@UnitInit
+    19 213F 20 39 23			jsr MAIN.SIEVE.@UnitInit
+    23 2142 20 98 23			jsr MAIN.COUNTDOWN.@UnitInit
+    27 2145 20 39 24			jsr MAIN.MONTECARLO.@UnitInit
+Source: suite.a65
+   148
+   149 2148			.local	MAIN						; PROCEDURE
+   150
+   151 2148 4C 62 25			jmp l_002D
+   152
+   153 				; ------------------------------------------------------------
+   154
+   155 214B			.local	SYSTEM						; UNIT
+   156
+   157 214B			.local	FILLCHAR_0068					; PROCEDURE | ASSEMBLER | OVERLOAD | REGISTER
+   158
+   159 				; ------------------------------------------------------------
+   160
+   161 				; Generate Assignment for BYTE / CHAR / SHORTINT / BOOLEAN
+   162 				; as Pointer
+   163 214B B5 98 85 84			mva :STACKORIGIN,x VALUE
+   164 214F CA				dex
+   165
+   166 				; ------------------------------------------------------------
+   167
+   168 				; Generate Assignment for WORD / SMALLINT / SHORTREAL / POINTER
+   169 				; as Pointer
+   170 2150 B5 98 85 8C			mva :STACKORIGIN,x COUNT
+   171 2154 B5 A8 85 8D			mva :STACKORIGIN+STACKWIDTH,x COUNT+1
+   172 2158 CA				dex
+   173
+   174 				; ------------------------------------------------------------
+   175
+   176 				; Generate Assignment for WORD / SMALLINT / SHORTREAL / POINTER
+   177 				; as Pointer
+   178 2159 B5 98 85 88			mva :STACKORIGIN,x A
+   179 215D B5 A8 85 89			mva :STACKORIGIN+STACKWIDTH,x A+1
+   180 2161 CA				dex
+   181
+   182 				; ---------------------  ASM Block 024  ---------------------
+   183
+   184 2162 20 A6 20			jsr @fill
+   185
+   186
+   187 				; ------------------------------------------------------------
+   188
+   189 = 0088			A	= edx
+   190 = 008C			COUNT	= ecx
+   191 = 0084			VALUE	= eax
+   192 2165			@exit
+   193 					.ifdef @new
+   194 					lda <@VarData
+   195 					sta :ztmp
+   196 					lda >@VarData
+   197 					ldy #@VarDataSize-1
+   198 					jmp @FreeMem
+   199 					eif
+   200 2165 60				rts						; ret
+   201 				.endl
+   202
+   203 2166			.local	FILLCHAR_0072					; PROCEDURE | ASSEMBLER | OVERLOAD | REGISTER
+   204
+   205 				; ------------------------------------------------------------
+   206
+   207 				; Generate Assignment for BYTE / CHAR / SHORTINT / BOOLEAN
+   208 				; as Pointer
+   209 2166 B5 98 85 84			mva :STACKORIGIN,x VALUE
+   210 216A CA				dex
+   211
+   212 				; ------------------------------------------------------------
+   213
+   214 				; Generate Assignment for WORD / SMALLINT / SHORTREAL / POINTER
+   215 				; as Pointer
+   216 216B B5 98 85 8C			mva :STACKORIGIN,x COUNT
+   217 216F B5 A8 85 8D			mva :STACKORIGIN+STACKWIDTH,x COUNT+1
+   218 2173 CA				dex
+   219
+   220 				; ------------------------------------------------------------
+   221
+   222 				; Generate Assignment for WORD / SMALLINT / SHORTREAL / POINTER
+   223 				; as Pointer
+   224 2174 B5 98 85 88			mva :STACKORIGIN,x A
+   225 2178 B5 A8 85 89			mva :STACKORIGIN+STACKWIDTH,x A+1
+   226 217C CA				dex
+   227
+   228 				; ---------------------  ASM Block 025  ---------------------
+   229
+   230 217D 20 A6 20			jsr @fill
+   231
+   232
+   233 				; ------------------------------------------------------------
+   234
+   235 = 0088			A	= edx
+   236 = 008C			COUNT	= ecx
+   237 = 0084			VALUE	= eax
+   238 2180			@exit
+   239 					.ifdef @new
+   240 					lda <@VarData
+   241 					sta :ztmp
+   242 					lda >@VarData
+   243 					ldy #@VarDataSize-1
+   244 					jmp @FreeMem
+   245 					eif
+   246 2180 60				rts						; ret
+   247 				.endl
+   248
+   249 2181			.local	MOVE_007C					; PROCEDURE | ASSEMBLER | OVERLOAD | REGISTER
+   250
+   251 				; ------------------------------------------------------------
+   252
+   253 				; Generate Assignment for WORD / SMALLINT / SHORTREAL / POINTER
+   254 				; as Pointer
+   255 2181 B5 98 85 84			mva :STACKORIGIN,x COUNT
+   256 2185 B5 A8 85 85			mva :STACKORIGIN+STACKWIDTH,x COUNT+1
+   257 2189 CA				dex
+   258
+   259 				; ------------------------------------------------------------
+   260
+   261 				; Generate Assignment for WORD / SMALLINT / SHORTREAL / POINTER
+   262 				; as Pointer
+   263 218A B5 98 85 8C			mva :STACKORIGIN,x DEST
+   264 218E B5 A8 85 8D			mva :STACKORIGIN+STACKWIDTH,x DEST+1
+   265 2192 CA				dex
+   266
+   267 				; ------------------------------------------------------------
+   268
+   269 				; Generate Assignment for WORD / SMALLINT / SHORTREAL / POINTER
+   270 				; as Pointer
+   271 2193 B5 98 85 88			mva :STACKORIGIN,x SOURCE
+   272 2197 B5 A8 85 89			mva :STACKORIGIN+STACKWIDTH,x SOURCE+1
+   273 219B CA				dex
+   274
+   275 				; ---------------------  ASM Block 031  ---------------------
+   276
+   277 219C 20 51 20			jsr @move
+   278
+   279
+   280 				; ------------------------------------------------------------
+   281
+   282 = 0088			SOURCE	= edx
+   283 = 008C			DEST	= ecx
+   284 = 0084			COUNT	= eax
+   285 219F			@exit
+   286 					.ifdef @new
+   287 					lda <@VarData
+   288 					sta :ztmp
+   289 					lda >@VarData
+   290 					ldy #@VarDataSize-1
+   291 					jmp @FreeMem
+   292 					eif
+   293 219F 60				rts						; ret
+   294 				.endl
+   295
+   296 21A0			.local	MOVE_0086					; PROCEDURE | ASSEMBLER | OVERLOAD | REGISTER
+   297
+   298 				; ------------------------------------------------------------
+   299
+   300 				; Generate Assignment for WORD / SMALLINT / SHORTREAL / POINTER
+   301 				; as Pointer
+   302 21A0 B5 98 85 84			mva :STACKORIGIN,x COUNT
+   303 21A4 B5 A8 85 85			mva :STACKORIGIN+STACKWIDTH,x COUNT+1
+   304 21A8 CA				dex
+   305
+   306 				; ------------------------------------------------------------
+   307
+   308 				; Generate Assignment for WORD / SMALLINT / SHORTREAL / POINTER
+   309 				; as Pointer
+   310 21A9 B5 98 85 8C			mva :STACKORIGIN,x DEST
+   311 21AD B5 A8 85 8D			mva :STACKORIGIN+STACKWIDTH,x DEST+1
+   312 21B1 CA				dex
+   313
+   314 				; ------------------------------------------------------------
+   315
+   316 				; Generate Assignment for WORD / SMALLINT / SHORTREAL / POINTER
+   317 				; as Pointer
+   318 21B2 B5 98 85 88			mva :STACKORIGIN,x SOURCE
+   319 21B6 B5 A8 85 89			mva :STACKORIGIN+STACKWIDTH,x SOURCE+1
+   320 21BA CA				dex
+   321
+   322 				; ---------------------  ASM Block 033  ---------------------
+   323
+   324 21BB 20 51 20			jsr @move
+   325
+   326
+   327 				; ------------------------------------------------------------
+   328
+   329 = 0088			SOURCE	= edx
+   330 = 008C			DEST	= ecx
+   331 = 0084			COUNT	= eax
+   332 21BE			@exit
+   333 					.ifdef @new
+   334 					lda <@VarData
+   335 					sta :ztmp
+   336 					lda >@VarData
+   337 					ldy #@VarDataSize-1
+   338 					jmp @FreeMem
+   339 					eif
+   340 21BE 60				rts						; ret
+   341 				.endl
+   342
+   343 21BF			.local	PAUSE_00A4					; PROCEDURE | ASSEMBLER | OVERLOAD
+   344
+   345 				; ---------------------  ASM Block 039  ---------------------
+   346
+   347 21BF A5 14 C5 14 F0 FC		lda:cmp:req :rtclok+2
+   348
+   349 21C5			@exit
+   350 					.ifdef @new
+   351 					lda <@VarData
+   352 					sta :ztmp
+   353 					lda >@VarData
+   354 					ldy #@VarDataSize-1
+   355 					jmp @FreeMem
+   356 					eif
+   357 21C5 60				rts						; ret
+   358 				.endl
+   359
+   360 				; ------------------------------------------------------------
+   361
+   362 = 0101			__PORTB_BANKS	= $0101
+   363 = 0648			M_PI_2	= $0648
+   364 = 0192			D_PI_2	= $0192
+   365 = 0004			D_PI_180	= $04
+   366 = 0000			MGTIA	= $00
+   367 = 0080			MVBXE	= $80
+   368 = 0000			VBXE_XDLADR	= $00
+   369 = 0100			VBXE_BCBADR	= $0100
+   370 = 1000			VBXE_MAPADR	= $1000
+   371 = 5000			VBXE_OVRADR	= $5000
+   372 = B000			VBXE_WINDOW	= $B000
+   373 = 0000			IDLI	= $00
+   374 = 0001			IVBL	= $01
+   375 = 00FE			CH_DELCHR	= $FE
+   376 = 009B			CH_ENTER	= $9B
+   377 = 001B			CH_ESC	= $1B
+   378 = 001C			CH_CURS_UP	= $1C
+   379 = 001D			CH_CURS_DOWN	= $1D
+   380 = 001E			CH_CURS_LEFT	= $1E
+   381 = 001F			CH_CURS_RIGHT	= $1F
+   382 = 007F			CH_TAB	= $7F
+   383 = 009B			CH_EOL	= $9B
+   384 = 007D			CH_CLR	= $7D
+   385 = 00FD			CH_BELL	= $FD
+   386 = 007E			CH_DEL	= $7E
+   387 = 009C			CH_DELLINE	= $9C
+   388 = 009D			CH_INSLINE	= $9D
+   389 = 0000			COLOR_BLACK	= $00
+   390 = 000E			COLOR_WHITE	= $0E
+   391 = 0032			COLOR_RED	= $32
+   392 = 0096			COLOR_CYAN	= $96
+   393 = 0068			COLOR_VIOLET	= $68
+   394 = 00C4			COLOR_GREEN	= $C4
+   395 = 0074			COLOR_BLUE	= $74
+   396 = 00EE			COLOR_YELLOW	= $EE
+   397 = 0028			COLOR_ORANGE	= $28
+   398 = 00E4			COLOR_BROWN	= $E4
+   399 = 003C			COLOR_LIGHTRED	= $3C
+   400 = 0004			COLOR_GRAY1	= $04
+   401 = 0006			COLOR_GRAY2	= $06
+   402 = 000A			COLOR_GRAY3	= $0A
+   403 = 00CC			COLOR_LIGHTGREEN	= $CC
+   404 = 007C			COLOR_LIGHTBLUE	= $7C
+   405 = 0004			FMOPENREAD	= $04
+   406 = 0008			FMOPENWRITE	= $08
+   407 = 0009			FMOPENAPPEND	= $09
+   408 = 000C			FMOPENREADWRITE	= $0C
+   409 = 25C7			SCREENWIDTH	= DATAORIGIN+$0000
+   410 = 25C9			SCREENHEIGHT	= DATAORIGIN+$0002
+   411 = 25CB			DATESEPARATOR	= DATAORIGIN+$0004
+   412 = D014			TVSYSTEM	= $D014
+   413 = 02C0			adr.PALETTE	= $02C0
+   414 21C6			.var PALETTE	= adr.PALETTE .word
+   415 = D012			adr.HPALETTE	= $D012
+   416 21C6			.var HPALETTE	= adr.HPALETTE .word
+   417 = 25CC			FILEMODE	= DATAORIGIN+$0005
+   418 = 25CD			GRAPHMODE	= DATAORIGIN+$0006
+   419 = 25CE			IORESULT	= DATAORIGIN+$0007
+   420 = 25CF			EOLN	= DATAORIGIN+$0008
+   421 = 25D0			RNDSEED	= DATAORIGIN+$0009
+   422
+   423 = 21C6 C0 02		PALETTE
+   423 = 21C8 12 D0		HPALETTE
+   423 				.endl							; UNIT SYSTEM
+   424
+   425 				; ------------------------------------------------------------
+   426
+   427 21CA			.local	ATARI						; UNIT
+   428
+   429 				; ------------------------------------------------------------
+   430
+   431 = 0012			RTCLOK	= $12
+   432 = 004D			ATRACT	= $4D
+   433 = 0052			LMARGIN	= $52
+   434 = 0053			RMARGIN	= $53
+   435 = 0054			ROWCRS	= $54
+   436 = 0055			COLCRS	= $55
+   437 = 0057			DINDEX	= $57
+   438 = 0058			SAVMSC	= $58
+   439 = 0062			PALNTS	= $62
+   440 = 006A			RAMTOP	= $6A
+   441 = 0200			VDSLST	= $0200
+   442 = 0230			SDLSTL	= $0230
+   443 = 0290			TXTROW	= $0290
+   444 = 0291			TXTCOL	= $0291
+   445 = 0293			TINDEX	= $0293
+   446 = 0294			TXTMSC	= $0294
+   447 = 022F			SDMCTL	= $022F
+   448 = 026F			GPRIOR	= $026F
+   449 = 02F0			CRSINH	= $02F0
+   450 = 02F3			CHACT	= $02F3
+   451 = 02F4			CHBAS	= $02F4
+   452 = 02FC			CH	= $02FC
+   453 = 02C0			PCOLR0	= $02C0
+   454 = 02C1			PCOLR1	= $02C1
+   455 = 02C2			PCOLR2	= $02C2
+   456 = 02C3			PCOLR3	= $02C3
+   457 = 02C4			COLOR0	= $02C4
+   458 = 02C5			COLOR1	= $02C5
+   459 = 02C6			COLOR2	= $02C6
+   460 = 02C7			COLOR3	= $02C7
+   461 = 02C8			COLOR4	= $02C8
+   462 = 02C8			COLBAKS	= $02C8
+   463 = D000			HPOSP0	= $D000
+   464 = D001			HPOSP1	= $D001
+   465 = D002			HPOSP2	= $D002
+   466 = D003			HPOSP3	= $D003
+   467 = D004			HPOSM0	= $D004
+   468 = D005			HPOSM1	= $D005
+   469 = D006			HPOSM2	= $D006
+   470 = D007			HPOSM3	= $D007
+   471 = D008			SIZEP0	= $D008
+   472 = D009			SIZEP1	= $D009
+   473 = D00A			SIZEP2	= $D00A
+   474 = D00B			SIZEP3	= $D00B
+   475 = D00C			SIZEM	= $D00C
+   476 = D00D			GRAFP0	= $D00D
+   477 = D00E			GRAFP1	= $D00E
+   478 = D00F			GRAFP2	= $D00F
+   479 = D010			GRAFP3	= $D010
+   480 = D011			GRAFM	= $D011
+   481 = D004			P0PF	= $D004
+   482 = D014			PAL	= $D014
+   483 = D012			COLPM0	= $D012
+   484 = D013			COLPM1	= $D013
+   485 = D014			COLPM2	= $D014
+   486 = D015			COLPM3	= $D015
+   487 = D016			COLPF0	= $D016
+   488 = D017			COLPF1	= $D017
+   489 = D018			COLPF2	= $D018
+   490 = D019			COLPF3	= $D019
+   491 = D01A			COLBK	= $D01A
+   492 = D01B			PRIOR	= $D01B
+   493 = D01D			GRACTL	= $D01D
+   494 = D01E			HITCLR	= $D01E
+   495 = D200			AUDF1	= $D200
+   496 = D201			AUDC1	= $D201
+   497 = D202			AUDF2	= $D202
+   498 = D203			AUDC2	= $D203
+   499 = D204			AUDF3	= $D204
+   500 = D205			AUDC3	= $D205
+   501 = D206			AUDF4	= $D206
+   502 = D207			AUDC4	= $D207
+   503 = D208			AUDCTL	= $D208
+   504 = D20F			SKSTAT	= $D20F
+   505 = D301			PORTB	= $D301
+   506 = D400			DMACTL	= $D400
+   507 = D401			CHACTL	= $D401
+   508 = D402			DLISTL	= $D402
+   509 = D404			HSCROL	= $D404
+   510 = D405			VSCROL	= $D405
+   511 = D407			PMBASE	= $D407
+   512 = D409			CHBASE	= $D409
+   513 = D40A			WSYNC	= $D40A
+   514 = D40B			VCOUNT	= $D40B
+   515 = D40C			PENH	= $D40C
+   516 = D40D			PENV	= $D40D
+   517 = D40E			NMIEN	= $D40E
+   518
+   519 				.endl							; UNIT ATARI
+   520
+   521 				; ------------------------------------------------------------
+   522
+   523 21CA			.local	B_SYSTEM					; UNIT
+   524
+   525 21CA			.local	SYSTEMOFF_00A5					; PROCEDURE | ASSEMBLER | OVERLOAD
+   526
+   527 				; ------------------------------------------------------------
+   528
+   529 				; Generate Assignment for BYTE / CHAR / SHORTINT / BOOLEAN
+   530 				; as Pointer
+   531 21CA B5 98 8D D3 25		mva :STACKORIGIN,x PORT_B
+   532 21CF CA				dex
+   533
+   534 				; ---------------------  ASM Block 049  ---------------------
+   535
+   536
+   537 						;lda:cmp:req 20 ;; removed due to problem with nmien = 0 already set
+   538 21D0 78					sei
+   539 21D1 A9 00 8D 0E D4			mva #0 NMIEN
+   540
+   541 21D6 AD D3 25 8D 01 D3			mva port_b PORTB
+   542 21DC A9 06 8D FA FF A9 + 		mwa #__nmi NMIVEC
+   543
+   544 21E6 A9 1C				lda <__iret
+   545 21E8 8D FE FF				sta IRQVEC
+   546 21EB 8D 1A 22				sta __vblvec
+   547 21EE 8D 0C 22				sta __dlivec
+   548
+   549 21F1 A9 22				lda >__iret
+   550 21F3 8D FF FF				sta IRQVEC+1
+   551 21F6 8D 1B 22				sta __vblvec+1
+   552 21F9 8D 0D 22				sta __dlivec+1
+   553
+   554 21FC A9 40 8D 0E D4			mva #$40 NMIEN
+   555 2201 8D D2 25				sta __nmien
+   556 2204 D0 17				bne __stop
+   557 2206			__nmi
+   558 2206 2C 0F D4				bit NMIST
+   559 2209 10 04				bpl __vbl
+   560 220B 4C 0C 22				jmp __dlivec
+   561 = 220C			.def :__dlivec = *-2
+   562 220E 40					rti
+   563 220F			__vbl
+   564 220F E6 14				inc rtclok+2
+   565 2211 D0 06				bne __vblvec-1
+   566 2213 E6 13				inc rtclok+1
+   567 2215 D0 02				bne __vblvec-1
+   568 2217 E6 12				inc rtclok
+   569 2219 4C 1A 22				jmp __vblvec
+   570 = 221A			.def :__vblvec = *-2
+   571 = 221C			.def :__iret
+   572 221C 40			    	rti
+   573 221D			__stop
+   574
+   575
+   576 				; ------------------------------------------------------------
+   577
+   578 = 25D3			PORT_B	= DATAORIGIN+$000C
+   579
+   580 = 25D3			@VarData	= PORT_B
+   581 = 0001			@VarDataSize	= 1
+   582
+   583 221D			@exit
+   584 					.ifdef @new
+   585 					lda <@VarData
+   586 					sta :ztmp
+   587 					lda >@VarData
+   588 					ldy #@VarDataSize-1
+   589 					jmp @FreeMem
+   590 					eif
+   591 221D 60				rts						; ret
+   592 				.endl
+   593
+   594 221E			.local	SYSTEMOFF_00A9					; PROCEDURE | OVERLOAD
+   595
+   596 				; optimize FAIL ('SYSTEMOFF_00A5', B_SYSTEM), line = 180
+   597 221E E8				inx
+   598 221F A9 FE 95 98			mva #$FE :STACKORIGIN,x
+   599 2223 20 CA 21			jsr SYSTEMOFF_00A5
+   600 2226			@exit
+   601 					.ifdef @new
+   602 					lda <@VarData
+   603 					sta :ztmp
+   604 					lda >@VarData
+   605 					ldy #@VarDataSize-1
+   606 					jmp @FreeMem
+   607 					eif
+   608 2226 60				rts						; ret
+   609 				.endl
+   610
+   611 2227			.local	ENABLEVBLI					; PROCEDURE | ASSEMBLER
+   612
+   613 				; ------------------------------------------------------------
+   614
+   615 				; Generate Assignment for WORD / SMALLINT / SHORTREAL / POINTER
+   616 				; as Pointer
+   617 2227 B5 98 8D D4 25		mva :STACKORIGIN,x VBLPTR
+   618 222C B5 A8 8D D5 25		mva :STACKORIGIN+STACKWIDTH,x VBLPTR+1
+   619 2231 CA				dex
+   620
+   621 				; ---------------------  ASM Block 051  ---------------------
+   622
+   623
+   624 2232 A5 14 C5 14 F0 FC			lda:cmp:req 20
+   625 2238 A9 00 8D 0E D4			mva #0 NMIEN
+   626 223D AD D4 25 8D 1A 22 + 		mwa vblptr __vblvec
+   627 2249 AD D2 25				lda __nmien
+   628 224C 09 40				ora #$40
+   629 224E 8D 0E D4				sta NMIEN
+   630 2251 8D D2 25				sta __nmien
+   631
+   632
+   633 				; ------------------------------------------------------------
+   634
+   635 = 25D4			VBLPTR	= DATAORIGIN+$000D
+   636
+   637 = 25D4			@VarData	= VBLPTR
+   638 = 0002			@VarDataSize	= 2
+   639
+   640 2254			@exit
+   641 					.ifdef @new
+   642 					lda <@VarData
+   643 					sta :ztmp
+   644 					lda >@VarData
+   645 					ldy #@VarDataSize-1
+   646 					jmp @FreeMem
+   647 					eif
+   648 2254 60				rts						; ret
+   649 				.endl
+   650
+   651 2255			.local	DISABLEVBLI					; PROCEDURE | ASSEMBLER
+   652
+   653 				; ---------------------  ASM Block 052  ---------------------
+   654
+   655
+   656 2255 A5 14 C5 14 F0 FC			lda:cmp:req 20
+   657 225B A9 00 8D 0E D4			mva #0 NMIEN
+   658 2260 A9 1C 8D 1A 22 A9 + 		mwa #__iret __vblvec
+   659 226A AD D2 25				lda __nmien
+   660 226D 09 40				ora #$40
+   661 226F 8D 0E D4				sta NMIEN
+   662 2272 8D D2 25				sta __nmien
+   663
+   664 2275			@exit
+   665 					.ifdef @new
+   666 					lda <@VarData
+   667 					sta :ztmp
+   668 					lda >@VarData
+   669 					ldy #@VarDataSize-1
+   670 					jmp @FreeMem
+   671 					eif
+   672 2275 60				rts						; ret
+   673 				.endl
+   674
+   675 				; ------------------------------------------------------------
+   676
+   677 = 25D2			__NMIEN	= DATAORIGIN+$000B
+   678 = 0080			PORTB_SELFTEST_OFF	= $80
+   679 = 0002			PORTB_BASIC_OFF	= $02
+   680 = 0001			PORTB_SYSTEM_ON	= $01
+   681
+   682 				.endl							; UNIT B_SYSTEM
+   683
+   684 				; ------------------------------------------------------------
+   685
+   686 2276			.local	BSORT						; UNIT
+   687
+   688 2276			.local	RUN						; PROCEDURE
+   689
+   690 				; optimize OK (BSORT), line = 29
+   691
+   692 2276 A9 FE 85 F4			mva #$FE SIZE
+   693
+   694 				; optimize OK (BSORT), line = 29
+   695
+   696 227A A9 FF 85 F3			mva #$FF TMP
+   697
+   698 				; --- WhileProlog
+   699 227E 4C B2 22			jmp l_00C4
+   700 2281			l_00C5
+   701 				; --- For
+   702
+   703 				; optimize OK (BSORT), line = 31
+   704
+   705 2281 A9 00 85 F0			mva #$00 I
+   706
+   707 				; optimize OK (BSORT), line = 31
+   708
+   709 2285			l_00CE
+   710 				; --- ForToDoCondition
+   711
+   712 				; optimize OK (BSORT), line = 31
+   713
+   714 2285 A5 F0			lda I
+   715 2287 C9 FE			cmp #$FE
+   716 2289 B0 25			jcs l_00DC
+   717
+   718 				; optimize OK (BSORT), line = 32
+   719
+   720 228B A8				tay
+   721 228C B9 D6 25			lda adr.SORTTABLE,y
+   722 228F 85 F1			sta N1
+   723
+   724 				; optimize OK (BSORT), line = 33
+   725
+   726 2291 C8				iny
+   727 2292 B9 D6 25			lda adr.SORTTABLE,y
+   728 2295 85 F2			sta N2
+   729
+   730 				; optimize OK (BSORT), line = 34
+   731
+   732 2297 A5 F1			lda N1
+   733 2299 C5 F2			cmp N2
+   734 229B 90 0F			jcc l_0106
+   735 229D F0 0D			jeq l_0106
+   736
+   737 				; optimize OK (BSORT), line = 35
+   738
+   739 229F A4 F0			ldy I
+   740 22A1 A5 F2 99 D6 25		mva N2 adr.SORTTABLE,y
+   741
+   742 				; optimize OK (BSORT), line = 36
+   743
+   744 22A6 C8				iny
+   745 22A7 A5 F1 99 D6 25		mva N1 adr.SORTTABLE,y
+   746 22AC			l_0106
+   747
+   748 				; --- ForToDoEpilog
+   749 22AC E6 F0			inc I
+   750 22AE D0 D5			jne l_00CE
+   751 22B0			l_00DC
+   752
+   753 				; optimize FAIL (0, BSORT), line = 39
+   754 22B0 C6 F4			dec SIZE
+   755 22B2			l_00C4
+   756
+   757 				; optimize OK (BSORT), line = 30
+   758
+   759 22B2 A5 F4			lda SIZE
+   760 22B4 D0 CB			jne l_00C5
+   761
+   762 				; ------------------------------------------------------------
+   763
+   764 = 00F0			I	= $F0
+   765 = 00F1			N1	= $F1
+   766 = 00F2			N2	= $F2
+   767 = 00F3			TMP	= $F3
+   768 = 00F4			SIZE	= $F4
+   769 = 25D6			adr.SORTTABLE	= [DATAORIGIN+$000F] .array [255]
+   770 22B6			.var SORTTABLE	= adr.SORTTABLE .word
+   771 = 00FD			@FORTMP_00CB	= $FD
+   772
+   773 = 22B7			@VarData	= SORTTABLE
+   774 = 00FF			@VarDataSize	= 255
+   775
+   776 22B6			@exit
+   777 					.ifdef @new
+   778 					lda <@VarData
+   779 					sta :ztmp
+   780 					lda >@VarData
+   781 					ldy #@VarDataSize-1
+   782 					jmp @FreeMem
+   783 					eif
+   784 22B6 60				rts						; ret
+   785 = 22B7 D6 25		SORTTABLE
+   785 				.endl
+   786
+   787 				; ------------------------------------------------------------
+   788 				; ------------------------------------------------------------
+   789 22B9			@UnitInit
+   790
+   791 22B9 60				rts
+   792
+   793 				; ------------------------------------------------------------
+   794
+   795 = 2000			adr.NAME	= CODEORIGIN+$0000
+   796 22BA			.var NAME	= adr.NAME .word
+   797
+   798 = 22BA 00 20		NAME
+   798 				.endl							; UNIT BSORT
+   799
+   800 				; ------------------------------------------------------------
+   801
+   802 22BC			.local	SIEVE						; UNIT
+   803
+   804 22BC			.local	RUN						; PROCEDURE
+   805
+   806 				; optimize OK (SIEVE), line = 27
+   807
+   808 22BC A9 00 85 E4			mva #$00 COUNT
+   809 22C0 85 E5			sta COUNT+1
+   810
+   811 				; optimize OK (SIEVE), line = 28
+   812
+   813 22C2 AD 37 23			lda FLAGS
+   814 22C5 85 88			sta :edx
+   815 22C7 AD 38 23			lda FLAGS+1
+   816 22CA 85 89			sta :edx+1
+   817 22CC A9 00			lda #$00
+   818 22CE 85 8C			sta :ecx
+   819 22D0 A9 20			lda #$20
+   820 22D2 85 8D			sta :ecx+1
+   821 22D4 A9 01			lda #$01
+   822 22D6 85 84			sta :eax
+   823 22D8 20 A6 20			jsr @fill
+   824 				; --- For
+   825
+   826 				; optimize OK (SIEVE), line = 29
+   827
+   828 22DB A9 02 85 E0			mva #$02 N
+   829
+   830 				; optimize OK (SIEVE), line = 29
+   831
+   832 22DF			l_014A
+   833 				; --- ForToDoCondition
+   834
+   835 				; optimize OK (SIEVE), line = 29
+   836
+   837 22DF A5 E0			lda N
+   838 22E1 C9 5C			cmp #$5C
+   839 22E3 B0 51			jcs l_0158
+   840
+   841 				; optimize OK (SIEVE), line = 30
+   842
+   843 22E5 AD 37 23			lda FLAGS
+   844 22E8 18 65 E0			add N
+   845 22EB A8				tay
+   846 22EC AD 38 23			lda FLAGS+1
+   847 22EF 69 00			adc #$00
+   848 22F1 85 91			sta :bp+1
+   849 22F3 B1 90			lda (:bp),y
+   850 22F5 F0 3B			jeq l_0167
+   851
+   852 				; optimize OK (SIEVE), line = 31
+   853
+   854 22F7 A5 E0			lda N
+   855 22F9 85 A1			sta :STACKORIGIN+9
+   856 22FB A9 00			lda #$00
+   857 22FD 06 A1			asl :STACKORIGIN+9
+   858 22FF 2A				rol @
+   859 2300 85 E3			sta K+1
+   860 2302 A5 A1			lda :STACKORIGIN+9
+   861 2304 85 E2			sta K
+   862
+   863 				; --- WhileProlog
+   864 2306 4C 26 23			jmp l_0174
+   865 2309			l_0175
+   866
+   867 				; optimize OK (SIEVE), line = 33
+   868
+   869 2309 AD 37 23			lda FLAGS
+   870 230C 18 65 E2			add K
+   871 230F A8				tay
+   872 2310 AD 38 23			lda FLAGS+1
+   873 2313 65 E3			adc K+1
+   874 2315 85 91			sta :bp+1
+   875 2317 A9 00			lda #$00
+   876 2319 91 90			sta (:bp),y
+   877
+   878 				; optimize OK (SIEVE), line = 34
+   879
+   880 231B A5 E2			lda K
+   881 231D 18 65 E0			add N
+   882 2320 85 E2			sta K
+   883 2322 90 02			scc
+   884 2324 E6 E3			inc K+1
+   885 2326			l_0174
+   886
+   887 				; optimize OK (SIEVE), line = 32
+   888
+   889 2326 A5 E3			lda K+1
+   890 2328 C9 20			cmp #$20
+   891 232A D0 04			bne @+
+   892 232C A5 E2			lda K
+   893 232E C9 00			cmp #$00
+   894 2330			@
+   895 2330 90 D7			jcc l_0175
+   896 2332			l_0167
+   897
+   898 				; --- ForToDoEpilog
+   899 2332 E6 E0			inc N
+   900 2334 D0 A9			jne l_014A
+   901 2336			l_0158
+   902
+   903 				; ------------------------------------------------------------
+   904
+   905 = 26D5			adr.FLAGS	= [DATAORIGIN+$010E] .array [8192]
+   906 2336			.var FLAGS	= adr.FLAGS .word
+   907 = 00E0			N	= $E0
+   908 = 00E2			K	= $E2
+   909 = 00E4			COUNT	= $E4
+   910 = 005B			@FORTMP_0147	= $5B
+   911
+   912 = 2337			@VarData	= FLAGS
+   913 = 2000			@VarDataSize	= 8192
+   914
+   915 2336			@exit
+   916 					.ifdef @new
+   917 					lda <@VarData
+   918 					sta :ztmp
+   919 					lda >@VarData
+   920 					ldy #@VarDataSize-1
+   921 					jmp @FreeMem
+   922 					eif
+   923 2336 60				rts						; ret
+   924 = 2337 D5 26		FLAGS
+   924 				.endl
+   925
+   926 				; ------------------------------------------------------------
+   927 				; ------------------------------------------------------------
+   928 2339			@UnitInit
+   929
+   930 2339 60				rts
+   931
+   932 				; ------------------------------------------------------------
+   933
+   934 = 2008			adr.NAME	= CODEORIGIN+$0008
+   935 233A			.var NAME	= adr.NAME .word
+   936
+   937 = 233A 08 20		NAME
+   937 				.endl							; UNIT SIEVE
+   938
+   939 				; ------------------------------------------------------------
+   940
+   941 233C			.local	COUNTDOWN					; UNIT
+   942
+   943 233C			.local	RUN						; PROCEDURE
+   944
+   945 				; --- For
+   946
+   947 				; optimize OK (COUNTDOWN), line = 30
+   948
+   949 233C A9 01 85 30			mva #$01 A
+   950
+   951 				; optimize OK (COUNTDOWN), line = 30
+   952
+   953 2340			l_019D
+   954 				; --- ForToDoCondition
+   955
+   956 				; optimize OK (COUNTDOWN), line = 30
+   957
+   958 				; --- For
+   959
+   960 				; optimize OK (COUNTDOWN), line = 31
+   961
+   962 2340 A9 09 85 31			mva #$09 B
+   963
+   964 				; optimize OK (COUNTDOWN), line = 31
+   965
+   966 2344			l_01B4
+   967 				; --- ForToDoCondition
+   968
+   969 				; optimize OK (COUNTDOWN), line = 31
+   970
+   971 				; --- For
+   972
+   973 				; optimize OK (COUNTDOWN), line = 32
+   974
+   975 2344 A9 09 85 32			mva #$09 C
+   976
+   977 				; optimize OK (COUNTDOWN), line = 32
+   978
+   979 2348			l_01CB
+   980 				; --- ForToDoCondition
+   981
+   982 				; optimize OK (COUNTDOWN), line = 32
+   983
+   984 				; --- For
+   985
+   986 				; optimize OK (COUNTDOWN), line = 33
+   987
+   988 2348 A9 09 85 33			mva #$09 D
+   989
+   990 				; optimize OK (COUNTDOWN), line = 33
+   991
+   992 234C			l_01E2
+   993 				; --- ForToDoCondition
+   994
+   995 				; optimize OK (COUNTDOWN), line = 33
+   996
+   997 				; --- For
+   998
+   999 				; optimize OK (COUNTDOWN), line = 34
+  1000
+  1001 234C A9 09 85 34			mva #$09 E
+  1002
+  1003 				; optimize OK (COUNTDOWN), line = 34
+  1004
+  1005 2350			l_01F9
+  1006 				; --- ForToDoCondition
+  1007
+  1008 				; optimize OK (COUNTDOWN), line = 34
+  1009
+  1010 				; --- For
+  1011
+  1012 				; optimize OK (COUNTDOWN), line = 35
+  1013
+  1014 2350 A9 09 85 35			mva #$09 F
+  1015
+  1016 				; optimize OK (COUNTDOWN), line = 35
+  1017
+  1018 2354			l_0210
+  1019 				; --- ForToDoCondition
+  1020
+  1021 				; optimize OK (COUNTDOWN), line = 35
+  1022
+  1023 				; --- For
+  1024
+  1025 				; optimize OK (COUNTDOWN), line = 36
+  1026
+  1027 2354 A9 09 85 36			mva #$09 G
+  1028
+  1029 				; optimize OK (COUNTDOWN), line = 36
+  1030
+  1031 2358			l_0227
+  1032 				; --- ForToDoCondition
+  1033
+  1034 				; optimize OK (COUNTDOWN), line = 36
+  1035
+  1036 				; --- ForToDoEpilog
+  1037 2358 A5 36			lda G
+  1038 235A F0 05			beq l_0235
+  1039 235C C6 36			dec G
+  1040 235E 4C 58 23			jmp l_0227
+  1041 2361			l_0235
+  1042
+  1043 				; --- ForToDoEpilog
+  1044 2361 A5 35			lda F
+  1045 2363 F0 05			beq l_021E
+  1046 2365 C6 35			dec F
+  1047 2367 4C 54 23			jmp l_0210
+  1048 236A			l_021E
+  1049
+  1050 				; --- ForToDoEpilog
+  1051 236A A5 34			lda E
+  1052 236C F0 05			beq l_0207
+  1053 236E C6 34			dec E
+  1054 2370 4C 50 23			jmp l_01F9
+  1055 2373			l_0207
+  1056
+  1057 				; --- ForToDoEpilog
+  1058 2373 A5 33			lda D
+  1059 2375 F0 05			beq l_01F0
+  1060 2377 C6 33			dec D
+  1061 2379 4C 4C 23			jmp l_01E2
+  1062 237C			l_01F0
+  1063
+  1064 				; --- ForToDoEpilog
+  1065 237C A5 32			lda C
+  1066 237E F0 05			beq l_01D9
+  1067 2380 C6 32			dec C
+  1068 2382 4C 48 23			jmp l_01CB
+  1069 2385			l_01D9
+  1070
+  1071 				; --- ForToDoEpilog
+  1072 2385 A5 31			lda B
+  1073 2387 F0 05			beq l_01C2
+  1074 2389 C6 31			dec B
+  1075 238B 4C 44 23			jmp l_01B4
+  1076 238E			l_01C2
+  1077
+  1078 				; --- ForToDoEpilog
+  1079 238E A5 30			lda A
+  1080 2390 F0 05			beq l_01AB
+  1081 2392 C6 30			dec A
+  1082 2394 4C 40 23			jmp l_019D
+  1083 2397			l_01AB
+  1084
+  1085 				; ------------------------------------------------------------
+  1086
+  1087 = 0030			A	= $30
+  1088 = 0031			B	= $31
+  1089 = 0032			C	= $32
+  1090 = 0033			D	= $33
+  1091 = 0034			E	= $34
+  1092 = 0035			F	= $35
+  1093 = 0036			G	= $36
+  1094 = 0000			@FORTMP_019A	= $00
+  1095 = 0000			@FORTMP_01B1	= $00
+  1096 = 0000			@FORTMP_01C8	= $00
+  1097 = 0000			@FORTMP_01DF	= $00
+  1098 = 0000			@FORTMP_01F6	= $00
+  1099 = 0000			@FORTMP_020D	= $00
+  1100 = 0000			@FORTMP_0224	= $00
+  1101 2397			@exit
+  1102 					.ifdef @new
+  1103 					lda <@VarData
+  1104 					sta :ztmp
+  1105 					lda >@VarData
+  1106 					ldy #@VarDataSize-1
+  1107 					jmp @FreeMem
+  1108 					eif
+  1109 2397 60				rts						; ret
+  1110 				.endl
+  1111
+  1112 				; ------------------------------------------------------------
+  1113 				; ------------------------------------------------------------
+  1114 2398			@UnitInit
+  1115
+  1116 2398 60				rts
+  1117
+  1118 				; ------------------------------------------------------------
+  1119
+  1120 = 200F			adr.NAME	= CODEORIGIN+$000F
+  1121 2399			.var NAME	= adr.NAME .word
+  1122
+  1123 = 2399 0F 20		NAME
+  1123 				.endl							; UNIT COUNTDOWN
+  1124
+  1125 				; ------------------------------------------------------------
+  1126
+  1127 239B			.local	MONTECARLO					; UNIT
+  1128
+  1129 239B			.local	RUN						; PROCEDURE
+  1130
+  1131 				; optimize OK (MONTECARLO), line = 32
+  1132
+  1133 239B A9 00 85 E8			mva #$00 BINGO
+  1134 239F 85 E9			sta BINGO+1
+  1135
+  1136 				; optimize OK (MONTECARLO), line = 33
+  1137
+  1138 23A1 A9 01 85 E2			mva #$01 R
+  1139 23A5 A9 3F 85 E3			mva #$3F R+1
+  1140
+  1141 				; optimize OK (MONTECARLO), line = 34
+  1142
+  1143 23A9 A9 10 85 EA			mva #$10 PROBE
+  1144 23AD A9 27 85 EB			mva #$27 PROBE+1
+  1145 				; --- For
+  1146
+  1147 				; optimize OK (MONTECARLO), line = 35
+  1148
+  1149 23B1 A9 00 85 E0			mva #$00 I
+  1150 23B5 85 E1			sta I+1
+  1151
+  1152 				; optimize OK (MONTECARLO), line = 35
+  1153
+  1154 23B7 A5 EA 8D CA 23		mva PROBE :@FORTMP?026F_0
+  1155 23BC A5 EB 8D C4 23		mva PROBE+1 :@FORTMP?026F_1
+  1156 23C1			l_0272
+  1157 				; --- ForToDoCondition
+  1158
+  1159 				; optimize OK (MONTECARLO), line = 35
+  1160
+  1161 23C1 A5 E1			lda I+1
+  1162 = 23C4			.def :@FORTMP?026F_1 = *+1
+  1163 23C3 C9 00			cmp #$00
+  1164 23C5 D0 04			bne @+
+  1165 23C7 A5 E0			lda I
+  1166 = 23CA			.def :@FORTMP?026F_0 = *+1
+  1167 23C9 C9 00			cmp #$00
+  1168 23CB			@
+  1169 23CB 90 02			scc
+  1170 23CD D0 57			jne l_027E
+  1171
+  1172 				; optimize OK (MONTECARLO), line = 36
+  1173
+  1174 23CF AD 0A D2 85 EE		mva RNDNUMBER N
+  1175
+  1176 				; optimize OK (MONTECARLO), line = 37
+  1177
+  1178 23D4 10 04			jpl l_0296
+  1179
+  1180 				; optimize OK (MONTECARLO), line = 37
+  1181
+  1182 23D6 49 80			eor #$80
+  1183 23D8 85 EE			sta N
+  1184 23DA			l_0296
+  1185
+  1186 				; optimize OK (MONTECARLO), line = 38
+  1187
+  1188 23DA A5 EE			lda N
+  1189 23DC 85 8C			sta :ecx
+  1190 23DE 85 84			sta :eax
+  1191 					.ifdef fmulinit
+  1192 					fmulu_8
+  1193 					els
+  1194 23E0 20 EE 20			imulCL
+  1195 					eif
+  1196 23E3 85 E5			sta X+1
+  1197 23E5 A5 84			lda :eax
+  1198 23E7 85 E4			sta X
+  1199
+  1200 				; optimize OK (MONTECARLO), line = 39
+  1201
+  1202 23E9 AD 0A D2 85 EE		mva RNDNUMBER N
+  1203
+  1204 				; optimize OK (MONTECARLO), line = 40
+  1205
+  1206 23EE 10 04			jpl l_02C7
+  1207
+  1208 				; optimize OK (MONTECARLO), line = 40
+  1209
+  1210 23F0 49 80			eor #$80
+  1211 23F2 85 EE			sta N
+  1212 23F4			l_02C7
+  1213
+  1214 				; optimize OK (MONTECARLO), line = 41
+  1215
+  1216 23F4 A5 EE			lda N
+  1217 23F6 85 8C			sta :ecx
+  1218 23F8 85 84			sta :eax
+  1219 					.ifdef fmulinit
+  1220 					fmulu_8
+  1221 					els
+  1222 23FA 20 EE 20			imulCL
+  1223 					eif
+  1224 23FD 85 E7			sta Y+1
+  1225 23FF A5 84			lda :eax
+  1226 2401 85 E6			sta Y
+  1227
+  1228 				; optimize OK (MONTECARLO), line = 42
+  1229
+  1230 2403 18 65 E4			add X
+  1231 2406 85 A1			sta :STACKORIGIN+9
+  1232 2408 A5 E5			lda X+1
+  1233 240A 65 E7			adc Y+1
+  1234 240C C5 E3			cmp R+1
+  1235 240E D0 04			bne @+
+  1236 2410 A5 A1			lda :STACKORIGIN+9
+  1237 2412 C5 E2			cmp R
+  1238 2414			@
+  1239 2414 90 02			bcc @+
+  1240 2416 D0 06			jne l_02F7
+  1241 2418			@
+  1242
+  1243 				; optimize FAIL (0, MONTECARLO), line = 42
+  1244 2418 E6 E8			inc BINGO
+  1245 241A D0 02			sne
+  1246 241C E6 E9			inc BINGO+1
+  1247 241E			l_02F7
+  1248
+  1249 				; --- ForToDoEpilog
+  1250 241E E6 E0			inc I
+  1251 2420 D0 9F			jne l_0272
+  1252 2422 E6 E1			inc I+1
+  1253 2424 D0 9B			jne l_0272
+  1254 2426			l_027E
+  1255
+  1256 				; optimize OK (MONTECARLO), line = 44
+  1257
+  1258 2426 A5 E9			lda BINGO+1
+  1259 2428 85 85			sta :eax+1
+  1260 242A A5 E8			lda BINGO
+  1261 242C 0A				asl @
+  1262 242D 26 85			rol :eax+1
+  1263 242F 0A				asl @
+  1264 2430 26 85			rol :eax+1
+  1265 2432 85 EC			sta FOUNDPI
+  1266 2434 A5 85			lda :eax+1
+  1267 2436 85 ED			sta FOUNDPI+1
+  1268
+  1269 				; ------------------------------------------------------------
+  1270
+  1271 = D20A			RNDNUMBER	= $D20A
+  1272 = 00E0			I	= $E0
+  1273 = 00E2			R	= $E2
+  1274 = 00E4			X	= $E4
+  1275 = 00E6			Y	= $E6
+  1276 = 00E8			BINGO	= $E8
+  1277 = 00EA			PROBE	= $EA
+  1278 = 00EC			FOUNDPI	= $EC
+  1279 = 00EE			N	= $EE
+  1280 = 0000			@FORTMP_026F	= $00
+  1281 2438			@exit
+  1282 					.ifdef @new
+  1283 					lda <@VarData
+  1284 					sta :ztmp
+  1285 					lda >@VarData
+  1286 					ldy #@VarDataSize-1
+  1287 					jmp @FreeMem
+  1288 					eif
+  1289 2438 60				rts						; ret
+  1290 				.endl
+  1291
+  1292 				; ------------------------------------------------------------
+  1293 				; ------------------------------------------------------------
+  1294 2439			@UnitInit
+  1295
+  1296 2439 60				rts
+  1297
+  1298 				; ------------------------------------------------------------
+  1299
+  1300 = 201A			adr.NAME	= CODEORIGIN+$001A
+  1301 243A			.var NAME	= adr.NAME .word
+  1302
+  1303 = 243A 1A 20		NAME
+  1303 				.endl							; UNIT MONTECARLO
+  1304
+  1305 243C			.local	INITSUITE					; PROCEDURE
+  1306
+  1307 				; optimize OK (suite.pas), line = 34
+  1308
+  1309 243C A9 00			lda #$00
+  1310 243E 85 88			sta :edx
+  1311 2440 A9 E0			lda #$E0
+  1312 2442 85 89			sta :edx+1
+  1313 2444 A9 00			lda #$00
+  1314 2446 85 8C			sta :ecx
+  1315 2448 A9 80			lda #$80
+  1316 244A 85 8D			sta :ecx+1
+  1317 244C A9 00			lda #$00
+  1318 244E 85 84			sta :eax
+  1319 2450 A9 04			lda #$04
+  1320 2452 85 85			sta :eax+1
+  1321 2454 20 51 20			jsr @move
+  1322
+  1323 				; optimize FAIL ('B_SYSTEM.SYSTEMOFF_00A9', suite.pas), line = 35
+  1324 2457 20 1E 22			jsr B_SYSTEM.SYSTEMOFF_00A9
+  1325
+  1326 				; optimize OK (suite.pas), line = 36
+  1327
+  1328 245A A0 D8			ldy #256-$28
+  1329 245C A9 FF			lda #$FF
+  1330 245E 99 48 FF C8 D0 FA		sta:rne $0020+$28-256,y+
+  1331
+  1332 				; optimize OK (suite.pas), line = 37
+  1333
+  1334 2464 A9 00			lda #$00
+  1335 2466 85 88			sta :edx
+  1336 2468 A9 E0			lda #$E0
+  1337 246A 85 89			sta :edx+1
+  1338 246C A9 FF			lda #$FF
+  1339 246E 85 8C			sta :ecx
+  1340 2470 A9 0F			lda #$0F
+  1341 2472 85 8D			sta :ecx+1
+  1342 2474 A9 00			lda #$00
+  1343 2476 85 84			sta :eax
+  1344 2478 20 A6 20			jsr @fill
+  1345 247B			@exit
+  1346 					.ifdef @new
+  1347 					lda <@VarData
+  1348 					sta :ztmp
+  1349 					lda >@VarData
+  1350 					ldy #@VarDataSize-1
+  1351 					jmp @FreeMem
+  1352 					eif
+  1353 247B 60				rts						; ret
+  1354 				.endl
+  1355
+  1356 247C			.local	DLCOUNER					; PROCEDURE | ASSEMBLER
+  1357
+  1358 				; ---------------------  ASM Block 060  ---------------------
+  1359
+  1360
+  1361 247C 70 70 70		    :3	.byte $70
+  1362 247F 42 20 00		    .byte $42,$20,$00
+  1363 2482 41 7C 24		    .byte $41,a(dlCouner)
+  1364 				  
+  1365 2485			@exit
+  1366 					.ifdef @new
+  1367 					lda <@VarData
+  1368 					sta :ztmp
+  1369 					lda >@VarData
+  1370 					ldy #@VarDataSize-1
+  1371 					jmp @FreeMem
+  1372 					eif
+  1373 2485 60				rts						; ret
+  1374 				.endl
+  1375
+  1376 2486			.local	VBLCOUNTER					; PROCEDURE | INTERRUPT
+  1377
+  1378 				; ---------------------  ASM Block 061  ---------------------
+  1379
+  1380
+  1381 2486 48 8A 48 98 48			phr
+  1382 					
+  1383
+  1384 				; optimize FAIL (0, counter.inc), line = 15
+  1385 248B E6 24			inc E
+  1386
+  1387 				; optimize OK (counter.inc), line = 16
+  1388
+  1389 248D A5 24			lda E
+  1390 248F C9 0A			cmp #$0A
+  1391 2491 D0 06			jne l_0338
+  1392
+  1393 				; optimize FAIL (0, counter.inc), line = 16
+  1394 2493 E6 23			inc D
+  1395
+  1396 				; optimize OK (counter.inc), line = 16
+  1397
+  1398 2495 A9 00 85 24			mva #$00 E
+  1399 2499			l_0338
+  1400
+  1401 				; optimize OK (counter.inc), line = 17
+  1402
+  1403 2499 A5 23			lda D
+  1404 249B C9 0A			cmp #$0A
+  1405 249D D0 06			jne l_0355
+  1406
+  1407 				; optimize FAIL (0, counter.inc), line = 17
+  1408 249F E6 22			inc C
+  1409
+  1410 				; optimize OK (counter.inc), line = 17
+  1411
+  1412 24A1 A9 00 85 23			mva #$00 D
+  1413 24A5			l_0355
+  1414
+  1415 				; optimize OK (counter.inc), line = 18
+  1416
+  1417 24A5 A5 22			lda C
+  1418 24A7 C9 0A			cmp #$0A
+  1419 24A9 D0 06			jne l_0372
+  1420
+  1421 				; optimize FAIL (0, counter.inc), line = 18
+  1422 24AB E6 21			inc B
+  1423
+  1424 				; optimize OK (counter.inc), line = 18
+  1425
+  1426 24AD A9 00 85 22			mva #$00 C
+  1427 24B1			l_0372
+  1428
+  1429 				; optimize OK (counter.inc), line = 19
+  1430
+  1431 24B1 A5 21			lda B
+  1432 24B3 C9 0A			cmp #$0A
+  1433 24B5 D0 06			jne l_038F
+  1434
+  1435 				; optimize FAIL (0, counter.inc), line = 19
+  1436 24B7 E6 20			inc A
+  1437
+  1438 				; optimize OK (counter.inc), line = 19
+  1439
+  1440 24B9 A9 00 85 21			mva #$00 B
+  1441 24BD			l_038F
+  1442
+  1443 				; ---------------------  ASM Block 062  ---------------------
+  1444
+  1445
+  1446 24BD 68 A8 68 AA 68			plr
+  1447 					
+  1448 24C2 40				rti						; ret
+  1449 				.endl
+  1450
+  1451 24C3			.local	INITCOUNTER					; PROCEDURE
+  1452
+  1453 				; optimize OK (counter.inc), line = 27
+  1454
+  1455 24C3 A9 00			lda #$00
+  1456 24C5 85 88			sta :edx
+  1457 24C7 A9 80			lda #$80
+  1458 24C9 85 89			sta :edx+1
+  1459 24CB A9 00			lda #$00
+  1460 24CD 85 8C			sta :ecx
+  1461 24CF A9 84			lda #$84
+  1462 24D1 85 8D			sta :ecx+1
+  1463 24D3 A9 00			lda #$00
+  1464 24D5 85 84			sta :eax
+  1465 24D7 A9 04			lda #$04
+  1466 24D9 85 85			sta :eax+1
+  1467 24DB 20 51 20			jsr @move
+  1468
+  1469 				; optimize OK (counter.inc), line = 28
+  1470
+  1471 24DE A0 4F			ldy #$4F
+  1472 24E0 B9 80 80 99 00 84 + 	mva:rpl $8080,y $8400,y-
+  1473
+  1474 				; optimize OK (counter.inc), line = 29
+  1475
+  1476 24E9 A0 F8			ldy #256-$08
+  1477 24EB A9 FF			lda #$FF
+  1478 24ED 99 00 87 C8 D0 FA		sta:rne $87F8+$08-256,y+
+  1479
+  1480 				; optimize OK (counter.inc), line = 30
+  1481
+  1482 24F3 A9 84 8D 09 D4		mva #$84 CHBAS
+  1483
+  1484 				; optimize OK (counter.inc), line = 30
+  1485
+  1486 24F8 A9 7C 8D 02 D4		mva <DLCOUNER SDLSTL
+  1487 24FD A9 24 8D 03 D4		mva >DLCOUNER SDLSTL+1
+  1488 2502			@exit
+  1489 					.ifdef @new
+  1490 					lda <@VarData
+  1491 					sta :ztmp
+  1492 					lda >@VarData
+  1493 					ldy #@VarDataSize-1
+  1494 					jmp @FreeMem
+  1495 					eif
+  1496 2502 60				rts						; ret
+  1497 				.endl
+  1498
+  1499 2503			.local	STARTCOUNTER					; PROCEDURE
+  1500
+  1501 				; ------------------------------------------------------------
+  1502
+  1503 				; Generate Assignment for WORD / SMALLINT / SHORTREAL / POINTER
+  1504 				; as Pointer
+  1505 2503 B5 98 85 92			mva :STACKORIGIN,x :bp2
+  1506 2507 B5 A8 85 93			mva :STACKORIGIN+STACKWIDTH,x :bp2+1
+  1507 250B A0 00			ldy #$00
+  1508 250D B1 92 99 D7 46 C8 + 	mva:rne (:bp2),y adr.NAME,y+
+  1509 2515 A9 D7 8D 60 25 A9 + 	mwa #adr.NAME NAME
+  1510 251F CA				dex
+  1511
+  1512 				; optimize OK (counter.inc), line = 35
+  1513
+  1514 2520 A0 D8			ldy #256-$28
+  1515 2522 A9 FF			lda #$FF
+  1516 2524 99 48 FF C8 D0 FA		sta:rne $0020+$28-256,y+
+  1517
+  1518 				; optimize OK (counter.inc), line = 36
+  1519
+  1520 252A A9 00 85 20			mva #$00 A
+  1521
+  1522 				; optimize OK (counter.inc), line = 36
+  1523
+  1524 252E 85 21			sta B
+  1525
+  1526 				; optimize OK (counter.inc), line = 36
+  1527
+  1528 2530 85 22			sta C
+  1529
+  1530 				; optimize OK (counter.inc), line = 36
+  1531
+  1532 2532 85 23			sta D
+  1533
+  1534 				; optimize OK (counter.inc), line = 36
+  1535
+  1536 2534 85 24			sta E
+  1537
+  1538 				; optimize OK (counter.inc), line = 37
+  1539
+  1540 2536 A9 D8			lda <adr.NAME+$01
+  1541 2538 85 88			sta :edx
+  1542 253A A9 46			lda >adr.NAME+$01
+  1543 253C 85 89			sta :edx+1
+  1544 253E AD D7 46			lda adr.NAME
+  1545 2541 85 84			sta :eax
+  1546 2543 A9 26			lda #$26
+  1547 2545 85 8C			sta :ecx
+  1548 2547 A9 00			lda #$00
+  1549 2549 85 8D			sta :ecx+1
+  1550 254B 85 85			sta :eax+1
+  1551 254D 20 51 20			jsr @move
+  1552
+  1553 				; optimize FAIL ('SYSTEM.PAUSE_00A4', counter.inc), line = 38
+  1554 2550 20 BF 21			jsr SYSTEM.PAUSE_00A4
+  1555
+  1556 				; optimize FAIL ('B_SYSTEM.ENABLEVBLI', counter.inc), line = 39
+  1557 2553 E8				inx
+  1558 2554 A9 86 95 98			mva <VBLCOUNTER :STACKORIGIN,x
+  1559 2558 A9 24 95 A8			mva >VBLCOUNTER :STACKORIGIN+STACKWIDTH,x
+  1560 255C 20 27 22			jsr B_SYSTEM.ENABLEVBLI
+  1561
+  1562 				; ------------------------------------------------------------
+  1563
+  1564 = 46D7			adr.NAME	= [DATAORIGIN+$2110] .array [256]
+  1565 255F			.var NAME	= adr.NAME .word
+  1566
+  1567 = 2560			@VarData	= NAME
+  1568 = 0100			@VarDataSize	= 256
+  1569
+  1570 255F			@exit
+  1571 					.ifdef @new
+  1572 					lda <@VarData
+  1573 					sta :ztmp
+  1574 					lda >@VarData
+  1575 					ldy #@VarDataSize-1
+  1576 					jmp @FreeMem
+  1577 					eif
+  1578 255F 60				rts						; ret
+  1579 = 2560 D7 46		NAME
+  1579 				.endl
+  1580 2562			l_002D
+  1581
+  1582 				; optimize FAIL ('INITSUITE', suite.pas), line = 43
+  1583 2562 20 3C 24			jsr INITSUITE
+  1584
+  1585 				; optimize FAIL ('INITCOUNTER', suite.pas), line = 45
+  1586 2565 20 C3 24			jsr INITCOUNTER
+  1587
+  1588 				; optimize FAIL ('STARTCOUNTER', suite.pas), line = 47
+  1589 2568 E8				inx
+  1590 2569 A9 00 95 98			mva #$00 :STACKORIGIN,x
+  1591 256D A9 20 95 A8			mva #$20 :STACKORIGIN+STACKWIDTH,x
+  1592 2571 20 03 25			jsr STARTCOUNTER
+  1593
+  1594 				; optimize FAIL ('BSORT.RUN', suite.pas), line = 48
+  1595 2574 20 76 22			jsr BSORT.RUN
+  1596
+  1597 				; optimize FAIL ('B_SYSTEM.DISABLEVBLI', suite.pas), line = 49
+  1598 2577 20 55 22			jsr B_SYSTEM.DISABLEVBLI
+  1599
+  1600 				; optimize FAIL ('STARTCOUNTER', suite.pas), line = 51
+  1601 257A E8				inx
+  1602 257B A9 08 95 98			mva #$08 :STACKORIGIN,x
+  1603 257F A9 20 95 A8			mva #$20 :STACKORIGIN+STACKWIDTH,x
+  1604 2583 20 03 25			jsr STARTCOUNTER
+  1605
+  1606 				; optimize FAIL ('SIEVE.RUN', suite.pas), line = 52
+  1607 2586 20 BC 22			jsr SIEVE.RUN
+  1608
+  1609 				; optimize FAIL ('B_SYSTEM.DISABLEVBLI', suite.pas), line = 53
+  1610 2589 20 55 22			jsr B_SYSTEM.DISABLEVBLI
+  1611
+  1612 				; optimize FAIL ('STARTCOUNTER', suite.pas), line = 55
+  1613 258C E8				inx
+  1614 258D A9 0F 95 98			mva #$0F :STACKORIGIN,x
+  1615 2591 A9 20 95 A8			mva #$20 :STACKORIGIN+STACKWIDTH,x
+  1616 2595 20 03 25			jsr STARTCOUNTER
+  1617
+  1618 				; optimize FAIL ('COUNTDOWN.RUN', suite.pas), line = 56
+  1619 2598 20 3C 23			jsr COUNTDOWN.RUN
+  1620
+  1621 				; optimize FAIL ('B_SYSTEM.DISABLEVBLI', suite.pas), line = 57
+  1622 259B 20 55 22			jsr B_SYSTEM.DISABLEVBLI
+  1623
+  1624 				; optimize FAIL ('STARTCOUNTER', suite.pas), line = 59
+  1625 259E E8				inx
+  1626 259F A9 1A 95 98			mva #$1A :STACKORIGIN,x
+  1627 25A3 A9 20 95 A8			mva #$20 :STACKORIGIN+STACKWIDTH,x
+  1628 25A7 20 03 25			jsr STARTCOUNTER
+  1629
+  1630 				; optimize FAIL ('MONTECARLO.RUN', suite.pas), line = 60
+  1631 25AA 20 9B 23			jsr MONTECARLO.RUN
+  1632
+  1633 				; optimize FAIL ('B_SYSTEM.DISABLEVBLI', suite.pas), line = 61
+  1634 25AD 20 55 22			jsr B_SYSTEM.DISABLEVBLI
+  1635
+  1636 				; --- RepeatUntilProlog
+  1637 25B0			l_03E9
+  1638
+  1639 				; optimize OK (suite.pas), line = 66
+  1640
+  1641 25B0 4C B0 25			jmp l_03E9
+  1642
+  1643 				; ------------------------------------------------------------
+  1644
+  1645 = E000			LMS	= $E000
+  1646 = 0020			A	= $20
+  1647 = 0021			B	= $21
+  1648 = 0022			C	= $22
+  1649 = 0023			D	= $23
+  1650 = 0024			E	= $24
+  1651 = D402			SDLSTL	= $D402
+  1652 = D409			CHBAS	= $D409
+  1653 25B3			@exit
+  1654
+  1655 25B3 A2 00		@halt	ldx #0
+  1656 25B5 9A				txs
+  1657 					.ifdef MAIN.@DEFINES.ROMOFF
+  1658 					inc portb
+  1659 					.endif
+  1660
+  1661 25B6 60				rts
+  1662
+  1663 				; ------------------------------------------------------------
+  1664
+  1665 25B7 00 00 00 00 00 00 + IOCB@COPY	:16 brk
+  1666
+  1667 				; ------------------------------------------------------------
+  1668
+  1669 25C7			.local	@DEFINES
+  1670 25C7			ATARI
+  1671 				.endl
+  1672
+  1673 				.endl							; MAIN
+  1674
+  1675 				; ------------------------------------------------------------
+  1676 				; ------------------------------------------------------------
+  1677
+  1678 				.macro	UNITINITIALIZATION
+  1679 				
+  1680 					.ifdef MAIN.SYSTEM.@UnitInit
+  1681 					jsr MAIN.SYSTEM.@UnitInit
+  1682 					eif
+  1683 				
+  1684 					.ifdef MAIN.ATARI.@UnitInit
+  1685 					jsr MAIN.ATARI.@UnitInit
+  1686 					eif
+  1687 				
+  1688 					.ifdef MAIN.B_SYSTEM.@UnitInit
+  1689 					jsr MAIN.B_SYSTEM.@UnitInit
+  1690 					eif
+  1691 				
+  1692 					.ifdef MAIN.BSORT.@UnitInit
+  1693 					jsr MAIN.BSORT.@UnitInit
+  1694 					eif
+  1695 				
+  1696 					.ifdef MAIN.SIEVE.@UnitInit
+  1697 					jsr MAIN.SIEVE.@UnitInit
+  1698 					eif
+  1699 				
+  1700 					.ifdef MAIN.COUNTDOWN.@UnitInit
+  1701 					jsr MAIN.COUNTDOWN.@UnitInit
+  1702 					eif
+  1703 				
+  1704 					.ifdef MAIN.MONTECARLO.@UnitInit
+  1705 					jsr MAIN.MONTECARLO.@UnitInit
+  1706 					eif
+  1707 				.endm
+  1708
+  1709 				; ------------------------------------------------------------
+  1710
+  1711 					ift .SIZEOF(MAIN.SYSTEM) > 0
+  1712 					.print 'SYSTEM: ',MAIN.SYSTEM,'..',MAIN.SYSTEM+.SIZEOF(MAIN.SYSTEM)-1
+  1712 				SYSTEM: $214B..$21C9
+  1713 					eif
+  1714
+  1715 					ift .SIZEOF(MAIN.ATARI) > 0
+  1716 					.print 'ATARI: ',MAIN.ATARI,'..',MAIN.ATARI+.SIZEOF(MAIN.ATARI)-1
+  1717 					eif
+  1718
+  1719 					ift .SIZEOF(MAIN.B_SYSTEM) > 0
+  1720 					.print 'B_SYSTEM: ',MAIN.B_SYSTEM,'..',MAIN.B_SYSTEM+.SIZEOF(MAIN.B_SYSTEM)-1
+  1720 				B_SYSTEM: $21CA..$2275
+  1721 					eif
+  1722
+  1723 					ift .SIZEOF(MAIN.BSORT) > 0
+  1724 					.print 'BSORT: ',MAIN.BSORT,'..',MAIN.BSORT+.SIZEOF(MAIN.BSORT)-1
+  1724 				BSORT: $2276..$22BB
+  1725 					eif
+  1726
+  1727 					ift .SIZEOF(MAIN.SIEVE) > 0
+  1728 					.print 'SIEVE: ',MAIN.SIEVE,'..',MAIN.SIEVE+.SIZEOF(MAIN.SIEVE)-1
+  1728 				SIEVE: $22BC..$233B
+  1729 					eif
+  1730
+  1731 					ift .SIZEOF(MAIN.COUNTDOWN) > 0
+  1732 					.print 'COUNTDOWN: ',MAIN.COUNTDOWN,'..',MAIN.COUNTDOWN+.SIZEOF(MAIN.COUNTDOWN)-1
+  1732 				COUNTDOWN: $233C..$239A
+  1733 					eif
+  1734
+  1735 					ift .SIZEOF(MAIN.MONTECARLO) > 0
+  1736 					.print 'MONTECARLO: ',MAIN.MONTECARLO,'..',MAIN.MONTECARLO+.SIZEOF(MAIN.MONTECARLO)-1
+  1736 				MONTECARLO: $239B..$243B
+  1737 					eif
+  1738
+  1739 					.print 'CODE: ',CODEORIGIN,'..',*-1
+  1739 				CODE: $2000..$25C6
+  1740
+  1741 				; ------------------------------------------------------------
+  1742
+  1743 25C7			DATAORIGIN
+  1744 25C7 28 00 18 00 2D 0C	.by  $28 $00 $18 $00 $2D $0C
+  1745
+  1746 = 0006			VARINITSIZE	= *-DATAORIGIN
+  1747 = 2210			VARDATASIZE	= 8720
+  1748
+  1749 = 47D7			PROGRAMSTACK	= DATAORIGIN+VARDATASIZE
+  1750
+  1751 					.print 'DATA: ',DATAORIGIN,'..',PROGRAMSTACK
+  1751 				DATA: $25C7..$47D7
+  1752
+  1753 02E0-02E1> 02 21			run START
+  1754
+  1755 				; ------------------------------------------------------------
+  1756
+  1757 				.macro	STATICDATA
+  1758 				.by  $06 $62 $75 $62 $62 $6C $65 $00  $05 $73 $69 $65 $76 $65 $00 $09  $63 $6F $75 $6E $74 $64 $6F $77
+  1759 				.by  $6E $00 $0A $6D $6F $6E $74 $65  $63 $61 $72 $6C $6F $00
+  1760 				.endm
+  1761
+  1762 					end
