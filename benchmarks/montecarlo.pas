@@ -22,7 +22,7 @@ implementation
 
 procedure run;
 var
-  rndNumber : byte absolute $D20A;
+  rnd       : byte absolute $D20A;
   i         : word absolute $e0;
   r         : word absolute $e2;
   x         : word absolute $e4;
@@ -35,10 +35,10 @@ begin
   r := 127 * 127;
   probe := 10000;
   for i := 0 to probe do begin
-    n := rndNumber;
+    n := rnd;
     if (n > 127) then n:= n xor %10000000;
     x := n * n;
-    n := rndNumber;
+    n := rnd;
     if (n > 127) then n:= n xor %10000000;
     y := n * n;
     if (x + y) <= r then Inc(bingo);
