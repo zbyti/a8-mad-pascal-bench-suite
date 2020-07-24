@@ -2,8 +2,8 @@ procedure dlCouner:assembler;
 asm
 {
   :3	.byte $70
-  .byte $42,$20,$00
-  .byte $41,a(dlCouner)
+      .byte $42,$20,$00
+      .byte $41,a(dlCouner)
 };
 end;
 
