@@ -19,7 +19,7 @@ begin
 	if b=10 then begin inc(a); b := 0 end;
 	asm {
 		plr
-	};	
+	};
 end;
 
 procedure initCounter;

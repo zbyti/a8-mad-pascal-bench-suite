@@ -33,12 +33,12 @@ begin
 				flags[k] := false;
 				Inc(k,n);
 			end;
-		end;	
+		end;
 	end;
-	
+
 	for k := 2 to 8191 do begin
 		if flags[k] then Inc(count);
-	end;	
+	end;
 end;
 
 //---------------------- INITIALIZATION ----------------------------------------

@@ -27,7 +27,7 @@ var
 	bingo		: word absolute $e8;
 	probe		: word absolute $ea;
 	foundPi		: word absolute $ec;
-	n			: byte absolute $ee;	
+	n			: byte absolute $ee;
 begin
 	bingo := 0;
 	r := 127 * 127;
@@ -41,7 +41,7 @@ begin
 		y := n * n;
 		if (x + y) <= r then Inc(bingo);
 	end;
-	foundPi := 4 * bingo;	
+	foundPi := 4 * bingo;
 end;
 
 //---------------------- INITIALIZATION ----------------------------------------
