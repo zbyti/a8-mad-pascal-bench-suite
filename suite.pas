@@ -5,7 +5,8 @@ program Suite;
 
 uses
   b_system,
-  bsort, sieve, count_while, count_for, montecarlo, chessboard;
+  bsort, sieve, count_while, count_for, montecarlo,
+  chessboard, yoshplus;
 
 const
   lms = $e000;
@@ -84,12 +85,21 @@ begin
   DisableVBLI;
   printScore(montecarlo.name,4);
 
+  pause(50);
+
   startCounter(chessboard.name);
   chessboard.run;
   DisableVBLI;
   pause(50);
   chessboard.rewriteCounter;
   printScore(chessboard.name,5);
+
+  startCounter(yoshplus.name);
+  yoshplus.run;
+  DisableVBLI;
+  pause(50);
+  yoshplus.rewriteCounter;
+  printScore(yoshplus.name,6);
 
   chbas := $80;
   sdlstl := word(@dlScore);
