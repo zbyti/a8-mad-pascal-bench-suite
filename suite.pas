@@ -25,7 +25,7 @@ begin
   FillChar(pointer(lms), $fff, 0);
 end;
 
-procedure printScore(name: string; row: byte);
+procedure printScore(name: string[15]; row: byte);
 var
   crow    : word;
   i       : byte;

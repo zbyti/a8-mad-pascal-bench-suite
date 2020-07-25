@@ -41,7 +41,7 @@ begin
   chbas := $84; sdlstl := word(@dlCounter);
 end;
 
-procedure startCounter(name: string);
+procedure startCounter(name: string[15]);
 begin
   FillChar(pointer($20), $28, $fe);
   FillChar(pointer($20), 5, 0);
