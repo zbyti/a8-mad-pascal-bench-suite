@@ -5,8 +5,8 @@ program Suite;
 
 uses
   b_system,
-  bsort, sieve, count_while, count_for, montecarlo,
-  chessboard, yoshplus;
+  bsort, sieve, countdown_while, countdown_for,
+  montecarlo, chessboard, yoshplus;
 
 const
   lms = $e000;
@@ -43,7 +43,7 @@ begin
   crow := lms+(40*row);
   Move(name[1], pointer(crow), length(name));
   for i := 0 to 4 do
-    poke(crow+i+$f,peek($20+i)+16);
+    poke(crow+i+$10,peek($20+i)+16);
 end;
 
 begin

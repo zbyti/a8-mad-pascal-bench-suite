@@ -12,17 +12,17 @@ printScore(sieve.name,1);
 
 pause(50);
 
-startCounter(count_for.name);
-count_for.run;
+startCounter(countdown_for.name);
+countdown_for.run;
 DisableVBLI;
-printScore(count_for.name,2);
+printScore(countdown_for.name,2);
 
 pause(50);
 
-startCounter(count_while.name);
-count_while.run;
+startCounter(countdown_while.name);
+countdown_while.run;
 DisableVBLI;
-printScore(count_while.name,3);
+printScore(countdown_while.name,3);
 
 pause(50);
 
