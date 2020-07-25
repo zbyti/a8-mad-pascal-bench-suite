@@ -3,7 +3,7 @@ unit chessboard;
 //---------------------- INTERFACE ---------------------------------------------
 
 interface
-  {$i '../interface.inc'}
+  {$i '../includes/interface.inc'}
   procedure rewriteCounter;
 
 //---------------------- TYPES -------------------------------------------------

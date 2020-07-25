@@ -15,7 +15,7 @@ var
   sdlstl  : word absolute $D402;
   chbas   : byte absolute $D409;
 
-{$i counter.inc}
+{$i 'includes/counter.inc'}
 
 procedure dlScore():assembler;
 asm
@@ -51,7 +51,7 @@ begin
   initSuite;
   initCounter;
 
-  {$i run.inc}
+  {$i 'includes/run.inc'}
 
   chbas := $80;
   sdlstl := word(@dlScore);
