@@ -33,7 +33,7 @@ begin
     n := rnd;
     if (n > 127) then n:= n xor %10000000;
     y := n * n;
-    if (x + y) <= r then Inc(bingo);
+    if (x + y) <= r then inc(bingo);
   end;
   score := 4 * bingo;
 end;

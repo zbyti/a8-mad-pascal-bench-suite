@@ -5,9 +5,6 @@ unit chessboard;
 interface
   {$i '../includes/interface.inc'}
 
-var
-  score     : word;
-
 //---------------------- IMPLEMENTATION ----------------------------------------
 
 implementation

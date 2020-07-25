@@ -5,9 +5,6 @@ unit countdown_while;
 interface
   {$i '../includes/interface.inc'}
 
-var
-  score     : word;
-
 //---------------------- IMPLEMENTATION ----------------------------------------
 
 implementation
