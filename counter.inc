@@ -30,16 +30,20 @@ begin
 end;
 
 procedure initCounter;
+var
+  i       : byte;
 begin
   Move(pointer($8000), pointer($8400), $400);
   Move(pointer($8080), pointer($8400), 80);
-  FillChar(pointer($87f8), 8, $ff);
+  for i := 0 to 7 do
+    poke($87f8+i, peek($8080+i) xor $ff);
+  FillChar(pointer($87f0), 8, $ff);
   chbas := $84; sdlstl := word(@dlCouner);
 end;
 
 procedure startCounter(name: string);
 begin
-  FillChar(pointer($20), $28, $ff);
+  FillChar(pointer($20), $28, $fe);
   FillChar(pointer($20), 5, 0);
   Move(name[1], pointer($26), length(name));
   pause;

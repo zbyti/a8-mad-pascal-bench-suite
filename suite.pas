@@ -31,7 +31,7 @@ procedure initSuite();
 begin
   Move(pointer($e000), pointer($8000), $400);
   SystemOff;
-  FillChar(pointer($20), $28, $ff);
+  FillChar(pointer($20), $28, 0);
   FillChar(pointer(lms), $fff, 0);
 end;
 
