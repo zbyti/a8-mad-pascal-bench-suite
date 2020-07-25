@@ -1,4 +1,4 @@
 procedure run;
 procedure rewriteCounter;
 
-var name : string;
+var name : string[15];
