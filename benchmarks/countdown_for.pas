@@ -9,7 +9,7 @@ interface
 
 //---------------------- CONSTANS ----------------------------------------------
 const
-  name      : string = 'countdown_for';
+  name      = 'countdown_for';
 
 //---------------------- VARIABLES ---------------------------------------------
 var
