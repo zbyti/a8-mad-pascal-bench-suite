@@ -1,9 +1,9 @@
 var
-  a       : byte absolute $20;
-  b       : byte absolute $21;
-  c       : byte absolute $22;
-  d       : byte absolute $23;
-  e       : byte absolute $24;
+  digi_a  : byte absolute $20;
+  digi_b  : byte absolute $21;
+  digi_c  : byte absolute $22;
+  digi_d  : byte absolute $23;
+  digi_e  : byte absolute $24;
 
 procedure dlCounter:assembler;
 asm
@@ -19,11 +19,11 @@ begin
   asm {
     phr
   };
-  inc(e);
-  if e=10 then begin inc(d); e := 0 end;
-  if d=10 then begin inc(c); d := 0 end;
-  if c=10 then begin inc(b); c := 0 end;
-  if b=10 then begin inc(a); b := 0 end;
+  inc(digi_e);
+  if digi_e=10 then begin inc(digi_d); digi_e := 0 end;
+  if digi_d=10 then begin inc(digi_c); digi_d := 0 end;
+  if digi_c=10 then begin inc(digi_b); digi_c := 0 end;
+  if digi_b=10 then begin inc(digi_a); digi_b := 0 end;
   asm {
     plr
   };
