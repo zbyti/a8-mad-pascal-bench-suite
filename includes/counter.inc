@@ -1,10 +1,3 @@
-var
-  digi_a  : byte absolute $20;
-  digi_b  : byte absolute $21;
-  digi_c  : byte absolute $22;
-  digi_d  : byte absolute $23;
-  digi_e  : byte absolute $24;
-
 procedure dlCounter:assembler;
 asm
 {
@@ -15,6 +8,12 @@ asm
 end;
 
 procedure vblCounter; interrupt;
+var
+  digi_a  : byte absolute $20;
+  digi_b  : byte absolute $21;
+  digi_c  : byte absolute $22;
+  digi_d  : byte absolute $23;
+  digi_e  : byte absolute $24;
 begin
   asm {
     phr
