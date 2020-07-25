@@ -1,3 +1,5 @@
+{$librarypath 'zlibs'}
+
 unit chessboard;
 
 //---------------------- INTERFACE ---------------------------------------------
@@ -9,7 +11,9 @@ interface
 
 implementation
 
-procedure run;
+uses counter;
+
+procedure benchmark;
 var
   rtclok    : byte absolute $14;
   zc        : byte absolute $45;
@@ -46,6 +50,16 @@ procedure rewriteCounter;
 begin
   FillChar(pointer($20), 5, 0);
   Move(pointer($45), pointer($22), 3);
+end;
+
+procedure run;
+begin
+  counter.prepare(name);
+  counter.stop := false;
+  benchmark;
+  counter.stop := true;
+  pause(50);
+  rewriteCounter;
 end;
 
 //---------------------- INITIALIZATION ----------------------------------------

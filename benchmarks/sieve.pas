@@ -1,3 +1,5 @@
+{$librarypath 'zlibs'}
+
 unit sieve;
 
 //---------------------- INTERFACE ---------------------------------------------
@@ -12,7 +14,9 @@ var
 
 implementation
 
-procedure run;
+uses counter;
+
+procedure benchmark;
 var
   flags     : array [0..8191] of boolean;
   n         : byte absolute $e0;
@@ -37,6 +41,15 @@ end;
 
 procedure rewriteCounter;
 begin
+end;
+
+procedure run;
+begin
+  counter.prepare(name);
+  counter.stop := false;
+  benchmark;
+  counter.stop := true;
+  pause(50);
 end;
 
 //---------------------- INITIALIZATION ----------------------------------------

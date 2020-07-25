@@ -1,10 +1,11 @@
 {$librarypath 'blibs'}
+{$librarypath 'zlibs'}
 {$librarypath 'benchmarks'}
 
 program Suite;
 
 uses
-  b_system,
+  b_system, counter,
   yoshplus, sieve, bsort, countdown_while, countdown_for,
   montecarlo, chessboard;
 
@@ -14,7 +15,6 @@ const
 var
   sdlstl      : word absolute $D402;
   chbas       : byte absolute $D409;
-  countFrames : boolean absolute 0;
 
 //------------------------------------------------------------------------------
 
@@ -28,7 +28,7 @@ asm
 };
 end;
 
-procedure printScore(name: string[15]; row: byte);
+procedure printScore(name: string[35]; row: byte);
 var
   crow    : word;
   i       : byte;
@@ -47,12 +47,10 @@ begin
   FillChar(pointer(lms), $fff, 0);
 end;
 
-{$i 'includes/counter.inc'}
-
 //------------------------------------------------------------------------------
 
 begin
-  initSuite; initCounter;
+  initSuite; counter.init;
 
   //--------------------------
 

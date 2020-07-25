@@ -1,3 +1,5 @@
+{$librarypath 'zlibs'}
+
 unit yoshplus;
 
 //---------------------- INTERFACE ---------------------------------------------
@@ -9,7 +11,9 @@ interface
 
 implementation
 
-procedure run;
+uses counter;
+
+procedure benchmark;
 var
   rtclok     : byte absolute $14;
   zc         : byte absolute $43;
@@ -33,6 +37,17 @@ procedure rewriteCounter;
 begin
   Move(pointer($43), pointer($20), 5);
 end;
+
+procedure run;
+begin
+  counter.prepare(name);
+  counter.stop := false;
+  benchmark;
+  counter.stop := true;
+  pause(50);
+  rewriteCounter;
+end;
+
 
 //---------------------- INITIALIZATION ----------------------------------------
 

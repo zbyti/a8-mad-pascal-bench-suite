@@ -1,3 +1,5 @@
+{$librarypath 'zlibs'}
+
 unit bsort;
 
 //---------------------- INTERFACE ---------------------------------------------
@@ -9,7 +11,9 @@ interface
 
 implementation
 
-procedure run;
+uses counter;
+
+procedure benchmark;
 var
   i         : byte absolute $F0;
   n1        : byte absolute $F1;
@@ -34,6 +38,15 @@ end;
 
 procedure rewriteCounter;
 begin
+end;
+
+procedure run;
+begin
+  counter.prepare(name);
+  counter.stop := false;
+  benchmark;
+  counter.stop := true;
+  pause(50);
 end;
 
 //---------------------- INITIALIZATION ----------------------------------------

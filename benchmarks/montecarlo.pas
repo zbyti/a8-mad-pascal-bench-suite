@@ -1,3 +1,5 @@
+{$librarypath 'zlibs'}
+
 unit montecarlo;
 
 //---------------------- INTERFACE ---------------------------------------------
@@ -12,7 +14,9 @@ var
 
 implementation
 
-procedure run;
+uses counter;
+
+procedure benchmark;
 var
   rnd       : byte absolute $D20A;
   i         : word absolute $e0;
@@ -40,6 +44,15 @@ end;
 
 procedure rewriteCounter;
 begin
+end;
+
+procedure run;
+begin
+  counter.prepare(name);
+  counter.stop := false;
+  benchmark;
+  counter.stop := true;
+  pause(50);
 end;
 
 //---------------------- INITIALIZATION ----------------------------------------

@@ -1,3 +1,5 @@
+{$librarypath 'zlibs'}
+
 unit countdown_for;
 
 //---------------------- INTERFACE ---------------------------------------------
@@ -9,7 +11,9 @@ interface
 
 implementation
 
-procedure run;
+uses counter;
+
+procedure benchmark;
 var
   za         : byte absolute $41;
   zb         : byte absolute $42;
@@ -30,6 +34,15 @@ end;
 
 procedure rewriteCounter;
 begin
+end;
+
+procedure run;
+begin
+  counter.prepare(name);
+  counter.stop := false;
+  benchmark;
+  counter.stop := true;
+  pause(50);
 end;
 
 //---------------------- INITIALIZATION ----------------------------------------

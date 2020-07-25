@@ -1,11 +1,26 @@
-procedure dlCounter:assembler;
-asm
-{
-  :3  .byte $70
-      .byte $42,$20,$00
-      .byte $41,a(dlCounter)
-};
-end;
+{$librarypath 'blibs'}
+
+unit counter;
+
+//---------------------- INTERFACE ---------------------------------------------
+
+interface
+  procedure init;
+  procedure prepare(name: string[15]);
+
+var
+  stop        : boolean absolute 0;
+
+//---------------------- IMPLEMENTATION ----------------------------------------
+
+implementation
+
+uses
+  b_system;
+
+var
+  sdlstl      : word absolute $D402;
+  chbas       : byte absolute $D409;
 
 procedure vblCounter; interrupt;
 var
@@ -18,7 +33,7 @@ begin
   asm {
     phr
   };
-  if countFrames then begin
+  if not stop then begin
     inc(digi_e);
     if digi_e=10 then begin inc(digi_d); digi_e := 0 end;
     if digi_d=10 then begin inc(digi_c); digi_d := 0 end;
@@ -30,11 +45,19 @@ begin
   };
 end;
 
-procedure initCounter;
+procedure dlCounter:assembler;
+asm
+{
+  :3  .byte $70
+      .byte $42,$20,$00
+      .byte $41,a(dlCounter)
+};
+end;
+
+procedure init;
 var
   i       : byte;
 begin
-  countFrames := false;
   Move(pointer($8000), pointer($8400), $400);
   Move(pointer($8080), pointer($8400), 80);
   for i := 0 to 7 do
@@ -45,10 +68,16 @@ begin
   EnableVBLI(@vblCounter);
 end;
 
-procedure startCounter(name: string[15]);
+procedure prepare(name: string[35]);
 begin
   FillChar(pointer($20), $28, $fe);
   FillChar(pointer($20), 5, 0);
   Move(name[1], pointer($26), length(name));
-  pause; countFrames := true;
+  pause;
 end;
+
+//---------------------- INITIALIZATION ----------------------------------------
+
+initialization
+  stop := true;
+end.
