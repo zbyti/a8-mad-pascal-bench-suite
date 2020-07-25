@@ -21,42 +21,42 @@ implementation
 
 procedure run;
 var
-  a         : byte absolute $41;
-  b         : byte absolute $42;
-  c         : byte absolute $43;
-  d         : byte absolute $44;
-  e         : byte absolute $45;
-  f         : byte absolute $46;
-  g         : byte absolute $47;
+  za         : byte absolute $41;
+  zb         : byte absolute $42;
+  zc         : byte absolute $43;
+  zd         : byte absolute $44;
+  ze         : byte absolute $45;
+  zf         : byte absolute $46;
+  zg         : byte absolute $47;
 begin
-  a := 1; b := 9; c := 9; d := 9;
-  e := 9; f := 9; g := 9;
-  while a <> $ff do begin
-    b := 9;
-    while b <> $ff do begin
-      c := 9;
-      while c <> $ff do begin
-        d := 9;
-        while d <> $ff do begin
-          e := 9;
-          while e <> $ff do begin
-            f := 9;
-            while f <> $ff do begin
-              g := 9;
-              while g <> $ff do begin
-                dec(g);
+  za := 1; zb := 9; zc := 9; zd := 9;
+  ze := 9; zf := 9; zg := 9;
+  while za <> $ff do begin
+    zb := 9;
+    while zb <> $ff do begin
+      zc := 9;
+      while zc <> $ff do begin
+        zd := 9;
+        while zd <> $ff do begin
+          ze := 9;
+          while ze <> $ff do begin
+            zf := 9;
+            while zf <> $ff do begin
+              zg := 9;
+              while zg <> $ff do begin
+                dec(zg);
               end;
-              dec(f);
+              dec(zf);
             end;
-            dec(e);
+            dec(ze);
           end;
-          dec(d);
+          dec(zd);
         end;
-        dec(c);
+        dec(zc);
       end;
-      dec(b);
+      dec(zb);
     end;
-    dec(a);
+    dec(za);
   end;
 end;
 

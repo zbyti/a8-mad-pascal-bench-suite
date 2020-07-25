@@ -40,7 +40,7 @@ end;
 procedure startCounter(name: string);
 begin
   FillChar(pointer($20), $28, $ff);
-  a := 0; b := 0; c :=0; d := 0; e := 0;
+  FillChar(pointer($20), 5, 0);
   Move(name[1], pointer($26), length(name));
   pause;
   EnableVBLI(@vblCounter);

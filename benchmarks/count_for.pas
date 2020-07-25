@@ -21,21 +21,21 @@ implementation
 
 procedure run;
 var
-  a         : byte absolute $41;
-  b         : byte absolute $42;
-  c         : byte absolute $43;
-  d         : byte absolute $44;
-  e         : byte absolute $45;
-  f         : byte absolute $46;
-  g         : byte absolute $47;
+  za         : byte absolute $41;
+  zb         : byte absolute $42;
+  zc         : byte absolute $43;
+  zd         : byte absolute $44;
+  ze         : byte absolute $45;
+  zf         : byte absolute $46;
+  zg         : byte absolute $47;
 begin
-  for a:=1 downto 0 do
-    for b:=9 downto 0 do
-      for c:=9 downto 0 do
-        for d:=9 downto 0 do
-          for e:=9 downto 0 do
-            for f:=9 downto 0 do
-              for g:=9 downto 0 do;
+  for za:=1 downto 0 do
+    for zb:=9 downto 0 do
+      for zc:=9 downto 0 do
+        for zd:=9 downto 0 do
+          for ze:=9 downto 0 do
+            for zf:=9 downto 0 do
+              for zg:=9 downto 0 do;
 end;
 
 //---------------------- INITIALIZATION ----------------------------------------
