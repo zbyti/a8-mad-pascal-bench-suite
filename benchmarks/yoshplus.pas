@@ -4,15 +4,16 @@ unit yoshplus;
 
 interface
   {$i '../includes/interface.inc'}
-  procedure rewriteCounter;
 
 //---------------------- TYPES -------------------------------------------------
 
 //---------------------- CONSTANS ----------------------------------------------
+
 const
-  name      = 'yoshplus';
+  name = 'yoshplus';
 
 //---------------------- VARIABLES ---------------------------------------------
+
 var
   score     : word;
 

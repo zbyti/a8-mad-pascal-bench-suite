@@ -4,15 +4,16 @@ unit chessboard;
 
 interface
   {$i '../includes/interface.inc'}
-  procedure rewriteCounter;
 
 //---------------------- TYPES -------------------------------------------------
 
 //---------------------- CONSTANS ----------------------------------------------
+
 const
-  name      = 'chessboard';
+  name = 'chessboard';
 
 //---------------------- VARIABLES ---------------------------------------------
+
 var
   score     : word;
 

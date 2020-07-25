@@ -8,8 +8,9 @@ interface
 //---------------------- TYPES -------------------------------------------------
 
 //---------------------- CONSTANS ----------------------------------------------
+
 const
-  name      = 'montecarlo';
+  name = 'montecarlo';
 
 //---------------------- VARIABLES ---------------------------------------------
 
@@ -44,6 +45,10 @@ begin
     if (x + y) <= r then Inc(bingo);
   end;
   score := 4 * bingo;
+end;
+
+procedure rewriteCounter;
+begin
 end;
 
 //---------------------- INITIALIZATION ----------------------------------------

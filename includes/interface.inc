@@ -1,1 +1,2 @@
 procedure run;
+procedure rewriteCounter;

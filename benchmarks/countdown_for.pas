@@ -8,10 +8,12 @@ interface
 //---------------------- TYPES -------------------------------------------------
 
 //---------------------- CONSTANS ----------------------------------------------
+
 const
-  name      = 'countdown_for';
+  name = 'countdown_for';
 
 //---------------------- VARIABLES ---------------------------------------------
+
 var
   score     : word;
 
@@ -36,6 +38,10 @@ begin
           for ze:=9 downto 0 do
             for zf:=9 downto 0 do
               for zg:=9 downto 0 do;
+end;
+
+procedure rewriteCounter;
+begin
 end;
 
 //---------------------- INITIALIZATION ----------------------------------------

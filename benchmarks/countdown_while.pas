@@ -8,10 +8,12 @@ interface
 //---------------------- TYPES -------------------------------------------------
 
 //---------------------- CONSTANS ----------------------------------------------
+
 const
-  name      = 'countdown_while';
+  name = 'countdown_while';
 
 //---------------------- VARIABLES ---------------------------------------------
+
 var
   score     : word;
 
@@ -58,6 +60,10 @@ begin
     end;
     dec(za);
   end;
+end;
+
+procedure rewriteCounter;
+begin
 end;
 
 //---------------------- INITIALIZATION ----------------------------------------
