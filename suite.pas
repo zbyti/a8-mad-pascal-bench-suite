@@ -15,8 +15,6 @@ var
   sdlstl  : word absolute $D402;
   chbas   : byte absolute $D409;
 
-{$i 'includes/counter.inc'}
-
 procedure initSuite();
 begin
   Move(pointer($e000), pointer($8000), $400);
@@ -45,6 +43,8 @@ asm
       .byte $41,a(dlScore)
 };
 end;
+
+{$i 'includes/counter.inc'}
 
 begin
   initSuite;
