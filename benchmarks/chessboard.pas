@@ -22,7 +22,7 @@ implementation
 
 procedure run;
 var
-  rtClock   : byte absolute $14;
+  rtclok    : byte absolute $14;
   zc        : byte absolute $45;
   zd        : byte absolute $46;
   ze        : byte absolute $47;
@@ -32,8 +32,8 @@ var
   p         : PByte absolute $e0;
 begin
   FillChar(pointer($45), 3, 0);
-  rtClock := 0;
-  while rtClock < 150 do begin
+  rtclok := 0;
+  while rtclok < 150 do begin
     p := pointer($a000);
     for i3b := 7 downto 0 do begin
       for i2b := 23 downto 0 do begin
