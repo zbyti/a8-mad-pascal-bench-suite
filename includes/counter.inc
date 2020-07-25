@@ -18,11 +18,13 @@ begin
   asm {
     phr
   };
-  inc(digi_e);
-  if digi_e=10 then begin inc(digi_d); digi_e := 0 end;
-  if digi_d=10 then begin inc(digi_c); digi_d := 0 end;
-  if digi_c=10 then begin inc(digi_b); digi_c := 0 end;
-  if digi_b=10 then begin inc(digi_a); digi_b := 0 end;
+  if countFrames then begin
+    inc(digi_e);
+    if digi_e=10 then begin inc(digi_d); digi_e := 0 end;
+    if digi_d=10 then begin inc(digi_c); digi_d := 0 end;
+    if digi_c=10 then begin inc(digi_b); digi_c := 0 end;
+    if digi_b=10 then begin inc(digi_a); digi_b := 0 end;
+  end;
   asm {
     plr
   };
@@ -32,12 +34,15 @@ procedure initCounter;
 var
   i       : byte;
 begin
+  countFrames := false;
   Move(pointer($8000), pointer($8400), $400);
   Move(pointer($8080), pointer($8400), 80);
   for i := 0 to 7 do
     poke($87f8+i, peek($8080+i) xor $ff);
   FillChar(pointer($87f0), 8, $ff);
-  chbas := $84; sdlstl := word(@dlCounter);
+  chbas := $84;
+  sdlstl := word(@dlCounter);
+  EnableVBLI(@vblCounter);
 end;
 
 procedure startCounter(name: string[15]);
@@ -45,6 +50,5 @@ begin
   FillChar(pointer($20), $28, $fe);
   FillChar(pointer($20), 5, 0);
   Move(name[1], pointer($26), length(name));
-  pause;
-  EnableVBLI(@vblCounter);
+  pause; countFrames := true;
 end;
