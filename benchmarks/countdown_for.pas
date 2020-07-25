@@ -5,15 +5,6 @@ unit countdown_for;
 interface
   {$i '../includes/interface.inc'}
 
-//---------------------- TYPES -------------------------------------------------
-
-//---------------------- CONSTANS ----------------------------------------------
-
-const
-  name = 'countdown_for';
-
-//---------------------- VARIABLES ---------------------------------------------
-
 var
   score     : word;
 
@@ -47,4 +38,5 @@ end;
 //---------------------- INITIALIZATION ----------------------------------------
 
 initialization
+  name := 'countdown_for';
 end.

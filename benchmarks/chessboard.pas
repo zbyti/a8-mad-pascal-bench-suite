@@ -5,15 +5,6 @@ unit chessboard;
 interface
   {$i '../includes/interface.inc'}
 
-//---------------------- TYPES -------------------------------------------------
-
-//---------------------- CONSTANS ----------------------------------------------
-
-const
-  name = 'chessboard';
-
-//---------------------- VARIABLES ---------------------------------------------
-
 var
   score     : word;
 
@@ -63,4 +54,5 @@ end;
 //---------------------- INITIALIZATION ----------------------------------------
 
 initialization
+  name := 'chessboard';
 end.

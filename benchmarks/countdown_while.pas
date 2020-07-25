@@ -5,15 +5,6 @@ unit countdown_while;
 interface
   {$i '../includes/interface.inc'}
 
-//---------------------- TYPES -------------------------------------------------
-
-//---------------------- CONSTANS ----------------------------------------------
-
-const
-  name = 'countdown_while';
-
-//---------------------- VARIABLES ---------------------------------------------
-
 var
   score     : word;
 
@@ -69,4 +60,5 @@ end;
 //---------------------- INITIALIZATION ----------------------------------------
 
 initialization
+  name := 'countdown_while';
 end.

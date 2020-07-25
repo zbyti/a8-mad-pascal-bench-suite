@@ -5,15 +5,6 @@ unit montecarlo;
 interface
   {$i '../includes/interface.inc'}
 
-//---------------------- TYPES -------------------------------------------------
-
-//---------------------- CONSTANS ----------------------------------------------
-
-const
-  name = 'montecarlo';
-
-//---------------------- VARIABLES ---------------------------------------------
-
 var
   score     : word absolute $ec;
 
@@ -54,4 +45,5 @@ end;
 //---------------------- INITIALIZATION ----------------------------------------
 
 initialization
+  name := 'montecarlo';
 end.
