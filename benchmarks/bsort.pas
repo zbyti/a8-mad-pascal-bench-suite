@@ -27,7 +27,7 @@ var
   n2        : byte absolute $F2;
   tmp       : byte absolute $F3;
   size      : byte absolute $F4;
-  sorttable	: array[0..254] of byte;
+  sorttable : array[0..254] of byte;
 begin
   size := 254; tmp := 255;
   while size<>0 do begin
