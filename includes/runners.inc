@@ -1,35 +1,42 @@
-startCounter(bsort.name);
-bsort.run;
+startCounter(yoshplus.name);
+yoshplus.run;
 DisableVBLI;
-printScore(bsort.name,0);
-
 pause(50);
+yoshplus.rewriteCounter;
+printScore(yoshplus.name, 0);
 
 startCounter(sieve.name);
 sieve.run;
 DisableVBLI;
-printScore(sieve.name,1);
+printScore(sieve.name, 1);
+
+pause(50);
+
+startCounter(bsort.name);
+bsort.run;
+DisableVBLI;
+printScore(bsort.name, 2);
 
 pause(50);
 
 startCounter(countdown_for.name);
 countdown_for.run;
 DisableVBLI;
-printScore(countdown_for.name,2);
+printScore(countdown_for.name, 3);
 
 pause(50);
 
 startCounter(countdown_while.name);
 countdown_while.run;
 DisableVBLI;
-printScore(countdown_while.name,3);
+printScore(countdown_while.name, 4);
 
 pause(50);
 
 startCounter(montecarlo.name);
 montecarlo.run;
 DisableVBLI;
-printScore(montecarlo.name,4);
+printScore(montecarlo.name, 5);
 
 pause(50);
 
@@ -38,11 +45,4 @@ chessboard.run;
 DisableVBLI;
 pause(50);
 chessboard.rewriteCounter;
-printScore(chessboard.name,5);
-
-startCounter(yoshplus.name);
-yoshplus.run;
-DisableVBLI;
-pause(50);
-yoshplus.rewriteCounter;
-printScore(yoshplus.name,6);
+printScore(chessboard.name, 6);

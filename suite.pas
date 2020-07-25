@@ -17,16 +17,6 @@ var
 
 {$i 'includes/counter.inc'}
 
-procedure dlScore():assembler;
-asm
-{
-  :3  .byte $70
-      .byte $42,a(lms)
-  :21 .byte $02
-      .byte $41,a(dlScore)
-};
-end;
-
 procedure initSuite();
 begin
   Move(pointer($e000), pointer($8000), $400);
@@ -46,11 +36,21 @@ begin
     poke(crow+i+$10,peek($20+i)+16);
 end;
 
+procedure dlScore():assembler;
+asm
+{
+  :3  .byte $70
+      .byte $42,a(lms)
+  :21 .byte $02
+      .byte $41,a(dlScore)
+};
+end;
+
 begin
   initSuite;
   initCounter;
 
-  {$i 'includes/run.inc'}
+  {$i 'includes/runners.inc'}
 
   chbas := $80;
   sdlstl := word(@dlScore);
