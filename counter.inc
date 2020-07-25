@@ -5,12 +5,12 @@ var
   d       : byte absolute $23;
   e       : byte absolute $24;
 
-procedure dlCouner:assembler;
+procedure dlCounter:assembler;
 asm
 {
   :3  .byte $70
       .byte $42,$20,$00
-      .byte $41,a(dlCouner)
+      .byte $41,a(dlCounter)
 };
 end;
 
@@ -38,7 +38,7 @@ begin
   for i := 0 to 7 do
     poke($87f8+i, peek($8080+i) xor $ff);
   FillChar(pointer($87f0), 8, $ff);
-  chbas := $84; sdlstl := word(@dlCouner);
+  chbas := $84; sdlstl := word(@dlCounter);
 end;
 
 procedure startCounter(name: string);
