@@ -22,7 +22,7 @@ implementation
 
 procedure run;
 var
-  rtClock   : byte absolute $14;
+  rtclok     : byte absolute $14;
   zc         : byte absolute $43;
   zd         : byte absolute $44;
   ze         : byte absolute $45;
@@ -30,8 +30,8 @@ var
   zg         : byte absolute $47;
 begin
   FillChar(pointer($43), 5, 0);
-  rtClock := 0;
-  while rtClock < 100 do begin
+  rtclok := 0;
+  while rtclok < 100 do begin
     inc(zg);
     if zg=10 then begin inc(zf); zg := 0 end;
     if zf=10 then begin inc(ze); zf := 0 end;
