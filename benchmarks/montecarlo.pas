@@ -29,8 +29,8 @@ var
 begin
   bingo := 0;
   r := 127 * 127;
-  probe := 10000;
-  for i := 0 to probe do begin
+  probe := 9999;
+  for i := probe downto 0 do begin
     n := rnd;
     if (n > 127) then n:= n xor %10000000;
     x := n * n;
