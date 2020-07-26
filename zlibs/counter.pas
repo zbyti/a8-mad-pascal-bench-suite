@@ -4,7 +4,7 @@ unit counter;
 
 interface
   procedure init(baseCharset: word);
-  procedure prepare(name: string[15]);
+  procedure prepare(name: string[25]);
 
 const
   lms = $20;
@@ -64,7 +64,7 @@ begin
   FillChar(pointer(charset + $400 - 16), 8, $ff);
 end;
 
-procedure prepare(name: string[15]);
+procedure prepare(name: string[25]);
 begin
   FillChar(pointer(lms), $28, $fe);
   FillChar(pointer(lms), 5, 0);

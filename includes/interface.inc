@@ -1,3 +1,3 @@
 procedure run;
 
-var name : string[15];
+var name : string[25];

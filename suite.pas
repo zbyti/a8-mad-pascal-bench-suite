@@ -7,7 +7,7 @@ program Suite;
 uses
   b_system, counter,
   yoshplus, sieve, bsort, countdown_while, countdown_for,
-  montecarlo, chessboard;
+  montecarlo, chessboard, sieve_big;
 
 const
   lms = $e000;
@@ -28,7 +28,7 @@ var
 
 //------------------------------------------------------------------------------
 
-procedure printScore(name: string[15]; row: byte);
+procedure printScore(name: string[25]; row: byte);
 var
   crow    : word;
   i       : byte;
@@ -36,7 +36,7 @@ begin
   crow := lms + (40 * row);
   Move(name[1], pointer(crow), length(name));
   for i := 0 to 4 do
-    poke(crow + i + 16, peek(counter.lms + i) + 16);
+    poke(crow + i + 26, peek(counter.lms + i) + 16);
 end;
 
 procedure initSuite();

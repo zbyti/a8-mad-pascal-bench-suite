@@ -52,5 +52,5 @@ end;
 //---------------------- INITIALIZATION ----------------------------------------
 
 initialization
-  name := 'yoshplus';
+  name := 'YoshPlus'~;
 end.

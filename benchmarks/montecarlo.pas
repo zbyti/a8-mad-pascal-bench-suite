@@ -54,5 +54,5 @@ end;
 //---------------------- INITIALIZATION ----------------------------------------
 
 initialization
-  name := 'montecarlo';
+  name := 'MonteCarlo'~;
 end.

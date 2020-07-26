@@ -1,36 +1,40 @@
 //---------------------------
 
 yoshplus.run;
-printScore(yoshplus.name, 0);
+printScore('YoshPlus 100 frames'~, 0);
 
 //---------------------------
 
 sieve.run;
-printScore(sieve.name, 1);
+printScore('Sieve 1028 10x'~, 1);
 
 //---------------------------
 
+sieve_big.run;
+printScore('Sieve 1899 10x'~, 2);
+
+//---------------------------
 bsort.run;
-printScore(bsort.name, 2);
+printScore('Bubble Sort: 255 elements'~, 3);
 
 //---------------------------
 
 countdown_for.run;
-printScore(countdown_for.name, 3);
+printScore('Countdown 2ML: FOR'~, 4);
 
 //---------------------------
 
 countdown_while.run;
-printScore(countdown_while.name, 4);
+printScore('Countdown 2ML: WHILE'~, 5);
 
 //---------------------------
 
 montecarlo.run;
-printScore(montecarlo.name, 5);
+printScore('MonteCarlo: PI'~, 6);
 
 //---------------------------
 
 chessboard.run;
-printScore(chessboard.name, 6);
+printScore('Chessboard 150 frames'~, 7);
 
 //---------------------------
