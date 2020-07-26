@@ -39,10 +39,6 @@ begin
   end;
 end;
 
-procedure rewriteCounter;
-begin
-end;
-
 procedure run;
 begin
   counter.prepare(name);

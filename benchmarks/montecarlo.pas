@@ -42,10 +42,6 @@ begin
   score := 4 * bingo;
 end;
 
-procedure rewriteCounter;
-begin
-end;
-
 procedure run;
 begin
   counter.prepare(name);
