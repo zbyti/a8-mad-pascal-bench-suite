@@ -23,13 +23,13 @@ var
   zf         : byte absolute counter.lms + $26;
   zg         : byte absolute counter.lms + $27;
 begin
-  for za:=1 downto 0 do
-    for zb:=9 downto 0 do
-      for zc:=9 downto 0 do
-        for zd:=9 downto 0 do
-          for ze:=9 downto 0 do
-            for zf:=9 downto 0 do
-              for zg:=9 downto 0 do;
+  for za := 1 downto 0 do
+    for zb := 9 downto 0 do
+      for zc := 9 downto 0 do
+        for zd := 9 downto 0 do
+          for ze := 9 downto 0 do
+            for zf := 9 downto 0 do
+              for zg := 9 downto 0 do;
 end;
 
 procedure run;

@@ -41,8 +41,8 @@ begin
       if (i3b and %1) = 0 then dec(p,3) else inc(p,3);
     end;
     inc(ze);
-    if ze=10 then begin inc(zd); ze := 0 end;
-    if zd=10 then begin inc(zc); zd := 0 end;
+    if ze = 10 then begin inc(zd); ze := 0 end;
+    if zd = 10 then begin inc(zc); zd := 0 end;
   end;
 end;
 
