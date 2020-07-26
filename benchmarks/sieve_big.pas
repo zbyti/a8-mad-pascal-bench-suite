@@ -8,7 +8,7 @@ interface
   {$i '../includes/interface.inc'}
 
 var
-  count     : word absolute $e0;
+  score     : word absolute $e0;
 
 //---------------------- IMPLEMENTATION ----------------------------------------
 
@@ -26,7 +26,7 @@ var
 begin
   for bi := 9 downto 0 do begin
     fillchar(flags, sizeof(flags), true);
-    i:=0; count := 0;
+    i:=0; score := 0;
     while i <= 8191 do begin
       if flags[i] then begin
         prime := (i * 2) + 3;
@@ -35,7 +35,7 @@ begin
           flags[k] := false;
           inc(k, prime);
         end;
-        inc(count);
+        inc(score);
       end;
       inc(i);
     end;
