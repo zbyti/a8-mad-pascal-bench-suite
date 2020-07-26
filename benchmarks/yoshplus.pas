@@ -16,13 +16,13 @@ uses counter;
 procedure benchmark;
 var
   rtclok     : byte absolute $14;
-  zc         : byte absolute $43;
-  zd         : byte absolute $44;
-  ze         : byte absolute $45;
-  zf         : byte absolute $46;
-  zg         : byte absolute $47;
+  zc         : byte absolute counter.lms + $23;
+  zd         : byte absolute counter.lms + $24;
+  ze         : byte absolute counter.lms + $25;
+  zf         : byte absolute counter.lms + $26;
+  zg         : byte absolute counter.lms + $27;
 begin
-  FillChar(pointer($43), 5, 0);
+  FillChar(pointer(counter.lms + $23), 5, 0);
   rtclok := 0;
   while rtclok < 100 do begin
     inc(zg);
@@ -35,7 +35,7 @@ end;
 
 procedure rewriteCounter;
 begin
-  Move(pointer($43), pointer($20), 5);
+  Move(pointer(counter.lms + $23), pointer(counter.lms), 5);
 end;
 
 procedure run;

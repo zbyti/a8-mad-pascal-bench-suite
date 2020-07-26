@@ -8,6 +8,9 @@ interface
   procedure init;
   procedure prepare(name: string[15]);
 
+const
+  lms = $20;
+
 var
   stop        : boolean absolute 0;
 
@@ -21,7 +24,7 @@ uses
 const
   dlCounter: array [0..8] of byte = (
     $70,$70,$70,
-    $42,$20,$00,
+    $42,lms,$00,
     $41,lo(word(@dlCounter)),hi(word(@dlCounter))
   );
 
@@ -31,11 +34,11 @@ var
 
 procedure vblCounter; interrupt;
 var
-  a : byte absolute $20;
-  b : byte absolute $21;
-  c : byte absolute $22;
-  d : byte absolute $23;
-  e : byte absolute $24;
+  a : byte absolute lms;
+  b : byte absolute lms+1;
+  c : byte absolute lms+2;
+  d : byte absolute lms+3;
+  e : byte absolute lms+4;
 begin
   asm {
     phr
@@ -68,9 +71,9 @@ end;
 
 procedure prepare(name: string[15]);
 begin
-  FillChar(pointer($20), $28, $fe);
-  FillChar(pointer($20), 5, 0);
-  Move(name[1], pointer($26), length(name));
+  FillChar(pointer(lms), $28, $fe);
+  FillChar(pointer(lms), 5, 0);
+  Move(name[1], pointer(lms+6), length(name));
   pause;
 end;
 

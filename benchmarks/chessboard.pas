@@ -16,9 +16,9 @@ uses counter;
 procedure benchmark;
 var
   rtclok    : byte absolute $14;
-  zc        : byte absolute $45;
-  zd        : byte absolute $46;
-  ze        : byte absolute $47;
+  zc        : byte absolute counter.lms + $25;
+  zd        : byte absolute counter.lms + $26;
+  ze        : byte absolute counter.lms + $27;
   i1b       : byte absolute $e2;
   i2b       : byte absolute $e3;
   i3b       : byte absolute $e4;
@@ -48,8 +48,8 @@ end;
 
 procedure rewriteCounter;
 begin
-  FillChar(pointer($20), 5, 0);
-  Move(pointer($45), pointer($22), 3);
+  FillChar(pointer(counter.lms), 5, 0);
+  Move(pointer(counter.lms + $25), pointer(counter.lms + 2), 3);
 end;
 
 procedure run;

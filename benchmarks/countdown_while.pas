@@ -15,13 +15,13 @@ uses counter;
 
 procedure benchmark;
 var
-  za         : byte absolute $41;
-  zb         : byte absolute $42;
-  zc         : byte absolute $43;
-  zd         : byte absolute $44;
-  ze         : byte absolute $45;
-  zf         : byte absolute $46;
-  zg         : byte absolute $47;
+  za         : byte absolute counter.lms + $21;
+  zb         : byte absolute counter.lms + $22;
+  zc         : byte absolute counter.lms + $23;
+  zd         : byte absolute counter.lms + $24;
+  ze         : byte absolute counter.lms + $25;
+  zf         : byte absolute counter.lms + $26;
+  zg         : byte absolute counter.lms + $27;
 begin
   za := 1; zb := 9; zc := 9; zd := 9;
   ze := 9; zf := 9; zg := 9;

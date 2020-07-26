@@ -35,14 +35,14 @@ begin
   crow := lms+(40*row);
   Move(name[1], pointer(crow), length(name));
   for i := 0 to 4 do
-    poke(crow+i+$10,peek($20+i)+16);
+    poke(crow+i+$10,peek(counter.lms+i)+16);
 end;
 
 procedure initSuite();
 begin
   Move(pointer($e000), pointer($8000), $400);
   SystemOff;
-  FillChar(pointer($20), $28, 0);
+  FillChar(pointer(counter.lms), $28, 0);
   FillChar(pointer(lms), $fff, 0);
 end;
 
