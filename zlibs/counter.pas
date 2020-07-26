@@ -1,5 +1,3 @@
-{$librarypath 'blibs'}
-
 unit counter;
 
 //---------------------- INTERFACE ---------------------------------------------
@@ -10,16 +8,16 @@ interface
 
 const
   lms = $20;
+  chbas = $84;
 
 var
   stop        : boolean absolute 0;
+  vblk        : pointer;
+  sdlstl      : word;
 
 //---------------------- IMPLEMENTATION ----------------------------------------
 
 implementation
-
-uses
-  b_system;
 
 const
   dlCounter: array [0..8] of byte = (
@@ -27,10 +25,6 @@ const
     $42,lms,$00,
     $41,lo(word(@dlCounter)),hi(word(@dlCounter))
   );
-
-var
-  sdlstl      : word absolute $D402;
-  chbas       : byte absolute $D409;
 
 procedure vblCounter; interrupt;
 var
@@ -64,9 +58,6 @@ begin
   for i := 0 to 7 do
     poke($87f8+i, peek($8080+i) xor $ff);
   FillChar(pointer($87f0), 8, $ff);
-  chbas := $84;
-  sdlstl := word(@dlCounter);
-  EnableVBLI(@vblCounter);
 end;
 
 procedure prepare(name: string[15]);
@@ -81,4 +72,6 @@ end;
 
 initialization
   stop := true;
+  vblk := @vblCounter;
+  sdlstl := word(@dlCounter);
 end.

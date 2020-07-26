@@ -44,12 +44,16 @@ begin
   SystemOff;
   FillChar(pointer(counter.lms), 40, 0);
   FillChar(pointer(lms), $fff, 0);
+  counter.init;
+  chbas := counter.chbas;
+  sdlstl := counter.sdlstl;
+  EnableVBLI(counter.vblk);
 end;
 
 //------------------------------------------------------------------------------
 
 begin
-  initSuite; counter.init;
+  initSuite;
 
   //--------------------------
 
