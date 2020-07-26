@@ -19,18 +19,16 @@ uses counter;
 procedure benchmark;
 var
   rnd       : byte absolute $D20A;
-  i         : word absolute $e0;
-  r         : word absolute $e2;
-  x         : word absolute $e4;
-  y         : word absolute $e6;
-  bingo     : word absolute $e8;
-  probe     : word absolute $ea;
-  n         : byte absolute $ee;
+  r         : word absolute $e0;
+  x         : word absolute $e2;
+  y         : word absolute $e4;
+  bingo     : word absolute $e6;
+  probe     : word absolute $e8;
+  n         : byte absolute $ea;
 begin
   bingo := 0;
   r := 127 * 127;
-  probe := 9999;
-  for i := probe downto 0 do begin
+  for probe := 9999 downto 0 do begin
     n := rnd;
     if (n > 127) then n:= n xor %10000000;
     x := n * n;
