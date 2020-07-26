@@ -24,21 +24,21 @@ var
 
 procedure vblCounter; interrupt;
 var
-  a  : byte absolute $20;
-  b  : byte absolute $21;
-  c  : byte absolute $22;
-  d  : byte absolute $23;
-  e  : byte absolute $24;
+  a : byte absolute $20;
+  b : byte absolute $21;
+  c : byte absolute $22;
+  d : byte absolute $23;
+  e : byte absolute $24;
 begin
   asm {
     phr
   };
   if not stop then begin
     inc(e);
-    if e=10 then begin inc(d); e := 0 end;
-    if d=10 then begin inc(c); d := 0 end;
-    if c=10 then begin inc(b); c := 0 end;
-    if b=10 then begin inc(a); b := 0 end;
+    if e = 10 then begin inc(d); e := 0 end;
+    if d = 10 then begin inc(c); d := 0 end;
+    if c = 10 then begin inc(b); c := 0 end;
+    if b = 10 then begin inc(a); b := 0 end;
   end;
   asm {
     plr
