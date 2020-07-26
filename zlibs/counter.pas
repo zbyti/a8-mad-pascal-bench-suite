@@ -3,23 +3,26 @@ unit counter;
 //---------------------- INTERFACE ---------------------------------------------
 
 interface
-  procedure init;
+  procedure init(baserCharset : word);
   procedure prepare(name: string[15]);
 
 const
   lms = $20;
-  chbas = $84;
 
 var
-  stop        : boolean absolute 0;
-  vblk        : pointer;
-  sdlstl      : word;
+  stop          : boolean absolute 0;
+  vblk          : pointer;
+  sdlstl        : word;
+  chbas         : byte;
+
 
 //---------------------- IMPLEMENTATION ----------------------------------------
 
 implementation
 
 const
+  charset = $8400;
+
   dlCounter: array [0..8] of byte = (
     $70,$70,$70,
     $42,lms,$00,
@@ -49,15 +52,15 @@ begin
   };
 end;
 
-procedure init;
+procedure init(baserCharset : word);
 var
   i       : byte;
 begin
-  Move(pointer($8000), pointer($8400), $400);
-  Move(pointer($8080), pointer($8400), 80);
+  Move(pointer(baserCharset), pointer(charset), $400);
+  Move(pointer(baserCharset + $80), pointer(charset), 80);
   for i := 0 to 7 do
-    poke($87f8+i, peek($8080+i) xor $ff);
-  FillChar(pointer($87f0), 8, $ff);
+    poke(charset + $400 - 8 + i, peek(baserCharset + $80 + i) xor $ff);
+  FillChar(pointer(charset + $400 - 16), 8, $ff);
 end;
 
 procedure prepare(name: string[15]);
@@ -74,4 +77,5 @@ initialization
   stop := true;
   vblk := @vblCounter;
   sdlstl := word(@dlCounter);
+  chbas := hi(charset);
 end.
