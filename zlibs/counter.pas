@@ -21,8 +21,6 @@ var
 implementation
 
 const
-  charset = $8400;
-
   dlCounter: array [0..8] of byte = (
     $70,$70,$70,
     $42,lms,$00,
@@ -54,8 +52,11 @@ end;
 
 procedure init(baseCharset: word);
 var
-  i : byte;
+  i           : byte;
+  charset     : word;
 begin
+  charset := baseCharset + $400;
+  chbas := hi(charset);
   Move(pointer(baseCharset), pointer(charset), $400);
   Move(pointer(baseCharset + $80), pointer(charset), 80);
   for i := 0 to 7 do
@@ -77,5 +78,4 @@ initialization
   stop := true;
   vblk := @vblCounter;
   sdlstl := word(@dlCounter);
-  chbas := hi(charset);
 end.
