@@ -48,5 +48,5 @@ end;
 //---------------------- INITIALIZATION ----------------------------------------
 
 initialization
-  name := 'BubbleSort'~;
+  name := 'bsort';
 end.

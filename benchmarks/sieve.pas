@@ -54,5 +54,5 @@ end;
 //---------------------- INITIALIZATION ----------------------------------------
 
 initialization
-  name := 'Sieve1028_10x'~;
+  name := 'sieve';
 end.

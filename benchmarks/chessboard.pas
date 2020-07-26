@@ -65,5 +65,5 @@ end;
 //---------------------- INITIALIZATION ----------------------------------------
 
 initialization
-  name := 'Chessboard'~;
+  name := 'chessboard';
 end.
