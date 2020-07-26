@@ -12,23 +12,22 @@ uses
 const
   lms = $e000;
 
+  dlScore : array [0..29] of byte = (
+    $70,$70,$70,
+    $42,lo(lms),hi(lms),
+    $02,$02,$02,$02,$02,$02,$02,$02,
+    $02,$02,$02,$02,$02,$02,$02,$02,
+    $02,$02,$02,$02,$02,
+    $41,lo(word(@dlScore)),hi(word(@dlScore))
+  );
+
 var
   sdlstl      : word absolute $D402;
   chbas       : byte absolute $D409;
 
 //------------------------------------------------------------------------------
 
-procedure dlScore():assembler;
-asm
-{
-  :3  .byte $70
-      .byte $42,a(lms)
-  :21 .byte $02
-      .byte $41,a(dlScore)
-};
-end;
-
-procedure printScore(name: string[35]; row: byte);
+procedure printScore(name: string[15]; row: byte);
 var
   crow    : word;
   i       : byte;

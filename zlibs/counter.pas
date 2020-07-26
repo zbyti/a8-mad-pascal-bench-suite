@@ -6,7 +6,7 @@ unit counter;
 
 interface
   procedure init;
-  procedure prepare(name: string[35]);
+  procedure prepare(name: string[15]);
 
 var
   stop        : boolean absolute 0;
@@ -17,6 +17,13 @@ implementation
 
 uses
   b_system;
+
+const
+  dlCounter: array [0..8] of byte = (
+    $70,$70,$70,
+    $42,$20,$00,
+    $41,lo(word(@dlCounter)),hi(word(@dlCounter))
+  );
 
 var
   sdlstl      : word absolute $D402;
@@ -45,15 +52,6 @@ begin
   };
 end;
 
-procedure dlCounter:assembler;
-asm
-{
-  :3  .byte $70
-      .byte $42,$20,$00
-      .byte $41,a(dlCounter)
-};
-end;
-
 procedure init;
 var
   i       : byte;
@@ -68,7 +66,7 @@ begin
   EnableVBLI(@vblCounter);
 end;
 
-procedure prepare(name: string[35]);
+procedure prepare(name: string[15]);
 begin
   FillChar(pointer($20), $28, $fe);
   FillChar(pointer($20), 5, 0);
