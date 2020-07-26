@@ -35,7 +35,7 @@ begin
   crow := lms + (40 * row);
   Move(name[1], pointer(crow), length(name));
   for i := 0 to 4 do
-    poke(crow + i + 16, peek(counter.lms+i) + 16);
+    poke(crow + i + 16, peek(counter.lms + i) + 16);
 end;
 
 procedure initSuite();
