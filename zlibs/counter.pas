@@ -6,7 +6,7 @@ unit counter;
 
 interface
   procedure init;
-  procedure prepare(name: string[15]);
+  procedure prepare(name: string[35]);
 
 var
   stop        : boolean absolute 0;
