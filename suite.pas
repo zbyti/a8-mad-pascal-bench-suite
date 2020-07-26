@@ -6,8 +6,8 @@ program Suite;
 
 uses
   b_system, counter,
-  yoshplus, sieve, bsort, countdown_while, countdown_for,
-  montecarlo, chessboard, sieve_big;
+  yoshplus, sieve1028, bsort, countdown_while, countdown_for,
+  montecarlo, chessboard, sieve1899;
 
 const
   lms = $e000;

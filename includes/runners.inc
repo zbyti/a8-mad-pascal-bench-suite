@@ -5,12 +5,12 @@ printScore('YoshPlus 100 frames'~, 0);
 
 //---------------------------
 
-sieve.run;
+sieve1028.run;
 printScore('Sieve 1028 10x'~, 1);
 
 //---------------------------
 
-sieve_big.run;
+sieve1899.run;
 printScore('Sieve 1899 10x'~, 2);
 
 //---------------------------
