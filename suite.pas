@@ -39,7 +39,7 @@ begin
     poke(crow + i + 26, peek(counter.lms + i) + 16);
 end;
 
-procedure initSuite();
+procedure initSuite;
 begin
   Move(pointer($e000), pointer(charset), $400);
   SystemOff;
