@@ -3,7 +3,7 @@ unit counter;
 //---------------------- INTERFACE ---------------------------------------------
 
 interface
-  procedure init(baserCharset : word);
+  procedure init(baseCharset: word);
   procedure prepare(name: string[15]);
 
 const
@@ -52,14 +52,14 @@ begin
   };
 end;
 
-procedure init(baserCharset : word);
+procedure init(baseCharset: word);
 var
-  i       : byte;
+  i : byte;
 begin
-  Move(pointer(baserCharset), pointer(charset), $400);
-  Move(pointer(baserCharset + $80), pointer(charset), 80);
+  Move(pointer(baseCharset), pointer(charset), $400);
+  Move(pointer(baseCharset + $80), pointer(charset), 80);
   for i := 0 to 7 do
-    poke(charset + $400 - 8 + i, peek(baserCharset + $80 + i) xor $ff);
+    poke(charset + $400 - 8 + i, peek(baseCharset + $80 + i) xor $ff);
   FillChar(pointer(charset + $400 - 16), 8, $ff);
 end;
 
