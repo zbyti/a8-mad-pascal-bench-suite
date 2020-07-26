@@ -30,7 +30,7 @@ printScore('Countdown 2ML: WHILE'~, 5);
 //---------------------------
 
 montecarlo.run;
-printScore('MonteCarlo: PI'~, 6);
+printScore('MonteCarlo 10K: PI'~, 6);
 
 //---------------------------
 
