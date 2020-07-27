@@ -30,6 +30,7 @@ var
 
 procedure showScore;
 begin
+  pause;
   chbas := $80;
   sdlstl := word(@dlScore);
   repeat until false;
