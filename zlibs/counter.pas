@@ -5,8 +5,8 @@ unit counter;
 interface
   procedure init(baseCharset, sLms: word);
   procedure prepare(name: string[25]);
-  procedure printScore;
-  procedure rewriteCounter;
+  procedure print;
+  procedure overwrite;
 
 const
   lms = $20;
@@ -81,7 +81,7 @@ begin
   pause;
 end;
 
-procedure printScore;
+procedure print;
 var
   crow    : word;
 begin
@@ -91,7 +91,7 @@ begin
     poke(crow + i + 26, peek(counter.lms + i) + 16);
 end;
 
-procedure rewriteCounter;
+procedure overwrite;
 begin
   FillChar(pointer(lms), 5, 0);
   Move(pointer(lms + $23), pointer(lms), 5);
