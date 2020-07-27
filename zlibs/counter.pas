@@ -87,8 +87,9 @@ var
 begin
   crow := scoreLms + (40 * counter.position);
   Move(benchName[1], pointer(crow), length(benchName));
+  inc(crow,26);
   for i := 0 to 4 do
-    poke(crow + i + 26, peek(counter.lms + i) + 16);
+    poke(crow + i, peek(counter.lms + i) + 16);
 end;
 
 procedure overwrite;
