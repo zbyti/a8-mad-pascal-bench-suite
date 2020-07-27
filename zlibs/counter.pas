@@ -83,13 +83,13 @@ end;
 
 procedure print;
 var
-  crow    : word;
+  printRow    : word;
 begin
-  crow := scoreLms + (40 * counter.position);
-  Move(benchName[1], pointer(crow), length(benchName));
-  inc(crow,26);
+  printRow := scoreLms + (40 * counter.position);
+  Move(benchName[1], pointer(printRow), length(benchName));
+  inc(printRow, 26);
   for i := 0 to 4 do
-    poke(crow + i, peek(counter.lms + i) + 16);
+    poke(printRow + i, peek(counter.lms + i) + 16);
 end;
 
 procedure overwrite;
