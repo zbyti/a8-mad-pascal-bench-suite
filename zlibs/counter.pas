@@ -76,7 +76,7 @@ begin
   FillChar(pointer(lms), 5, 0);
   for i := 1 to length(name) do
     if name[i] = chr(0) then name[i] := chr($fe);
-  Move(name[1], pointer(lms+6), length(name));
+  Move(name[1], pointer(lms + 6), length(name));
   inc(position);
   pause;
 end;
