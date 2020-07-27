@@ -5,7 +5,7 @@ unit chessboard;
 //---------------------- INTERFACE ---------------------------------------------
 
 interface
-  {$i '../includes/interface.inc'}
+  {$i '../interface.inc'}
 
 //---------------------- IMPLEMENTATION ----------------------------------------
 
@@ -96,14 +96,15 @@ end;
 procedure run;
 begin
   counter.prepare(name);
-
   sdlstl := word(@dlChessboard); pause;
-
   counter.stop := false;
+
   benchmark;
+
   counter.stop := true;
   pause(50);
   rewriteCounter;
+  counter.printScore('Chessboard 150 frames'~);
 end;
 
 //---------------------- INITIALIZATION ----------------------------------------

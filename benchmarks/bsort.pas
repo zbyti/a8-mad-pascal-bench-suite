@@ -5,7 +5,7 @@ unit bsort;
 //---------------------- INTERFACE ---------------------------------------------
 
 interface
-  {$i '../includes/interface.inc'}
+  {$i '../interface.inc'}
 
 //---------------------- IMPLEMENTATION ----------------------------------------
 
@@ -43,6 +43,7 @@ begin
   benchmark;
   counter.stop := true;
   pause(50);
+  counter.printScore('Bubble Sort: 255 elements'~);
 end;
 
 //---------------------- INITIALIZATION ----------------------------------------

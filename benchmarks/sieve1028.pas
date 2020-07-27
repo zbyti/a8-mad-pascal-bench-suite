@@ -5,7 +5,7 @@ unit sieve1028;
 //---------------------- INTERFACE ---------------------------------------------
 
 interface
-  {$i '../includes/interface.inc'}
+  {$i '../interface.inc'}
 
 var
   score     : word absolute $e6;
@@ -49,6 +49,7 @@ begin
   benchmark;
   counter.stop := true;
   pause(50);
+  counter.printScore('Sieve 1028 10x'~);
 end;
 
 //---------------------- INITIALIZATION ----------------------------------------

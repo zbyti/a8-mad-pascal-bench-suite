@@ -5,7 +5,7 @@ unit countdown_for;
 //---------------------- INTERFACE ---------------------------------------------
 
 interface
-  {$i '../includes/interface.inc'}
+  {$i '../interface.inc'}
 
 //---------------------- IMPLEMENTATION ----------------------------------------
 
@@ -39,6 +39,7 @@ begin
   benchmark;
   counter.stop := true;
   pause(50);
+  counter.printScore('Countdown 2ML: FOR'~);
 end;
 
 //---------------------- INITIALIZATION ----------------------------------------

@@ -5,7 +5,7 @@ unit yoshplus;
 //---------------------- INTERFACE ---------------------------------------------
 
 interface
-  {$i '../includes/interface.inc'}
+  {$i '../interface.inc'}
 
 //---------------------- IMPLEMENTATION ----------------------------------------
 
@@ -46,6 +46,7 @@ begin
   counter.stop := true;
   pause(50);
   rewriteCounter;
+  counter.printScore('YoshPlus 100 frames'~);
 end;
 
 

@@ -3,8 +3,9 @@ unit counter;
 //---------------------- INTERFACE ---------------------------------------------
 
 interface
-  procedure init(baseCharset: word);
+  procedure init(baseCharset, sLms: word);
   procedure prepare(name: string[25]);
+  procedure printScore(name: string[25]);
 
 const
   lms = $20;
@@ -25,9 +26,10 @@ const
   );
 
 var
-  sdlstl  : word absolute $D402;
-  chbas   : byte absolute $D409;
-  charset : word;
+  sdlstl            : word absolute $D402;
+  chbas             : byte absolute $D409;
+  charset, scoreLms : word;
+  position          : byte;
 
 procedure vblCounter; interrupt;
 var
@@ -52,10 +54,11 @@ begin
   };
 end;
 
-procedure init(baseCharset: word);
+procedure init(baseCharset, sLms: word);
 var
   i           : byte;
 begin
+  scoreLms := sLms;
   charset := baseCharset + $400;
   Move(pointer(baseCharset), pointer(charset), $400);
   Move(pointer(baseCharset + $80), pointer(charset), 80);
@@ -72,7 +75,19 @@ begin
   FillChar(pointer(lms), $28, $fe);
   FillChar(pointer(lms), 5, 0);
   Move(name[1], pointer(lms+6), length(name));
+  inc(position);
   pause;
+end;
+
+procedure printScore(name: string[25]);
+var
+  crow    : word;
+  i       : byte;
+begin
+  crow := scoreLms + (40 * counter.position);
+  Move(name[1], pointer(crow), length(name));
+  for i := 0 to 4 do
+    poke(crow + i + 26, peek(counter.lms + i) + 16);
 end;
 
 //---------------------- INITIALIZATION ----------------------------------------
@@ -80,4 +95,5 @@ end;
 initialization
   stop := true;
   vblk := @vblCounter;
+  position := $ff;
 end.

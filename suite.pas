@@ -36,24 +36,13 @@ begin
   repeat until false;
 end;
 
-procedure printScore(name: string[25]; row: byte);
-var
-  crow    : word;
-  i       : byte;
-begin
-  crow := lms + (40 * row);
-  Move(name[1], pointer(crow), length(name));
-  for i := 0 to 4 do
-    poke(crow + i + 26, peek(counter.lms + i) + 16);
-end;
-
 procedure initSuite;
 begin
   Move(pointer($e000), pointer(charset), $400);
   SystemOff;
   FillChar(pointer(counter.lms), 40, 0);
   FillChar(pointer(lms), $fff, 0);
-  counter.init(charset);
+  counter.init(charset, lms);
   EnableVBLI(counter.vblk);
 end;
 
@@ -62,11 +51,14 @@ end;
 begin
   initSuite;
 
-  //--------------------------
-
-  {$i 'includes/runners.inc'}
-
-  //--------------------------
+  yoshplus.run;
+  chessboard.run;
+  sieve1028.run;
+  sieve1899.run;
+  bsort.run;
+  montecarlo.run;
+  countdown_for.run;
+  countdown_while.run;
 
   showScore;
 end.

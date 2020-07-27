@@ -5,7 +5,7 @@ unit montecarlo;
 //---------------------- INTERFACE ---------------------------------------------
 
 interface
-  {$i '../includes/interface.inc'}
+  {$i '../interface.inc'}
 
 var
   score     : word absolute $ec;
@@ -47,6 +47,7 @@ begin
   benchmark;
   counter.stop := true;
   pause(50);
+  counter.printScore('MonteCarlo 10K: PI'~);
 end;
 
 //---------------------- INITIALIZATION ----------------------------------------
