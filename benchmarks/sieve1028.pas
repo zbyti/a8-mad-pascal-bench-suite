@@ -31,9 +31,7 @@ begin
   end;
 end;
 
-procedure rewriteCounter;
-begin
-end;
+procedure rewriteCounter; begin end;
 
 {$i '../inc/run.inc'}
 

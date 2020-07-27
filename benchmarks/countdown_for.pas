@@ -23,9 +23,7 @@ begin
               for zg := 9 downto 0 do;
 end;
 
-procedure rewriteCounter;
-begin
-end;
+procedure rewriteCounter; begin end;
 
 {$i '../inc/run.inc'}
 

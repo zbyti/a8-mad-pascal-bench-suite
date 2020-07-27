@@ -29,9 +29,7 @@ begin
   pi := 4 * bingo;
 end;
 
-procedure rewriteCounter;
-begin
-end;
+procedure rewriteCounter; begin end;
 
 {$i '../inc/run.inc'}
 
