@@ -4,6 +4,8 @@ unit chessboard;
 
 //---------------------- IMPLEMENTATION ----------------------------------------
 
+uses counter;
+
 const
   lms = $a000;
 

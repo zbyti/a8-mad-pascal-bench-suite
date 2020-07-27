@@ -11,5 +11,3 @@ interface
     name   : string[25];
 
 implementation
-
-uses counter;

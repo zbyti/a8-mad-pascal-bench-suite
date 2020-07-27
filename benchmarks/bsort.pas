@@ -4,6 +4,8 @@ unit bsort;
 
 //---------------------- IMPLEMENTATION ----------------------------------------
 
+uses counter;
+
 procedure benchmark;
 var
   i         : byte absolute $F0;

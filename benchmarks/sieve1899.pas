@@ -4,6 +4,8 @@ unit sieve1899;
 
 //---------------------- IMPLEMENTATION ----------------------------------------
 
+uses counter;
+
 procedure benchmark;
 var
   count     : word absolute $e0;

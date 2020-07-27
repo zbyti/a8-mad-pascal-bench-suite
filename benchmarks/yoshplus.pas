@@ -4,6 +4,8 @@ unit yoshplus;
 
 //---------------------- IMPLEMENTATION ----------------------------------------
 
+uses counter;
+
 procedure benchmark;
 var
   rtclok     : byte absolute $14;

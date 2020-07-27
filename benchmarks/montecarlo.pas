@@ -4,6 +4,8 @@ unit montecarlo;
 
 //---------------------- IMPLEMENTATION ----------------------------------------
 
+uses counter;
+
 procedure benchmark;
 var
   rnd       : byte absolute $D20A;

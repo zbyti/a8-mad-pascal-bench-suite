@@ -4,6 +4,8 @@ unit sieve1028;
 
 //---------------------- IMPLEMENTATION ----------------------------------------
 
+uses counter;
+
 procedure benchmark;
 var
   flags     : array [0..8191] of boolean;
