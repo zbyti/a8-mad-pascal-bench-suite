@@ -1,17 +1,8 @@
-{$librarypath 'zlibs'}
-
 unit countdown_while;
 
-//---------------------- INTERFACE ---------------------------------------------
-
-interface
-  {$i '../inc/interface.inc'}
+{$i '../inc/header.inc'}
 
 //---------------------- IMPLEMENTATION ----------------------------------------
-
-implementation
-
-uses counter;
 
 procedure benchmark;
 var

@@ -1,20 +1,8 @@
-{$librarypath 'zlibs'}
-
 unit sieve1028;
 
-//---------------------- INTERFACE ---------------------------------------------
-
-interface
-  {$i '../inc/interface.inc'}
-
-var
-  score     : word absolute $e6;
+{$i '../inc/header.inc'}
 
 //---------------------- IMPLEMENTATION ----------------------------------------
-
-implementation
-
-uses counter;
 
 procedure benchmark;
 var
@@ -22,9 +10,10 @@ var
   n         : byte absolute $e0;
   k         : word absolute $e2;
   bi        : byte absolute $e4;
+  count     : word absolute $e6;
 begin
   for bi := 9 downto 0 do begin
-    score := 0;
+    count := 0;
     fillchar(flags, sizeof(flags), true);
     for n := 2 to 91 do begin
       if flags[n] then begin
@@ -38,7 +27,7 @@ begin
   end;
 
   for k := 2 to 8191 do begin
-    if flags[k] then inc(score);
+    if flags[k] then inc(count);
   end;
 end;
 

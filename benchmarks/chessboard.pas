@@ -1,17 +1,8 @@
-{$librarypath 'zlibs'}
-
 unit chessboard;
 
-//---------------------- INTERFACE ---------------------------------------------
-
-interface
-  {$i '../inc/interface.inc'}
+{$i '../inc/header.inc'}
 
 //---------------------- IMPLEMENTATION ----------------------------------------
-
-implementation
-
-uses counter;
 
 const
   lms = $a000;

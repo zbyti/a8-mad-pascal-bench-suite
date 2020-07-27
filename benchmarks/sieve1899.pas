@@ -1,23 +1,12 @@
-{$librarypath 'zlibs'}
-
 unit sieve1899;
 
-//---------------------- INTERFACE ---------------------------------------------
-
-interface
-  {$i '../inc/interface.inc'}
-
-var
-  score     : word absolute $e0;
+{$i '../inc/header.inc'}
 
 //---------------------- IMPLEMENTATION ----------------------------------------
 
-implementation
-
-uses counter;
-
 procedure benchmark;
 var
+  count     : word absolute $e0;
   i         : word absolute $e2;
   k         : word absolute $e4;
   prime     : word absolute $e6;
@@ -26,7 +15,7 @@ var
 begin
   for bi := 9 downto 0 do begin
     fillchar(flags, sizeof(flags), true);
-    i:=0; score := 0;
+    i:=0; count := 0;
     while i <= 8191 do begin
       if flags[i] then begin
         prime := (i * 2) + 3;
@@ -35,7 +24,7 @@ begin
           flags[k] := false;
           inc(k, prime);
         end;
-        inc(score);
+        inc(count);
       end;
       inc(i);
     end;

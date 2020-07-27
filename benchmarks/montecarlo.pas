@@ -1,20 +1,8 @@
-{$librarypath 'zlibs'}
-
 unit montecarlo;
 
-//---------------------- INTERFACE ---------------------------------------------
-
-interface
-  {$i '../inc/interface.inc'}
-
-var
-  score     : word absolute $ec;
+{$i '../inc/header.inc'}
 
 //---------------------- IMPLEMENTATION ----------------------------------------
-
-implementation
-
-uses counter;
 
 procedure benchmark;
 var
@@ -25,6 +13,7 @@ var
   bingo     : word absolute $e6;
   probe     : word absolute $e8;
   n         : byte absolute $ea;
+  pi        : word absolute $ec;
 begin
   bingo := 0;
   r := 127 * 127;
@@ -37,7 +26,7 @@ begin
     y := n * n;
     if (x + y) <= r then inc(bingo);
   end;
-  score := 4 * bingo;
+  pi := 4 * bingo;
 end;
 
 procedure rewriteCounter;
