@@ -10,6 +10,12 @@ interface
 const
   lms = $20;
 
+  dlCounter: array [0..8] of byte = (
+    $70,$70,$70,
+    $42,lms,$00,
+    $41,lo(word(@dlCounter)),hi(word(@dlCounter))
+  );
+
 var
   stop          : boolean absolute 0;
   vblk          : pointer;
@@ -18,18 +24,12 @@ var
 
 implementation
 
-const
-  dlCounter: array [0..8] of byte = (
-    $70,$70,$70,
-    $42,lms,$00,
-    $41,lo(word(@dlCounter)),hi(word(@dlCounter))
-  );
-
 var
   sdlstl            : word absolute $D402;
   chbas             : byte absolute $D409;
   charset, scoreLms : word;
   position          : byte;
+  i                 : byte;
 
 procedure vblCounter; interrupt;
 var
@@ -55,8 +55,6 @@ begin
 end;
 
 procedure init(baseCharset, sLms: word);
-var
-  i           : byte;
 begin
   scoreLms := sLms;
   charset := baseCharset + $400;
@@ -74,6 +72,8 @@ begin
   chbas := hi(charset);
   FillChar(pointer(lms), $28, $fe);
   FillChar(pointer(lms), 5, 0);
+  for i := 1 to length(name) do
+    if name[i] = chr(0) then name[i] := chr($fe);
   Move(name[1], pointer(lms+6), length(name));
   inc(position);
   pause;
@@ -82,7 +82,6 @@ end;
 procedure printScore(name: string[25]);
 var
   crow    : word;
-  i       : byte;
 begin
   crow := scoreLms + (40 * counter.position);
   Move(name[1], pointer(crow), length(name));
@@ -93,7 +92,7 @@ end;
 //---------------------- INITIALIZATION ----------------------------------------
 
 initialization
-  stop := true;
   vblk := @vblCounter;
+  stop := true;
   position := $ff;
 end.

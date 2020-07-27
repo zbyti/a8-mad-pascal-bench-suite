@@ -5,7 +5,7 @@ unit montecarlo;
 //---------------------- INTERFACE ---------------------------------------------
 
 interface
-  {$i '../interface.inc'}
+  {$i '../inc/interface.inc'}
 
 var
   score     : word absolute $ec;
@@ -40,18 +40,14 @@ begin
   score := 4 * bingo;
 end;
 
-procedure run;
+procedure rewriteCounter;
 begin
-  counter.prepare(name);
-  counter.stop := false;
-  benchmark;
-  counter.stop := true;
-  pause(50);
-  counter.printScore('MonteCarlo 10K: PI'~);
 end;
+
+{$i '../inc/run.inc'}
 
 //---------------------- INITIALIZATION ----------------------------------------
 
 initialization
-  name := 'montecarlo';
+  name := 'MonteCarlo 10K: PI'~;
 end.

@@ -5,7 +5,7 @@ unit yoshplus;
 //---------------------- INTERFACE ---------------------------------------------
 
 interface
-  {$i '../interface.inc'}
+  {$i '../inc/interface.inc'}
 
 //---------------------- IMPLEMENTATION ----------------------------------------
 
@@ -38,20 +38,10 @@ begin
   Move(pointer(counter.lms + $23), pointer(counter.lms), 5);
 end;
 
-procedure run;
-begin
-  counter.prepare(name);
-  counter.stop := false;
-  benchmark;
-  counter.stop := true;
-  pause(50);
-  rewriteCounter;
-  counter.printScore('YoshPlus 100 frames'~);
-end;
-
+{$i '../inc/run.inc'}
 
 //---------------------- INITIALIZATION ----------------------------------------
 
 initialization
-  name := 'yoshplus';
+  name := 'YoshPlus 100 frames'~;
 end.

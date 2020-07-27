@@ -5,7 +5,7 @@ unit bsort;
 //---------------------- INTERFACE ---------------------------------------------
 
 interface
-  {$i '../interface.inc'}
+  {$i '../inc/interface.inc'}
 
 //---------------------- IMPLEMENTATION ----------------------------------------
 
@@ -36,18 +36,14 @@ begin
   end;
 end;
 
-procedure run;
+procedure rewriteCounter;
 begin
-  counter.prepare(name);
-  counter.stop := false;
-  benchmark;
-  counter.stop := true;
-  pause(50);
-  counter.printScore('Bubble Sort: 255 elements'~);
 end;
+
+{$i '../inc/run.inc'}
 
 //---------------------- INITIALIZATION ----------------------------------------
 
 initialization
-  name := 'bsort';
+  name := 'Bubble Sort: 255 elements'~;
 end.

@@ -5,7 +5,7 @@ unit chessboard;
 //---------------------- INTERFACE ---------------------------------------------
 
 interface
-  {$i '../interface.inc'}
+  {$i '../inc/interface.inc'}
 
 //---------------------- IMPLEMENTATION ----------------------------------------
 
@@ -51,12 +51,10 @@ const
     hi(word(@dlChessboard))
   );
 
-var
-  sdlstl      : word absolute $D402;
-
 procedure benchmark;
 var
   rtclok    : byte absolute $14;
+  sdlstl    : word absolute $D402;
   zc        : byte absolute counter.lms + $25;
   zd        : byte absolute counter.lms + $26;
   ze        : byte absolute counter.lms + $27;
@@ -65,6 +63,7 @@ var
   i3b       : byte absolute $e4;
   p         : PByte absolute $e0;
 begin
+  sdlstl := word(@dlChessboard);
   FillChar(pointer($45), 3, 0);
   rtclok := 0;
   while rtclok < 150 do begin
@@ -93,20 +92,10 @@ begin
   Move(pointer(counter.lms + $25), pointer(counter.lms + 2), 3);
 end;
 
-procedure run;
-begin
-  counter.prepare(name);
-  sdlstl := word(@dlChessboard); pause;
-  counter.stop := false;
-  benchmark;
-  counter.stop := true;
-  pause(50);
-  rewriteCounter;
-  counter.printScore('Chessboard 150 frames'~);
-end;
+{$i '../inc/run.inc'}
 
 //---------------------- INITIALIZATION ----------------------------------------
 
 initialization
-  name := 'chessboard';
+  name := 'Chessboard 150 frames'~;
 end.

@@ -5,7 +5,7 @@ unit sieve1899;
 //---------------------- INTERFACE ---------------------------------------------
 
 interface
-  {$i '../interface.inc'}
+  {$i '../inc/interface.inc'}
 
 var
   score     : word absolute $e0;
@@ -42,18 +42,14 @@ begin
   end;
 end;
 
-procedure run;
+procedure rewriteCounter;
 begin
-  counter.prepare(name);
-  counter.stop := false;
-  benchmark;
-  counter.stop := true;
-  pause(50);
-  counter.printScore('Sieve 1899 10x'~);
 end;
+
+{$i '../inc/run.inc'}
 
 //---------------------- INITIALIZATION ----------------------------------------
 
 initialization
-  name := 'sieve1899'~;
+  name := 'Sieve 1899 10x'~;
 end.

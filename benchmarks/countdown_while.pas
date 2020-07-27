@@ -5,7 +5,7 @@ unit countdown_while;
 //---------------------- INTERFACE ---------------------------------------------
 
 interface
-  {$i '../interface.inc'}
+  {$i '../inc/interface.inc'}
 
 //---------------------- IMPLEMENTATION ----------------------------------------
 
@@ -54,18 +54,14 @@ begin
   end;
 end;
 
-procedure run;
+procedure rewriteCounter;
 begin
-  counter.prepare(name);
-  counter.stop := false;
-  benchmark;
-  counter.stop := true;
-  pause(50);
-  counter.printScore('Countdown 2ML: WHILE'~);
 end;
+
+{$i '../inc/run.inc'}
 
 //---------------------- INITIALIZATION ----------------------------------------
 
 initialization
-  name := 'countdown_while';
+  name := 'Countdown 2ML: WHILE'~;
 end.
