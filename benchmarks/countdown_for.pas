@@ -4,8 +4,6 @@ unit countdown_for;
 
 //---------------------- IMPLEMENTATION ----------------------------------------
 
-uses counter;
-
 procedure benchmark;
 var
   za         : byte absolute counter.lms + $21;

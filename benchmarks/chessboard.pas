@@ -4,11 +4,7 @@ unit chessboard;
 
 //---------------------- IMPLEMENTATION ----------------------------------------
 
-uses counter;
-
 const
-  lms = $a000;
-
   dlChessboard: array [0..202] of byte = (
     $70,$70,$70,
     $42,counter.lms,$00,
@@ -46,8 +42,6 @@ const
 
 procedure benchmark;
 var
-  rtclok    : byte absolute $14;
-  sdlstl    : word absolute $D402;
   zc        : byte absolute counter.lms + $25;
   zd        : byte absolute counter.lms + $26;
   ze        : byte absolute counter.lms + $27;

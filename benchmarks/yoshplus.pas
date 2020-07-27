@@ -4,11 +4,8 @@ unit yoshplus;
 
 //---------------------- IMPLEMENTATION ----------------------------------------
 
-uses counter;
-
 procedure benchmark;
 var
-  rtclok     : byte absolute $14;
   zc         : byte absolute counter.lms + $23;
   zd         : byte absolute counter.lms + $24;
   ze         : byte absolute counter.lms + $25;

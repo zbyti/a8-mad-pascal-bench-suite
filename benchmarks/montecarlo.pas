@@ -4,11 +4,8 @@ unit montecarlo;
 
 //---------------------- IMPLEMENTATION ----------------------------------------
 
-uses counter;
-
 procedure benchmark;
 var
-  rnd       : byte absolute $D20A;
   r         : word absolute $e0;
   x         : word absolute $e2;
   y         : word absolute $e4;
