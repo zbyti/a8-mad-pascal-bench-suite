@@ -11,12 +11,6 @@ interface
 const
   lms = $20;
 
-  dlCounter: array [0..8] of byte = (
-    $70,$70,$70,
-    $42,lms,$00,
-    $41,lo(word(@dlCounter)),hi(word(@dlCounter))
-  );
-
 var
   stop              : boolean absolute 0;
   vblk              : pointer;
@@ -24,6 +18,13 @@ var
 //---------------------- IMPLEMENTATION ----------------------------------------
 
 implementation
+
+const
+  dlCounter: array [0..8] of byte = (
+    $70,$70,$70,
+    $42,lms,$00,
+    $41,lo(word(@dlCounter)),hi(word(@dlCounter))
+  );
 
 var
   sdlstl            : word absolute $D402;
