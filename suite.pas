@@ -28,14 +28,6 @@ var
 
 //------------------------------------------------------------------------------
 
-procedure showScore;
-begin
-  pause;
-  chbas := $80;
-  sdlstl := word(@dlScore);
-  repeat until false;
-end;
-
 procedure initSuite;
 begin
   Move(pointer($e000), pointer(charset), $400);
@@ -46,11 +38,16 @@ begin
   EnableVBLI(counter.vblk);
 end;
 
-//------------------------------------------------------------------------------
-
+procedure showScore;
 begin
-  initSuite;
+  pause;
+  chbas := $80;
+  sdlstl := word(@dlScore);
+  repeat until false;
+end;
 
+procedure startRunners;
+begin
   yoshplus.run;
   chessboard.run;
   sieve1028.run;
@@ -59,6 +56,12 @@ begin
   montecarlo.run;
   countdown_for.run;
   countdown_while.run;
+end;
 
+//------------------------------------------------------------------------------
+
+begin
+  initSuite;
+  startRunners;
   showScore;
 end.
