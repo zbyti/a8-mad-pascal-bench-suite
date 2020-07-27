@@ -68,9 +68,9 @@ procedure prepare(name: string[25]);
 begin
   pause;
   sdlstl := word(@dlCounter);
+  chbas := hi(charset);
   FillChar(pointer(lms), $28, $fe);
   FillChar(pointer(lms), 5, 0);
-  chbas := hi(charset);
   Move(name[1], pointer(lms+6), length(name));
   pause;
 end;
