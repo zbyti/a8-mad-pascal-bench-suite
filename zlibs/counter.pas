@@ -93,7 +93,6 @@ end;
 
 procedure overwrite;
 begin
-  FillChar(pointer(lms), 5, 0);
   Move(pointer(lms + $23), pointer(lms), 5);
 end;
 
