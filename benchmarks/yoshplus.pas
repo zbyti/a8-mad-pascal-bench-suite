@@ -23,15 +23,11 @@ begin
   end;
 end;
 
-procedure rewriteCounter;
-begin
-  Move(pointer(counter.lms + $23), pointer(counter.lms), 5);
-end;
-
 {$i '../inc/run.inc'}
 
 //---------------------- INITIALIZATION ----------------------------------------
 
 initialization
   name := 'YoshPlus 100 frames'~;
+  isRewritable := true;
 end.

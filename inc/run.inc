@@ -1,3 +1,9 @@
+procedure rewriteCounter;
+begin
+  FillChar(pointer(counter.lms), 5, 0);
+  Move(pointer(counter.lms + $23), pointer(counter.lms), 5);
+end;
+
 procedure run;
 begin
   counter.prepare(name);
@@ -5,6 +11,6 @@ begin
   benchmark;
   counter.stop := true;
   pause(50);
-  rewriteCounter;
+  if isRewritable then rewriteCounter;
   counter.printScore;
 end;

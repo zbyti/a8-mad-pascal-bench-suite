@@ -45,12 +45,11 @@ begin
   end;
 end;
 
-procedure rewriteCounter; begin end;
-
 {$i '../inc/run.inc'}
 
 //---------------------- INITIALIZATION ----------------------------------------
 
 initialization
   name := 'Countdown 2ML: WHILE'~;
+  isRewritable := false;
 end.

@@ -28,12 +28,11 @@ begin
   pi := 4 * bingo;
 end;
 
-procedure rewriteCounter; begin end;
-
 {$i '../inc/run.inc'}
 
 //---------------------- INITIALIZATION ----------------------------------------
 
 initialization
   name := 'MonteCarlo 10K: PI'~;
+  isRewritable := false;
 end.

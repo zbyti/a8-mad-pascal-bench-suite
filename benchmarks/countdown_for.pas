@@ -23,12 +23,11 @@ begin
               for zg := 9 downto 0 do;
 end;
 
-procedure rewriteCounter; begin end;
-
 {$i '../inc/run.inc'}
 
 //---------------------- INITIALIZATION ----------------------------------------
 
 initialization
   name := 'Countdown 2ML: FOR'~;
+  isRewritable := false;
 end.

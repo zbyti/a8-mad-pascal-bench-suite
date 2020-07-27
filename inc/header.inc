@@ -3,9 +3,6 @@
 //---------------------- INTERFACE ---------------------------------------------
 
 interface
-
-  procedure benchmark;
-  procedure rewriteCounter;
   procedure run;
 
   var
@@ -21,7 +18,8 @@ implementation
     lms = $a000;
 
   var
-    rtclok : byte absolute $14;
-    rnd    : byte absolute $D20A;
-    chbas  : byte absolute $D409;
-    sdlstl : word absolute $D402;
+    rtclok        : byte absolute $14;
+    rnd           : byte absolute $D20A;
+    chbas         : byte absolute $D409;
+    sdlstl        : word absolute $D402;
+    isRewritable  : boolean;

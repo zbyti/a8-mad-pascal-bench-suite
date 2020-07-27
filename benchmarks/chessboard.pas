@@ -51,7 +51,7 @@ var
   p         : PByte absolute $e0;
 begin
   sdlstl := word(@dlChessboard);
-  FillChar(pointer($45), 3, 0);
+  FillChar(pointer(counter.lms + $23), 5, 0);
   rtclok := 0;
   while rtclok < 150 do begin
     p := pointer(lms);
@@ -73,16 +73,11 @@ begin
   end;
 end;
 
-procedure rewriteCounter;
-begin
-  FillChar(pointer(counter.lms), 5, 0);
-  Move(pointer(counter.lms + $25), pointer(counter.lms + 2), 3);
-end;
-
 {$i '../inc/run.inc'}
 
 //---------------------- INITIALIZATION ----------------------------------------
 
 initialization
   name := 'Chessboard 150 frames'~;
+  isRewritable := true;
 end.

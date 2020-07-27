@@ -27,12 +27,11 @@ begin
   end;
 end;
 
-procedure rewriteCounter; begin end;
-
 {$i '../inc/run.inc'}
 
 //---------------------- INITIALIZATION ----------------------------------------
 
 initialization
   name := 'Bubble Sort: 255 elements'~;
+  isRewritable := false;
 end.

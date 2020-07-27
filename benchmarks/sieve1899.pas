@@ -31,12 +31,11 @@ begin
   end;
 end;
 
-procedure rewriteCounter; begin end;
-
 {$i '../inc/run.inc'}
 
 //---------------------- INITIALIZATION ----------------------------------------
 
 initialization
   name := 'Sieve 1899 10x'~;
+  isRewritable := false;
 end.
