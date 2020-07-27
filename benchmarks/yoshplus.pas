@@ -23,7 +23,7 @@ begin
   end;
 end;
 
-{$i '../inc/footer.inc'}
+{$i '../inc/run.inc'}
 
 //---------------------- INITIALIZATION ----------------------------------------
 

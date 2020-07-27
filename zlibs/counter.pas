@@ -6,6 +6,7 @@ interface
   procedure init(baseCharset, sLms: word);
   procedure prepare(name: string[25]);
   procedure printScore;
+  procedure rewriteCounter;
 
 const
   lms = $20;
@@ -88,6 +89,12 @@ begin
   Move(benchName[1], pointer(crow), length(benchName));
   for i := 0 to 4 do
     poke(crow + i + 26, peek(counter.lms + i) + 16);
+end;
+
+procedure rewriteCounter;
+begin
+  FillChar(pointer(lms), 5, 0);
+  Move(pointer(lms + $23), pointer(lms), 5);
 end;
 
 //---------------------- INITIALIZATION ----------------------------------------
