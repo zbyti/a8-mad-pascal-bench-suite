@@ -11,6 +11,8 @@ interface
   var
     name   : string[25];
 
+//---------------------- IMPLEMENTATION ----------------------------------------
+
 implementation
 
   uses counter;
