@@ -48,14 +48,14 @@ end;
 
 procedure startRunners;
 begin
-  yoshplus.run;
-  chessboard.run;
   sieve1028.run;
   sieve1899.run;
+  chessboard.run;
   bsort.run;
   montecarlo.run;
   countdown_for.run;
   countdown_while.run;
+  yoshplus.run;
 end;
 
 //------------------------------------------------------------------------------

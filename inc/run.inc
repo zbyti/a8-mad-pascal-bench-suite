@@ -6,5 +6,5 @@ begin
   counter.stop := true;
   pause(50);
   rewriteCounter;
-  counter.printScore(name);
+  counter.printScore;
 end;

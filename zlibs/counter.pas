@@ -5,7 +5,7 @@ unit counter;
 interface
   procedure init(baseCharset, sLms: word);
   procedure prepare(name: string[25]);
-  procedure printScore(name: string[25]);
+  procedure printScore;
 
 const
   lms = $20;
@@ -17,8 +17,8 @@ const
   );
 
 var
-  stop          : boolean absolute 0;
-  vblk          : pointer;
+  stop              : boolean absolute 0;
+  vblk              : pointer;
 
 //---------------------- IMPLEMENTATION ----------------------------------------
 
@@ -27,9 +27,9 @@ implementation
 var
   sdlstl            : word absolute $D402;
   chbas             : byte absolute $D409;
+  benchName         : string[25];
   charset, scoreLms : word;
-  position          : byte;
-  i                 : byte;
+  position, i       : byte;
 
 procedure vblCounter; interrupt;
 var
@@ -70,6 +70,7 @@ begin
   pause;
   sdlstl := word(@dlCounter);
   chbas := hi(charset);
+  benchName := name;
   FillChar(pointer(lms), $28, $fe);
   FillChar(pointer(lms), 5, 0);
   for i := 1 to length(name) do
@@ -79,12 +80,12 @@ begin
   pause;
 end;
 
-procedure printScore(name: string[25]);
+procedure printScore;
 var
   crow    : word;
 begin
   crow := scoreLms + (40 * counter.position);
-  Move(name[1], pointer(crow), length(name));
+  Move(benchName[1], pointer(crow), length(benchName));
   for i := 0 to 4 do
     poke(crow + i + 26, peek(counter.lms + i) + 16);
 end;
