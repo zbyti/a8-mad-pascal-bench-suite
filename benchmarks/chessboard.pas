@@ -13,6 +13,45 @@ implementation
 
 uses counter;
 
+const
+  lms = $a000;
+
+  dlChessboard: array [0..202] of byte = (
+    $70,$70,$70,
+    $42,counter.lms,$00,
+    $70,
+    $4f,lo(lms),hi(lms),
+    $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f,
+    $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f,
+    $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f,
+    $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f,
+    $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f,
+    $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f,
+    $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f,
+    $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f,
+    $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f,
+    $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f,
+    $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f,
+    $0f,$0f,$0f,$0f,
+    $4f,lo(lms),hi(lms+1),
+    $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f,
+    $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f,
+    $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f,
+    $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f,
+    $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f,
+    $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f,
+    $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f,
+    $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f,
+    $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f,
+    $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f,
+    $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f,
+    $0f,$0f,$0f,$0f,$0f,$0f,$0f,
+    $41,lo(word(@dlChessboard)),hi(word(@dlChessboard))
+  );
+
+var
+  sdlstl      : word absolute $D402;
+
 procedure benchmark;
 var
   rtclok    : byte absolute $14;
@@ -27,7 +66,7 @@ begin
   FillChar(pointer($45), 3, 0);
   rtclok := 0;
   while rtclok < 150 do begin
-    p := pointer($a000);
+    p := pointer(lms);
     for i3b := 7 downto 0 do begin
       for i2b := 23 downto 0 do begin
         for i1b := 3 downto 0 do begin
@@ -54,12 +93,16 @@ end;
 
 procedure run;
 begin
+  pause; sdlstl := word(@dlChessboard);
+
   counter.prepare(name);
   counter.stop := false;
   benchmark;
   counter.stop := true;
   pause(50);
   rewriteCounter;
+
+  sdlstl := counter.sdlstl;
 end;
 
 //---------------------- INITIALIZATION ----------------------------------------

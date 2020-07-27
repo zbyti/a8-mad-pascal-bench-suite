@@ -45,10 +45,12 @@ begin
   SystemOff;
   FillChar(pointer(counter.lms), 40, 0);
   FillChar(pointer(lms), $fff, 0);
+
   counter.init(charset);
+  EnableVBLI(counter.vblk);
+  pause(25);
   chbas := counter.chbas;
   sdlstl := counter.sdlstl;
-  EnableVBLI(counter.vblk);
 end;
 
 //------------------------------------------------------------------------------
