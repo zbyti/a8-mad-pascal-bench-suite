@@ -46,7 +46,9 @@ const
     $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f,
     $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f,
     $0f,$0f,$0f,$0f,$0f,$0f,$0f,
-    $41,lo(word(@dlChessboard)),hi(word(@dlChessboard))
+    $41,
+    lo(word(@dlChessboard)),
+    hi(word(@dlChessboard))
   );
 
 var
