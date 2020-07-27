@@ -23,7 +23,7 @@ begin
               for zg := 9 downto 0 do;
 end;
 
-{$i '../inc/run.inc'}
+{$i '../inc/footer.inc'}
 
 //---------------------- INITIALIZATION ----------------------------------------
 

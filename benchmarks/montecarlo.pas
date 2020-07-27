@@ -28,7 +28,7 @@ begin
   pi := 4 * bingo;
 end;
 
-{$i '../inc/run.inc'}
+{$i '../inc/footer.inc'}
 
 //---------------------- INITIALIZATION ----------------------------------------
 
