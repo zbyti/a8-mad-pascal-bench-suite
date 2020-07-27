@@ -93,16 +93,15 @@ end;
 
 procedure run;
 begin
-  pause; sdlstl := word(@dlChessboard);
-
   counter.prepare(name);
+
+  sdlstl := word(@dlChessboard); pause;
+
   counter.stop := false;
   benchmark;
   counter.stop := true;
   pause(50);
   rewriteCounter;
-
-  sdlstl := counter.sdlstl;
 end;
 
 //---------------------- INITIALIZATION ----------------------------------------

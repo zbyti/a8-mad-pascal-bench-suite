@@ -28,6 +28,13 @@ var
 
 //------------------------------------------------------------------------------
 
+procedure showScore;
+begin
+  chbas := $80;
+  sdlstl := word(@dlScore);
+  repeat until false;
+end;
+
 procedure printScore(name: string[25]; row: byte);
 var
   crow    : word;
@@ -45,12 +52,8 @@ begin
   SystemOff;
   FillChar(pointer(counter.lms), 40, 0);
   FillChar(pointer(lms), $fff, 0);
-
   counter.init(charset);
   EnableVBLI(counter.vblk);
-  pause(25);
-  chbas := counter.chbas;
-  sdlstl := counter.sdlstl;
 end;
 
 //------------------------------------------------------------------------------
@@ -64,8 +67,5 @@ begin
 
   //--------------------------
 
-  chbas := $80;
-  sdlstl := word(@dlScore);
-
-  repeat until false;
+  showScore;
 end.

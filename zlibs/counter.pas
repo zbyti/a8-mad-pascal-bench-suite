@@ -12,9 +12,6 @@ const
 var
   stop          : boolean absolute 0;
   vblk          : pointer;
-  sdlstl        : word;
-  chbas         : byte;
-
 
 //---------------------- IMPLEMENTATION ----------------------------------------
 
@@ -26,6 +23,11 @@ const
     $42,lms,$00,
     $41,lo(word(@dlCounter)),hi(word(@dlCounter))
   );
+
+var
+  sdlstl  : word absolute $D402;
+  chbas   : byte absolute $D409;
+  charset : word;
 
 procedure vblCounter; interrupt;
 var
@@ -53,10 +55,8 @@ end;
 procedure init(baseCharset: word);
 var
   i           : byte;
-  charset     : word;
 begin
   charset := baseCharset + $400;
-  chbas := hi(charset);
   Move(pointer(baseCharset), pointer(charset), $400);
   Move(pointer(baseCharset + $80), pointer(charset), 80);
   for i := 0 to 7 do
@@ -70,6 +70,9 @@ begin
   FillChar(pointer(lms), 5, 0);
   Move(name[1], pointer(lms+6), length(name));
   pause;
+  chbas := hi(charset);
+  sdlstl := word(@dlCounter);
+  pause;
 end;
 
 //---------------------- INITIALIZATION ----------------------------------------
@@ -77,5 +80,4 @@ end;
 initialization
   stop := true;
   vblk := @vblCounter;
-  sdlstl := word(@dlCounter);
 end.
