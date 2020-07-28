@@ -86,11 +86,11 @@ procedure print;
 var
   printRow    : word;
 begin
-  printRow := scoreLms + (40 * counter.position);
+  printRow := scoreLms + (40 * position);
   Move(benchName[1], pointer(printRow), length(benchName));
   inc(printRow, 26);
   for i := 0 to 4 do
-    poke(printRow + i, peek(counter.lms + i) + 16);
+    poke(printRow + i, peek(lms + i) + 16);
 end;
 
 procedure overwrite;
