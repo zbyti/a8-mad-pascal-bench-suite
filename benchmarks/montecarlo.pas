@@ -34,5 +34,4 @@ end;
 
 initialization
   name := 'MonteCarlo 10K: PI'~;
-  isRewritable := false;
 end.

@@ -29,5 +29,4 @@ end;
 
 initialization
   name := 'Countdown 2ML: FOR'~;
-  isRewritable := false;
 end.

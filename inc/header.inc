@@ -22,4 +22,4 @@ implementation
     rnd           : byte absolute $D20A;
     chbas         : byte absolute $D409;
     sdlstl        : word absolute $D402;
-    isRewritable  : boolean;
+    isRewritable  : boolean = false;

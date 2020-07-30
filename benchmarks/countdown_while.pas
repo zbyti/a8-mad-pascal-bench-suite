@@ -51,5 +51,4 @@ end;
 
 initialization
   name := 'Countdown 2ML: WHILE'~;
-  isRewritable := false;
 end.

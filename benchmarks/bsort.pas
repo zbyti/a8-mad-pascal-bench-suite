@@ -33,5 +33,4 @@ end;
 
 initialization
   name := 'Bubble Sort: 255 elements'~;
-  isRewritable := false;
 end.

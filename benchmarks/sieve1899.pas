@@ -37,5 +37,4 @@ end;
 
 initialization
   name := 'Sieve 1899 10x'~;
-  isRewritable := false;
 end.
