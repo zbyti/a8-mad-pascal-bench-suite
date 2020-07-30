@@ -19,11 +19,9 @@ begin
   bingo := 0;
   r := 127 * 127;
   for probe := 9999 downto 0 do begin
-    n := rnd;
-    if (n > 127) then n:= n xor %10000000;
+    n := rnd and 127;
     x := n * n;
-    n := rnd;
-    if (n > 127) then n:= n xor %10000000;
+    n := rnd and 127;
     y := n * n;
     if (x + y) <= r then inc(bingo);
   end;
