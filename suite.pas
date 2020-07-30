@@ -41,7 +41,7 @@ end;
 procedure showScore;
 begin
   pause;
-  chbas := hi($8000);
+  chbas := hi(charset);
   sdlstl := word(@dlScore);
   repeat until false;
 end;
