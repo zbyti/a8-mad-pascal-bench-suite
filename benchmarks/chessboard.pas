@@ -7,7 +7,7 @@ unit chessboard;
 //---------------------- IMPLEMENTATION ----------------------------------------
 
 const
-  dlChessboard: array [0..202] of byte = (
+  dlChessboard: array [0..201] of byte = (
     $70,$70,$70,
     $42,counter.lms,$00,
     $70,
@@ -23,8 +23,9 @@ const
     $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f,
     $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f,
     $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f,
-    $0f,$0f,$0f,$0f,
-    $4f,lo(lms),hi(lms+1),
+    $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f,
+    $0f,$0f,$0f,$0f,$0f,
+    $4f,lo(lms)+24,hi(lms)+$10,
     $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f,
     $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f,
     $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f,
@@ -35,8 +36,7 @@ const
     $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f,
     $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f,
     $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f,
-    $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f,
-    $0f,$0f,$0f,$0f,$0f,$0f,$0f,
+    $0f,$0f,$0f,$0f,$0f,
     $41,
     lo(word(@dlChessboard)),
     hi(word(@dlChessboard))
