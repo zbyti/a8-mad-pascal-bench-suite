@@ -1,5 +1,7 @@
 unit yoshplus;
 
+//---------------------- COMMON INTERFACE --------------------------------------
+
 {$i '../inc/header.inc'}
 
 //---------------------- IMPLEMENTATION ----------------------------------------
@@ -22,6 +24,8 @@ begin
     if zd = 10 then begin inc(zc); zd := 0 end;
   end;
 end;
+
+//---------------------- COMMON PROCEDURE --------------------------------------
 
 {$i '../inc/run.inc'}
 

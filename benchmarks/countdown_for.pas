@@ -1,5 +1,7 @@
 unit countdown_for;
 
+//---------------------- COMMON INTERFACE --------------------------------------
+
 {$i '../inc/header.inc'}
 
 //---------------------- IMPLEMENTATION ----------------------------------------
@@ -22,6 +24,8 @@ begin
             for zf := 9 downto 0 do
               for zg := 9 downto 0 do;
 end;
+
+//---------------------- COMMON PROCEDURE --------------------------------------
 
 {$i '../inc/run.inc'}
 
