@@ -82,7 +82,7 @@ end;
 //---------------------- INITIALIZATION ----------------------------------------
 
 initialization
-  name := 'Chessboard 150 frames'~;
+  name := 'Chessboard 200 frames'~;
   isRewritable := true;
   FillChar(pointer(lms), $1ff0, 0);
 end.
