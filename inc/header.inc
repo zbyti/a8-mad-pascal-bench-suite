@@ -15,7 +15,7 @@ implementation
   uses counter;
 
   const
-    lms = $a000;
+    lms = $a010;
 
   var
     rtclok        : byte absolute $14;

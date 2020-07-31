@@ -25,7 +25,7 @@ const
     $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f,
     $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f,
     $0f,$0f,$0f,$0f,$0f,
-    $4f,lo(lms)+24,hi(lms)+$10,
+    $4f,lo(lms)-$10,hi(lms)+$10,
     $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f,
     $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f,
     $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f,
@@ -55,7 +55,7 @@ begin
   sdlstl := word(@dlChessboard);
   FillChar(pointer(counter.lms + $23), 5, 0);
   rtclok := 0;
-  while rtclok < 150 do begin
+  while rtclok < 200 do begin
     p := pointer(lms);
     for i3b := 7 downto 0 do begin
       for i2b := 23 downto 0 do begin
@@ -84,4 +84,5 @@ end;
 initialization
   name := 'Chessboard 150 frames'~;
   isRewritable := true;
+  FillChar(pointer(lms), $1ff0, 0);
 end.
