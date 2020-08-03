@@ -16,6 +16,7 @@ implementation
 
   const
     lms = $a010;
+    charset = $8000;
 
   var
     rtclok        : byte absolute $14;
