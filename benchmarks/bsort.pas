@@ -8,14 +8,17 @@ unit bsort;
 
 procedure benchmark;
 var
-  i         : byte absolute $F0;
-  n1        : byte absolute $F1;
-  n2        : byte absolute $F2;
-  tmp       : byte absolute $F3;
-  size      : byte absolute $F4;
+  i         : byte absolute $f0;
+  n1        : byte absolute $f1;
+  n2        : byte absolute $f2;
+  size      : byte absolute $f4;
   sorttable : array[0..254] of byte;
 begin
-  size := 254; tmp := 255;
+  size := 254;
+
+  for i := 0 to 254 do
+    sorttable[i] := $ff - i;
+
   while size<>0 do begin
     for i := 0 to 253 do begin
       n1 := sorttable[i];
