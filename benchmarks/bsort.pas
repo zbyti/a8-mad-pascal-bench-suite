@@ -11,15 +11,13 @@ var
   i         : byte absolute $f0;
   n1        : byte absolute $f1;
   n2        : byte absolute $f2;
-  size      : byte absolute $f4;
+  size      : byte absolute $f3;
   sorttable : array[0..254] of byte;
 begin
-  size := 254;
-
   for i := 0 to 254 do
     sorttable[i] := $ff - i;
 
-  while size<>0 do begin
+  for size := 253 downto 0 do begin
     for i := 0 to 253 do begin
       n1 := sorttable[i];
       n2 := sorttable[i+1];
@@ -28,7 +26,6 @@ begin
         sorttable[i+1] := n1;
       end;
     end;
-    dec(size);
   end;
 end;
 
