@@ -1,16 +1,16 @@
 #!/bin/bash
 
-mpBin="$HOME/Programs/MadPascal/mp"
-mpBase="$HOME/Programs/MadPascal/base"
-madsBin="$HOME/Programs/mads/mads"
+mp="$HOME/Programs/MadPascal/mp"
+mads="$HOME/Programs/mads/mads"
+base="$HOME/Programs/MadPascal/base"
 name="suite"
 
-$mpBin $name.pas -o
+$mp $name.pas -o
 
 if [ -f $name.a65 ]; then
   [ ! -d "output" ] && mkdir output
   mv $name.a65 output/
-  $madsBin output/$name.a65 -x -i:$mpBase -o:output/$name.xex
+  $mads output/$name.a65 -x -i:$base -o:output/$name.xex
 else
   exit 1
 fi
