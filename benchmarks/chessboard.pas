@@ -6,41 +6,7 @@ unit chessboard;
 
 //---------------------- IMPLEMENTATION ----------------------------------------
 
-const
-  dlChessboard: array [0..205] of byte = (
-    $70,$70,$70,
-    $42,counter.lms,$00,
-    $70,
-    $4f,lo(lms),hi(lms),
-    $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f,
-    $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f,
-    $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f,
-    $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f,
-    $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f,
-    $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f,
-    $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f,
-    $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f,
-    $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f,
-    $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f,
-    $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f,
-    $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f,
-    $0f,$0f,$0f,$0f,$0f,
-    $4f,lo(lms)-$10,hi(lms)+$10,
-    $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f,
-    $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f,
-    $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f,
-    $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f,
-    $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f,
-    $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f,
-    $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f,
-    $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f,
-    $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f,
-    $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f,
-    $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f,
-    $0f,$41,
-    lo(word(@dlChessboard)),
-    hi(word(@dlChessboard))
-  );
+{$i '../inc/gr8-dl.inc'}
 
 procedure benchmark;
 var
@@ -52,7 +18,7 @@ var
   i3b       : byte absolute $e4;
   p         : PByte absolute $e0;
 begin
-  sdlstl := word(@dlChessboard);
+  sdlstl := word(@dl);
   FillChar(pointer(counter.lms + $23), 5, 0);
   rtclok := 0;
   while rtclok < 200 do begin

@@ -6,41 +6,7 @@ unit lipsum;
 
 //---------------------- IMPLEMENTATION ----------------------------------------
 
-const
-  dlIpsum: array [0..205] of byte = (
-    $70,$70,$70,
-    $42,counter.lms,$00,
-    $70,
-    $4f,lo(lms),hi(lms),
-    $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f,
-    $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f,
-    $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f,
-    $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f,
-    $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f,
-    $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f,
-    $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f,
-    $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f,
-    $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f,
-    $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f,
-    $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f,
-    $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f,
-    $0f,$0f,$0f,$0f,$0f,
-    $4f,lo(lms)-$10,hi(lms)+$10,
-    $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f,
-    $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f,
-    $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f,
-    $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f,
-    $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f,
-    $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f,
-    $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f,
-    $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f,
-    $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f,
-    $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f,
-    $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f,
-    $0f,$41,
-    lo(word(@dlIpsum)),
-    hi(word(@dlIpsum))
-  );
+{$i '../inc/gr8-dl.inc'}
 
 procedure writeGr8(x, y: byte; text: string);
 var
@@ -63,7 +29,7 @@ procedure benchmark;
 var
   iter      : byte absolute $e8;
 begin
-  sdlstl := word(@dlIpsum);
+  sdlstl := word(@dl);
   for iter := 23 downto 0 do
     writeGr8(0, iter, 'Lorem ipsum dolor sit amet orci aliquam.'~);
 end;
