@@ -33,3 +33,8 @@ const
     lo(word(@dl)),
     hi(word(@dl))
   );
+
+procedure gr8;
+begin
+  sdlstl := word(@dl)
+end;

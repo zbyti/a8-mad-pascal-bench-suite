@@ -18,7 +18,7 @@ var
   i3b       : byte absolute $e4;
   p         : PByte absolute $e0;
 begin
-  sdlstl := word(@dl);
+  gr8;
   FillChar(pointer(counter.lms + $23), 5, 0);
   rtclok := 0;
   while rtclok < 200 do begin
