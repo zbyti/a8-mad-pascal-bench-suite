@@ -1,0 +1,17 @@
+#!/bin/bash
+
+mpBin="$HOME/Programs/MadPascal/mp"
+mpBase="$HOME/Programs/MadPascal/base"
+madsBin="$HOME/Programs/mads/mads"
+
+$mpBin suite.pas -o
+
+if [ -f suite.a65 ]; then
+  [ ! -d "output" ] && mkdir output
+  mv suite.a65 output/
+  cd output
+  $madsBin suite.a65 -x -i:$mpBase -o:suite.xex
+  cd ..
+else
+  exit 1
+fi
