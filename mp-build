@@ -1,18 +1,23 @@
 #!/bin/bash
+
+mpBin="/home/zbyti/Programs/bin/mp"
+mpBase="/home/zbyti/Programs/MadPascal/base"
+madsBin="/home/zbyti/Programs/bin/mads"
+
 if [ -z "$1" ]; then
   echo -e "\nPlease call '$0 <argument>' to run this command!\n"
   exit 1
 fi
 
-/home/zbyti/Programs/bin/mp $1 -o
+$mpBin $1 -o
 name=${1::-4}
 fileAsm="${name}.a65"
 
 if [ -f $fileAsm ]; then
   [ ! -d "output" ] && mkdir output
-  mv $fileAsm output/ 
+  mv $fileAsm output/
   cd output
-  /home/zbyti/Programs/bin/mads $fileAsm -x -i:/home/zbyti/Programs/MadPascal/base -o:$name.xex
+  $madsBin $fileAsm -x -i:$mpBase -o:$name.xex
   cd ..
 else
   exit 1
