@@ -3,14 +3,15 @@
 mpBin="$HOME/Programs/MadPascal/mp"
 mpBase="$HOME/Programs/MadPascal/base"
 madsBin="$HOME/Programs/mads/mads"
+name="suite"
 
-$mpBin suite.pas -o
+$mpBin ${name}.pas -o
 
-if [ -f suite.a65 ]; then
+if [ -f ${name}.a65 ]; then
   [ ! -d "output" ] && mkdir output
-  mv suite.a65 output/
+  mv ${name}.a65 output/
   cd output
-  $madsBin suite.a65 -x -i:$mpBase -o:suite.xex
+  $madsBin ${name}.a65 -x -i:$mpBase -o:${name}.xex
   cd ..
 else
   exit 1
