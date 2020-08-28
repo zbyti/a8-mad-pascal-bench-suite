@@ -10,9 +10,7 @@ $mpBin ${name}.pas -o
 if [ -f ${name}.a65 ]; then
   [ ! -d "output" ] && mkdir output
   mv ${name}.a65 output/
-  cd output
-  $madsBin ${name}.a65 -x -i:$mpBase -o:${name}.xex
-  cd ..
+  $madsBin output/${name}.a65 -x -i:$mpBase -o:output/${name}.xex
 else
   exit 1
 fi
