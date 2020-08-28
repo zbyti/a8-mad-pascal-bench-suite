@@ -1,8 +1,8 @@
 #!/bin/bash
 
-mpBin="/home/zbyti/Programs/bin/mp"
-mpBase="/home/zbyti/Programs/MadPascal/base"
-madsBin="/home/zbyti/Programs/bin/mads"
+mpBin="$HOME/Programs/bin/mp"
+mpBase="$HOME/Programs/MadPascal/base"
+madsBin="$HOME/Programs/bin/mads"
 
 if [ -z "$1" ]; then
   echo -e "\nPlease call '$0 <argument>' to run this command!\n"
