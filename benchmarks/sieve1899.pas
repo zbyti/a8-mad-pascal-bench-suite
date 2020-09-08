@@ -13,7 +13,7 @@ var
   k         : word absolute $e4;
   prime     : word absolute $e6;
   bi        : byte absolute $e8;
-  flags     : array [0..8191] of boolean;
+  flags     : array [0..8191] of boolean absolute $a000;
 begin
   for bi := 9 downto 0 do begin
     fillchar(flags, sizeof(flags), true);

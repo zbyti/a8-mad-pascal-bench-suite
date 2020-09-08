@@ -8,7 +8,7 @@ unit sieve1028;
 
 procedure benchmark;
 var
-  flags     : array [0..8191] of boolean;
+  flags     : array [0..8191] of boolean absolute $a000;
   n         : byte absolute $e0;
   k         : word absolute $e2;
   bi        : byte absolute $e4;
