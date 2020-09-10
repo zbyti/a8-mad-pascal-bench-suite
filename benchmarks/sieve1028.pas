@@ -28,9 +28,8 @@ begin
     end;
   end;
 
-  for k := 2 to 8191 do begin
+  for k := 2 to 8191 do
     if flags[k] then inc(count);
-  end;
 end;
 
 //---------------------- COMMON PROCEDURE --------------------------------------
