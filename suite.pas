@@ -7,7 +7,7 @@ program Suite;
 uses
   b_system, counter,
   yoshplus, sieve1028, bsort, countdown_while, countdown_for,
-  montecarlo, chessboard, sieve1899, lipsum;
+  montecarlo, chessboard, sieve1899, lipsum, guessing;
 
 const
   lms = $e000;
@@ -57,6 +57,7 @@ begin
   montecarlo.run;
   yoshplus.run;
   lipsum.run;
+  guessing.run;
 end;
 
 //------------------------------------------------------------------------------
