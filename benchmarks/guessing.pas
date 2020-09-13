@@ -12,9 +12,9 @@ var
   ze         : byte absolute counter.lms + $25;
   zf         : byte absolute counter.lms + $26;
   zg         : byte absolute counter.lms + $27;
-  r          : word absolute $e0;
-  g          : word absolute $e2;
-  i          : word absolute $e4;
+  i          : byte absolute $e4;
+  r          : smallint absolute $e0;
+  g          : smallint absolute $e2;
 begin
   FillChar(pointer(counter.lms + $23), 5, 0);
   for r := 1 to 1000 do begin

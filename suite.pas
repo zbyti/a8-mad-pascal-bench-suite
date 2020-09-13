@@ -60,7 +60,7 @@ begin
   lipsum.run;
   guessing.run;
   qr_code_2d.run;
-  qr_code_1d.run
+  qr_code_1d.run;
 end;
 
 //------------------------------------------------------------------------------
