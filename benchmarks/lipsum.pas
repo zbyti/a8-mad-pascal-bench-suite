@@ -41,5 +41,5 @@ end;
 //---------------------- INITIALIZATION ----------------------------------------
 
 initialization
-  name := 'Lorem Ipsum GR.8'~;
+  name := 'Lorem Ipsum GR8'~;
 end.
