@@ -7,7 +7,8 @@ program Suite;
 uses
   b_system, counter,
   yoshplus, sieve1028, bsort, countdown_while, countdown_for,
-  montecarlo, chessboard, sieve1899, lipsum, guessing;
+  montecarlo, chessboard, sieve1899, lipsum, guessing,
+  qr_code_2d, qr_code_1d;
 
 const
   lms = $e000;
@@ -58,6 +59,8 @@ begin
   yoshplus.run;
   lipsum.run;
   guessing.run;
+  qr_code_2d.run;
+  qr_code_1d.run
 end;
 
 //------------------------------------------------------------------------------
