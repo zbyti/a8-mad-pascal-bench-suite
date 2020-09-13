@@ -66,7 +66,7 @@ begin
       p[y] := qr[x]; inc(y);
       if y = 5 then begin
         inc(p,10); y := 0;
-      end
+      end;
     end;
     inc(ze);
     if ze = 10 then begin inc(zd); ze := 0 end;
