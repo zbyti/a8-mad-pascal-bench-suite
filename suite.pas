@@ -8,7 +8,7 @@ uses
   b_system, counter,
   yoshplus, sieve1028, bsort, countdown_while, countdown_for,
   montecarlo, chessboard, sieve1899, lipsum, guessing,
-  qr_2d, qr_1d;
+  qr_2d, qr_1d, matrix_t;
 
 const
   lms = $e000;
@@ -59,6 +59,7 @@ begin
   yoshplus.run;
   lipsum.run;
   guessing.run;
+  matrix_t.run;
   qr_2d.run;
   qr_1d.run;
 end;
