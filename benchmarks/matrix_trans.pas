@@ -1,4 +1,4 @@
-unit matrix_t;
+unit matrix_trans;
 
 //---------------------- COMMON INTERFACE --------------------------------------
 
@@ -8,11 +8,12 @@ unit matrix_t;
 
 procedure benchmark;
 const
-  size = 255;
+  size = 63;
 var
   x         : byte absolute $e0;
   y         : byte absolute $e1;
-  A, B      : array[0..0, 0..0] of byte;
+  A         : array[0..size, 0..size] of byte absolute $a000;
+  B         : array[0..size, 0..size] of byte absolute $b000;
 
 begin
   for y := 0 to size do
@@ -28,5 +29,5 @@ end;
 //---------------------- INITIALIZATION ----------------------------------------
 
 initialization
-  name := 'Matrix 256x256 Trans'~;
+  name := 'Matrix 64x64 Trans'~;
 end.
