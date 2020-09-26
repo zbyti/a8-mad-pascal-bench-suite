@@ -6,9 +6,9 @@ program Suite;
 
 uses
   b_system, counter,
-  yoshplus, md5_hash, bsort, countdown_while, countdown_for,
-  montecarlo, chessboard, sieve1028, sieve1899, lipsum, guessing,
-  qr_2d, qr_1d, matrix_trans, floating_single;
+  yoshplus, bsort, countdown_while, countdown_for,
+  montecarlo, sieve1028, sieve1899, lipsum, guessing,
+  qr_2d, qr_1d, matrix_trans, floating_single, md5_hash, chessboard;
 
 const
   lms = $e000;
