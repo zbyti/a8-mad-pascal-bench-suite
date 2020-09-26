@@ -6,9 +6,8 @@ program Suite;
 
 uses
   b_system, counter,
-  //sieve1028,
-  md5_hash, yoshplus, bsort, countdown_while, countdown_for,
-  montecarlo, chessboard, sieve1899, lipsum, guessing,
+  yoshplus, md5_hash, bsort, countdown_while, countdown_for,
+  montecarlo, chessboard, sieve1028, sieve1899, lipsum, guessing,
   qr_2d, qr_1d, matrix_trans, floating_single;
 
 const
@@ -53,7 +52,7 @@ begin
   chessboard.run;
   countdown_for.run;
   countdown_while.run;
-  //sieve1028.run;
+  sieve1028.run;
   sieve1899.run;
   bsort.run;
   montecarlo.run;
