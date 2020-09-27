@@ -16,7 +16,7 @@ var
   r          : smallint absolute $e0;
   g          : smallint absolute $e2;
 begin
-  FillChar(pointer(counter.lms + $23), 5, 0);
+  FillChar(pointer(gr.counterLms + $23), 5, 0);
   for r := 1 to 1000 do begin
     g := 500; i := 0;
     while true do begin
