@@ -6,8 +6,6 @@ unit chessboard;
 
 //---------------------- IMPLEMENTATION ----------------------------------------
 
-{$i '../inc/gr8-dl.inc'}
-
 procedure benchmark;
 var
   zc        : byte absolute counter.lms + $25;
@@ -18,7 +16,7 @@ var
   i3b       : byte absolute $e4;
   p         : PByte absolute $e0;
 begin
-  gr8;
+  gr.mode8;
   FillChar(pointer(counter.lms + $23), 5, 0);
   rtclok := 0;
   while rtclok < 200 do begin

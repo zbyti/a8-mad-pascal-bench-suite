@@ -6,8 +6,6 @@ unit lipsum;
 
 //---------------------- IMPLEMENTATION ----------------------------------------
 
-{$i '../inc/gr8-dl.inc'}
-
 procedure writeGr8(x, y: byte; text: string);
 var
   bi1       : byte absolute $e0;
@@ -29,7 +27,7 @@ procedure benchmark;
 var
   iter      : byte absolute $e8;
 begin
-  gr8;
+  gr.mode8;
   for iter := 23 downto 0 do
     writeGr8(0, iter, 'Lorem ipsum dolor sit amet orci aliquam.'~);
 end;

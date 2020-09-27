@@ -6,8 +6,6 @@ unit qr_2d;
 
 //---------------------- IMPLEMENTATION ----------------------------------------
 
-{$i '../inc/gr4-dl.inc'}
-
 const
   qr: array[0..34, 0..4] of byte = (
     (%11111111,%11111111,%11111111,%11111111,%11100000),
@@ -57,7 +55,7 @@ var
   p         : PByte absolute $e0;
 
 begin
-  gr4;
+  gr.mode4;
   FillChar(pointer(counter.lms + $23), 5, 0);
   rtclok := 0;
   while rtclok < 200 do begin
