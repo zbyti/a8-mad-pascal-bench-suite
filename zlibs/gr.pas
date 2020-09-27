@@ -63,7 +63,7 @@ const
   );
 
 var
-  sdlstl            : word absolute $D402;
+  sdlstl : word absolute $D402;
 
 
 procedure mode8;
