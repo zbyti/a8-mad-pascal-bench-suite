@@ -8,10 +8,10 @@ unit guessing;
 
 procedure benchmark;
 var
-  zd         : byte absolute counter.lms + $24;
-  ze         : byte absolute counter.lms + $25;
-  zf         : byte absolute counter.lms + $26;
-  zg         : byte absolute counter.lms + $27;
+  zd         : byte absolute gr.counterLms + $24;
+  ze         : byte absolute gr.counterLms + $25;
+  zf         : byte absolute gr.counterLms + $26;
+  zg         : byte absolute gr.counterLms + $27;
   i          : byte absolute $e4;
   r          : smallint absolute $e0;
   g          : smallint absolute $e2;

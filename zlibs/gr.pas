@@ -3,17 +3,20 @@ unit gr;
 //---------------------- INTERFACE ---------------------------------------------
 
 interface
+
+const
+  counterLms = $20;
+  lms        = $a010;
+
   procedure mode8;
   procedure mode4;
+  procedure counterRow;
 
 //---------------------- IMPLEMENTATION ----------------------------------------
 
 implementation
 
 const
-  counterLms = $20;
-  lms        = $a010;
-
   dl8: array [0..205] of byte = (
     $70,$70,$70,
     $42,counterLms,$00,
@@ -62,6 +65,12 @@ const
     $41,lo(word(@dl4)),hi(word(@dl4))
   );
 
+  dlCounter: array [0..8] of byte = (
+    $70,$70,$70,
+    $42,counterLms,$00,
+    $41,lo(word(@dlCounter)),hi(word(@dlCounter))
+  );
+
 var
   sdlstl : word absolute $D402;
 
@@ -74,6 +83,11 @@ end;
 procedure mode4;
 begin
   sdlstl := word(@dl4)
+end;
+
+procedure counterRow;
+begin
+  sdlstl := word(@dlCounter)
 end;
 
 //---------------------- INITIALIZATION ----------------------------------------

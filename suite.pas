@@ -5,7 +5,7 @@
 program Suite;
 
 uses
-  b_system, counter,
+  b_system, gr, counter,
   yoshplus, chessboard, lipsum, bsort, countdown_while, countdown_for,
   ludolphian, montecarlo, sieve1028, sieve1899, guessing, qr_2d, qr_1d,
   matrix_trans, floating_single, md5_hash;
@@ -33,7 +33,7 @@ procedure initSuite;
 begin
   Move(pointer($e000), pointer(charset), $400);
   SystemOff;
-  FillChar(pointer(counter.lms), 40, 0);
+  FillChar(pointer(gr.counterLms), 40, 0);
   FillChar(pointer(lms), $fff, 0);
   counter.init(charset, lms);
   EnableVBLI(counter.vblk);

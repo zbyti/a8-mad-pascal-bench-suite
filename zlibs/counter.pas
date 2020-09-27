@@ -8,9 +8,6 @@ interface
   procedure print;
   procedure overwrite;
 
-const
-  lms = $20;
-
 var
   stop              : boolean absolute 0;
   vblk              : pointer;
@@ -19,15 +16,9 @@ var
 
 implementation
 
-const
-  dlCounter: array [0..8] of byte = (
-    $70,$70,$70,
-    $42,lms,$00,
-    $41,lo(word(@dlCounter)),hi(word(@dlCounter))
-  );
+uses gr;
 
 var
-  sdlstl            : word absolute $D402;
   chbas             : byte absolute $D409;
   benchName         : string[25];
   charset, scoreLms : word;
@@ -35,11 +26,11 @@ var
 
 procedure vblCounter; interrupt;
 var
-  a : byte absolute lms;
-  b : byte absolute lms+1;
-  c : byte absolute lms+2;
-  d : byte absolute lms+3;
-  e : byte absolute lms+4;
+  a : byte absolute gr.counterLms;
+  b : byte absolute gr.counterLms + 1;
+  c : byte absolute gr.counterLms + 2;
+  d : byte absolute gr.counterLms + 3;
+  e : byte absolute gr.counterLms + 4;
 begin
   asm {
     phr
@@ -69,15 +60,14 @@ end;
 
 procedure prepare(name: string[25]);
 begin
-  pause;
-  sdlstl := word(@dlCounter);
+  pause; gr.counterRow;
   chbas := hi(charset);
   benchName := name;
-  FillChar(pointer(lms), $28, $fe);
-  FillChar(pointer(lms), 5, 0);
+  FillChar(pointer(gr.counterLms), $28, $fe);
+  FillChar(pointer(gr.counterLms), 5, 0);
   for i := 1 to length(name) do
     if name[i] = chr(0) then name[i] := chr($fe);
-  Move(name[1], pointer(lms + 6), length(name));
+  Move(name[1], pointer(gr.counterLms + 6), length(name));
   inc(position);
   pause;
 end;
@@ -90,12 +80,12 @@ begin
   Move(benchName[1], pointer(printRow), length(benchName));
   inc(printRow, 26);
   for i := 0 to 4 do
-    poke(printRow + i, peek(lms + i) + 16);
+    poke(printRow + i, peek(gr.counterLms + i) + 16);
 end;
 
 procedure overwrite;
 begin
-  Move(pointer(lms + $23), pointer(lms), 5);
+  Move(pointer(gr.counterLms + $23), pointer(gr.counterLms), 5);
 end;
 
 //---------------------- INITIALIZATION ----------------------------------------
