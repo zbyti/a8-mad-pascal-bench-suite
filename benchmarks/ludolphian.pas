@@ -21,7 +21,7 @@ begin
     else
       lud := lud + tmp;
     inc(m,2); inc(i);
-  until i = 10000;
+  until i = 5000;
   lud := lud * 4;
 end;
 
