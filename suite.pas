@@ -7,8 +7,8 @@ program Suite;
 uses
   b_system, counter,
   yoshplus, bsort, countdown_while, countdown_for,
-  montecarlo, sieve1028, sieve1899, lipsum, guessing,
-  qr_2d, qr_1d, matrix_trans, floating_single, md5_hash, chessboard;
+  ludolphian, montecarlo, sieve1028, sieve1899, guessing, qr_2d, qr_1d,
+  matrix_trans, floating_single, md5_hash, lipsum, chessboard;
 
 const
   lms = $e000;
@@ -50,20 +50,21 @@ end;
 procedure startRunners;
 begin
   chessboard.run;
+  lipsum.run;
+  qr_2d.run;
+  qr_1d.run;
   countdown_for.run;
   countdown_while.run;
   sieve1028.run;
   sieve1899.run;
   bsort.run;
   montecarlo.run;
+  ludolphian.run;
   yoshplus.run;
-  lipsum.run;
   guessing.run;
   floating_single.run;
   matrix_trans.run;
   md5_hash.run;
-  qr_2d.run;
-  qr_1d.run;
 end;
 
 //------------------------------------------------------------------------------
