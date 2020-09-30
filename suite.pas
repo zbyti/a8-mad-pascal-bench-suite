@@ -33,7 +33,6 @@ begin
   pause;
   chbas := hi(charset);
   gr.scoreScreen;
-  repeat until false;
 end;
 
 procedure startRunners;
@@ -63,4 +62,5 @@ begin
   initSuite;
   startRunners;
   showScore;
+  repeat until false;
 end.
