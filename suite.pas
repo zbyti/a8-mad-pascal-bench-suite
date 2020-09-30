@@ -23,8 +23,8 @@ begin
   Move(pointer($e000), pointer(charset), $400);
   SystemOff;
   FillChar(pointer(gr.counterLms), 40, 0);
-  FillChar(pointer(gr.score), $fff, 0);
-  counter.init(charset, gr.score);
+  FillChar(pointer(gr.scoreLms), $fff, 0);
+  counter.init(charset, gr.scoreLms);
   EnableVBLI(counter.vblk);
 end;
 

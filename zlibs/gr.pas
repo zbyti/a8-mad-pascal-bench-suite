@@ -6,7 +6,7 @@ interface
 
 const
   counterLms = $20;
-  score      = $e000;
+  scoreLms   = $e000;
   lms        = $a010;
 
   procedure mode8;
@@ -68,7 +68,7 @@ const
 
   dlScore : array [0..31] of byte = (
     $70,$70,$70,
-    $42,lo(score),hi(score),
+    $42,lo(scoreLms),hi(scoreLms),
     $02,$02,$02,$02,$02,$02,$02,$02,
     $02,$02,$02,$02,$02,$02,$02,$02,
     $02,$02,$02,$02,$02,$02,$02,
