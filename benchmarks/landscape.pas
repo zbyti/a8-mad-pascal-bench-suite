@@ -69,17 +69,15 @@ begin
             start := colheight[c];
           end;
 
-          if boolean(i) then begin
+          if i = 1 then begin
             while start < stop do begin
               p^ := c;
-              inc(p,40);
-              inc(start);
+              inc(p,40); inc(start);
             end;
           end else begin
             while start < stop do begin
               p^ := (p^ and %00001111) or (c shl 4);
-              inc(p,40);
-              inc(start);
+              inc(p,40); inc(start);
             end;
           end;
 
