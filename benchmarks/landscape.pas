@@ -61,23 +61,32 @@ begin
       for i := 1 downto 0 do begin
         p := pointer(lms + x); start := 0;
         for c := 13 downto 0 do begin
+
           stop := colheight[c];
           if start > stop then begin
             dec(p,(start - stop) * 40);
             stop := start;
             start := colheight[c];
           end;
-          while start < stop do begin
-            if i = 1 then
-              p^ := c
-            else
+
+          if i = 1 then begin
+            while start < stop do begin
+              p^ := c;
+              inc(p,40);
+              inc(start);
+            end;
+          end else begin
+            while start < stop do begin
               p^ := (p^ and %00001111) or (c shl 4);
-            inc(p,40);
-            inc(start);
+              inc(p,40);
+              inc(start);
+            end;
           end;
+
           start := stop;
           if boolean(rnd and 1) then dec(colheight[c]);
           if boolean(rnd and 1) then inc(colheight[c]);
+
         end;
       end;
     end;
