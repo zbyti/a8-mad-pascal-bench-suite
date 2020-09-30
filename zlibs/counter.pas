@@ -3,7 +3,7 @@ unit counter;
 //---------------------- INTERFACE ---------------------------------------------
 
 interface
-  procedure init(baseCharset, sLms: word);
+  procedure init;
   procedure prepare(name: string[25]);
   procedure print;
   procedure overwrite;
@@ -11,6 +11,7 @@ interface
 var
   stop              : boolean absolute 0;
   vblk              : pointer;
+  rtclok            : byte absolute $14;
 
 //---------------------- IMPLEMENTATION ----------------------------------------
 
@@ -19,10 +20,9 @@ implementation
 uses gr;
 
 var
-  chbas             : byte absolute $D409;
   benchName         : string[25];
-  charset, scoreLms : word;
-  position, i       : byte;
+  charset, position : word;
+  i                 : byte;
 
 procedure vblCounter; interrupt;
 var
@@ -47,14 +47,13 @@ begin
   };
 end;
 
-procedure init(baseCharset, sLms: word);
+procedure init;
 begin
-  scoreLms := sLms;
-  charset := baseCharset + $400;
-  Move(pointer(baseCharset), pointer(charset), $400);
-  Move(pointer(baseCharset + $80), pointer(charset), 80);
+  charset := gr.charset + $400;
+  Move(pointer(gr.charset), pointer(charset), $400);
+  Move(pointer(gr.charset + $80), pointer(charset), 80);
   for i := 0 to 7 do
-    poke(charset + $400 - 8 + i, peek(baseCharset + $80 + i) xor $ff);
+    poke(charset + $400 - 8 + i, peek(gr.charset + $80 + i) xor $ff);
   FillChar(pointer(charset + $400 - 16), 8, $ff);
 end;
 
@@ -68,7 +67,6 @@ begin
   for i := 1 to length(name) do
     if name[i] = chr(0) then name[i] := chr($fe);
   Move(name[1], pointer(gr.counterLms + 6), length(name));
-  inc(position);
   pause;
 end;
 
@@ -76,11 +74,12 @@ procedure print;
 var
   printRow    : word;
 begin
-  printRow := scoreLms + (40 * position);
+  printRow := position;
   Move(benchName[1], pointer(printRow), length(benchName));
   inc(printRow, 26);
   for i := 0 to 4 do
     poke(printRow + i, peek(gr.counterLms + i) + 16);
+  inc(position,40);
 end;
 
 procedure overwrite;
@@ -93,5 +92,5 @@ end;
 initialization
   vblk := @vblCounter;
   stop := true;
-  position := $ff;
+  position := gr.scoreLms;
 end.

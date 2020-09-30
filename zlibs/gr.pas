@@ -5,14 +5,19 @@ unit gr;
 interface
 
 const
+  charset    = $8000;
   counterLms = $20;
   scoreLms   = $e000;
   lms        = $a010;
 
+var
+  chbas         : byte absolute $D409;
+  sdlstl        : word absolute $D402;
+
   procedure mode8;
   procedure mode4;
   procedure counterRow;
-  procedure scoreScreen;
+  procedure showScore;
 
 //---------------------- IMPLEMENTATION ----------------------------------------
 
@@ -81,10 +86,6 @@ const
     $41,lo(word(@dlCounter)),hi(word(@dlCounter))
   );
 
-var
-  sdlstl : word absolute $D402;
-
-
 procedure mode8;
 begin
   sdlstl := word(@dl8)
@@ -100,8 +101,10 @@ begin
   sdlstl := word(@dlCounter)
 end;
 
-procedure scoreScreen;
+procedure showScore;
 begin
+  pause;
+  chbas := hi(charset);
   sdlstl := word(@dlScore)
 end;
 

@@ -10,29 +10,16 @@ uses
   ludolphian, montecarlo, sieve1028, sieve1899, guessing, qr_2d, qr_1d,
   matrix_trans, floating_single, md5_hash, landscape;
 
-const
-  charset = $8000;
-
-var
-  chbas       : byte absolute $D409;
-
 //------------------------------------------------------------------------------
 
 procedure initSuite;
 begin
-  Move(pointer($e000), pointer(charset), $400);
+  Move(pointer($e000), pointer(gr.charset), $400);
   SystemOff;
   FillChar(pointer(gr.counterLms), 40, 0);
   FillChar(pointer(gr.scoreLms), $fff, 0);
-  counter.init(charset, gr.scoreLms);
+  counter.init;
   EnableVBLI(counter.vblk);
-end;
-
-procedure showScore;
-begin
-  pause;
-  chbas := hi(charset);
-  gr.scoreScreen;
 end;
 
 procedure startRunners;
