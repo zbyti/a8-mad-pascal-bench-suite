@@ -6,11 +6,13 @@ interface
 
 const
   counterLms = $20;
+  score      = $e000;
   lms        = $a010;
 
   procedure mode8;
   procedure mode4;
   procedure counterRow;
+  procedure scoreScreen;
 
 //---------------------- IMPLEMENTATION ----------------------------------------
 
@@ -64,6 +66,15 @@ const
     $41,lo(word(@dl4)),hi(word(@dl4))
   );
 
+  dlScore : array [0..31] of byte = (
+    $70,$70,$70,
+    $42,lo(score),hi(score),
+    $02,$02,$02,$02,$02,$02,$02,$02,
+    $02,$02,$02,$02,$02,$02,$02,$02,
+    $02,$02,$02,$02,$02,$02,$02,
+    $41,lo(word(@dlScore)),hi(word(@dlScore))
+  );
+
   dlCounter: array [0..8] of byte = (
     $70,$70,$70,
     $42,counterLms,$00,
@@ -87,6 +98,11 @@ end;
 procedure counterRow;
 begin
   sdlstl := word(@dlCounter)
+end;
+
+procedure scoreScreen;
+begin
+  sdlstl := word(@dlScore)
 end;
 
 //---------------------- INITIALIZATION ----------------------------------------
