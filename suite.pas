@@ -8,7 +8,7 @@ uses
   b_system, gr, counter,
   yoshplus, chessboard, lipsum, bsort, countdown_while, countdown_for,
   ludolphian, montecarlo, sieve1028, sieve1899, guessing, qr_2d, qr_1d,
-  matrix_trans, floating_single, md5_hash;
+  matrix_trans, floating_single, md5_hash, landscape;
 
 const
   lms = $e000;
@@ -49,6 +49,7 @@ end;
 
 procedure startRunners;
 begin
+  landscape.run;
   chessboard.run;
   lipsum.run;
   qr_2d.run;

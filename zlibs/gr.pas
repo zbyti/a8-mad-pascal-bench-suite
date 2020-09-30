@@ -18,9 +18,9 @@ implementation
 
 const
   dl8: array [0..205] of byte = (
-    $70,$70,$70,
+    $f0,$70,$70,
     $42,counterLms,$00,
-    $70,
+    $f0,
     $4f,lo(lms),hi(lms),
     $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f,
     $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f,
@@ -35,7 +35,7 @@ const
     $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f,
     $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f,
     $0f,$0f,$0f,$0f,$0f,
-    $4f,lo(lms)-$10,hi(lms)+$10,
+    $4f,0,hi(lms)+$10,
     $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f,
     $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f,
     $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f,
@@ -47,9 +47,8 @@ const
     $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f,
     $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f,
     $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f,
-    $0f,$41,
-    lo(word(@dl8)),
-    hi(word(@dl8))
+    $0f,
+    $41,lo(word(@dl8)),hi(word(@dl8))
   );
 
   dl4: array [0..46] of byte = (

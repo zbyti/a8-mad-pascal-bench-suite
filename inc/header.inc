@@ -12,7 +12,7 @@ interface
 
 implementation
 
-  uses gr, counter, md5;
+  uses b_system, gr, counter, md5;
 
   const
     lms = $a010;
