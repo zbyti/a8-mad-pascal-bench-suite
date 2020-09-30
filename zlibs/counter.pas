@@ -26,11 +26,11 @@ var
 
 procedure vblCounter; interrupt;
 var
-  a : byte absolute gr.counterLms;
-  b : byte absolute gr.counterLms + 1;
-  c : byte absolute gr.counterLms + 2;
-  d : byte absolute gr.counterLms + 3;
-  e : byte absolute gr.counterLms + 4;
+  a : byte absolute counterLms;
+  b : byte absolute counterLms + 1;
+  c : byte absolute counterLms + 2;
+  d : byte absolute counterLms + 3;
+  e : byte absolute counterLms + 4;
 begin
   asm {
     phr
@@ -59,14 +59,14 @@ end;
 
 procedure prepare(name: string[25]);
 begin
-  pause; gr.counterRow;
+  pause; counterRow;
   chbas := hi(charset);
   benchName := name;
-  FillChar(pointer(gr.counterLms), $28, $fe);
-  FillChar(pointer(gr.counterLms), 5, 0);
+  FillChar(pointer(counterLms), $28, $fe);
+  FillChar(pointer(counterLms), 5, 0);
   for i := 1 to length(name) do
     if name[i] = chr(0) then name[i] := chr($fe);
-  Move(name[1], pointer(gr.counterLms + 6), length(name));
+  Move(name[1], pointer(counterLms + 6), length(name));
   pause;
 end;
 
@@ -78,13 +78,13 @@ begin
   Move(benchName[1], pointer(printRow), length(benchName));
   inc(printRow, 26);
   for i := 0 to 4 do
-    poke(printRow + i, peek(gr.counterLms + i) + 16);
+    poke(printRow + i, peek(counterLms + i) + 16);
   inc(position,40);
 end;
 
 procedure overwrite;
 begin
-  Move(pointer(gr.counterLms + $23), pointer(gr.counterLms), 5);
+  Move(pointer(counterLms + $23), pointer(counterLms), 5);
 end;
 
 //---------------------- INITIALIZATION ----------------------------------------
@@ -92,5 +92,5 @@ end;
 initialization
   vblk := @vblCounter;
   stop := true;
-  position := gr.scoreLms;
+  position := scoreLms;
 end.

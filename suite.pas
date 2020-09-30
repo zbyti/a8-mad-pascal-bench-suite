@@ -14,10 +14,10 @@ uses
 
 procedure initSuite;
 begin
-  Move(pointer($e000), pointer(gr.charset), $400);
+  Move(pointer($e000), pointer(charset), $400);
   SystemOff;
-  FillChar(pointer(gr.counterLms), 40, 0);
-  FillChar(pointer(gr.scoreLms), $fff, 0);
+  FillChar(pointer(counterLms), 40, 0);
+  FillChar(pointer(scoreLms), $fff, 0);
   counter.init;
   EnableVBLI(counter.vblk);
 end;

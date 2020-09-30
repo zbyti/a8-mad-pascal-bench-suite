@@ -8,13 +8,13 @@ unit yoshplus;
 
 procedure benchmark;
 var
-  zc         : byte absolute gr.counterLms + $23;
-  zd         : byte absolute gr.counterLms + $24;
-  ze         : byte absolute gr.counterLms + $25;
-  zf         : byte absolute gr.counterLms + $26;
-  zg         : byte absolute gr.counterLms + $27;
+  zc         : byte absolute counterLms + $23;
+  zd         : byte absolute counterLms + $24;
+  ze         : byte absolute counterLms + $25;
+  zf         : byte absolute counterLms + $26;
+  zg         : byte absolute counterLms + $27;
 begin
-  FillChar(pointer(gr.counterLms + $23), 5, 0);
+  FillChar(pointer(counterLms + $23), 5, 0);
   rtclok := 0;
   while rtclok < 100 do begin
     inc(zg);

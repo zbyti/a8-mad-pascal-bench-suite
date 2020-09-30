@@ -8,16 +8,16 @@ unit chessboard;
 
 procedure benchmark;
 var
-  zc        : byte absolute gr.counterLms + $25;
-  zd        : byte absolute gr.counterLms + $26;
-  ze        : byte absolute gr.counterLms + $27;
+  zc        : byte absolute counterLms + $25;
+  zd        : byte absolute counterLms + $26;
+  ze        : byte absolute counterLms + $27;
   i1b       : byte absolute $e2;
   i2b       : byte absolute $e3;
   i3b       : byte absolute $e4;
   p         : PByte absolute $e0;
 begin
-  gr.mode8;
-  FillChar(pointer(gr.counterLms + $23), 5, 0);
+  mode8;
+  FillChar(pointer(counterLms + $23), 5, 0);
   rtclok := 0;
   while rtclok < 200 do begin
     p := pointer(lms);

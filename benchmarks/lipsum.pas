@@ -27,7 +27,7 @@ procedure benchmark;
 var
   iter      : byte absolute $e8;
 begin
-  gr.mode8;
+  mode8;
   for iter := 23 downto 0 do
     writeGr8(0, iter, 'Lorem ipsum dolor sit amet orci aliquam.'~);
 end;

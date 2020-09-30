@@ -52,14 +52,14 @@ var
 
 begin
   pOff := @g9off; pOn := @g9on;
-  EnableDLI(pOff); gr.mode8;
+  EnableDLI(pOff); mode8;
   gprior := $40; color4 := $b0;
 
   for z := 9 downto 0 do begin
     move(@base, @colheight, 14);
     for x := 39 downto 0 do begin
       for i := 1 downto 0 do begin
-        p := pointer(gr.lms + x); start := 0;
+        p := pointer(lms + x); start := 0;
         for c := 13 downto 0 do begin
           stop := colheight[c];
           if start > stop then begin

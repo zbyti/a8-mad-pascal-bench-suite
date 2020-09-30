@@ -8,13 +8,13 @@ unit countdown_while;
 
 procedure benchmark;
 var
-  za         : byte absolute gr.counterLms + $21;
-  zb         : byte absolute gr.counterLms + $22;
-  zc         : byte absolute gr.counterLms + $23;
-  zd         : byte absolute gr.counterLms + $24;
-  ze         : byte absolute gr.counterLms + $25;
-  zf         : byte absolute gr.counterLms + $26;
-  zg         : byte absolute gr.counterLms + $27;
+  za         : byte absolute counterLms + $21;
+  zb         : byte absolute counterLms + $22;
+  zc         : byte absolute counterLms + $23;
+  zd         : byte absolute counterLms + $24;
+  ze         : byte absolute counterLms + $25;
+  zf         : byte absolute counterLms + $26;
+  zg         : byte absolute counterLms + $27;
 begin
   za := 1; zb := 9; zc := 9; zd := 9;
   ze := 9; zf := 9; zg := 9;

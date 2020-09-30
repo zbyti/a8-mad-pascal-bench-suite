@@ -8,15 +8,15 @@ unit guessing;
 
 procedure benchmark;
 var
-  zd         : byte absolute gr.counterLms + $24;
-  ze         : byte absolute gr.counterLms + $25;
-  zf         : byte absolute gr.counterLms + $26;
-  zg         : byte absolute gr.counterLms + $27;
+  zd         : byte absolute counterLms + $24;
+  ze         : byte absolute counterLms + $25;
+  zf         : byte absolute counterLms + $26;
+  zg         : byte absolute counterLms + $27;
   i          : byte absolute $e4;
   r          : smallint absolute $e0;
   g          : smallint absolute $e2;
 begin
-  FillChar(pointer(gr.counterLms + $23), 5, 0);
+  FillChar(pointer(counterLms + $23), 5, 0);
   for r := 1 to 1000 do begin
     g := 500; i := 0;
     while true do begin
