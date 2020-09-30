@@ -82,7 +82,7 @@ begin
       end;
     end;
   end;
-  DisableDLI; gprior := 0
+  DisableDLI; gprior := 0;
 end;
 
 //---------------------- COMMON PROCEDURE --------------------------------------
