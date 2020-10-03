@@ -6,9 +6,9 @@ program Suite;
 
 uses
   b_system, gr, counter,
-  yoshplus, chessboard, lipsum, bsort, countdown_while, countdown_for,
+  chessboard, lipsum, bsort, countdown_while, countdown_for,
   ludolphian, montecarlo, sieve1028, sieve1899, guessing, qr_2d, qr_1d,
-  matrix_trans, floating_single, md5_hash, landscape;
+  matrix_trans, floating_single, md5_hash, landscape, yoshplus;
 
 //------------------------------------------------------------------------------
 
