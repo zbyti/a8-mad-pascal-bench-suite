@@ -9,9 +9,8 @@ unit bsort;
 procedure benchmark;
 var
   i         : byte absolute $f0;
-  n1        : byte absolute $f1;
-  n2        : byte absolute $f2;
-  size      : byte absolute $f3;
+  a	    : byte absolute $f1;
+  size      : byte absolute $f2;
   sorttable : array[0..254] of byte absolute $a000;
 begin
   for i := 0 to 254 do
@@ -19,11 +18,10 @@ begin
 
   for size := 253 downto 0 do begin
     for i := 0 to 253 do begin
-      n1 := sorttable[i];
-      n2 := sorttable[i+1];
-      if n1>n2 then begin
-        sorttable[i] := n2;
-        sorttable[i+1] := n1;
+      if sorttable[i+1] < sorttable[i] then begin
+        a := sorttable[i+1];
+        sorttable[i+1] := sorttable[i];
+	sorttable[i]:=a;
       end;
     end;
   end;
