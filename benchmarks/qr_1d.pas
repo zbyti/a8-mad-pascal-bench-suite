@@ -47,6 +47,7 @@ const
 
 procedure benchmark;
 var
+  zb	    : byte absolute counterLms + $24;
   zc        : byte absolute counterLms + $25;
   zd        : byte absolute counterLms + $26;
   ze        : byte absolute counterLms + $27;
@@ -57,18 +58,22 @@ var
 begin
   mode4;
   FillChar(pointer(counterLms + $23), 5, 0);
-  rtclok := 0; y := 0;
+  rtclok := 0; y := %10000;
   while rtclok < 200 do begin
     p := pointer(lms);
     for x := 0 to 174 do begin
-      p[y] := qr[x]; inc(y);
-      if y = 5 then begin
-        inc(p,10); y := 0;
+      p[x] := qr[x];
+
+      y:=y shr 1;
+
+      if y = 0 then begin
+        inc(p,5); y := %10000;
       end;
     end;
     inc(ze);
     if ze = 10 then begin inc(zd); ze := 0 end;
     if zd = 10 then begin inc(zc); zd := 0 end;
+    if zc = 10 then begin inc(zb); zc := 0 end;
   end;
 end;
 

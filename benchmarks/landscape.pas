@@ -46,7 +46,7 @@ var
   x        : byte  absolute $e3;
   i        : byte  absolute $e4;
   z        : byte  absolute $e5;
-  p        : pbyte absolute $e6;
+  p        : PByte absolute $e6;
 
   colheight: array[0..13] of byte;
 
