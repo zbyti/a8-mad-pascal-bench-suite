@@ -12,9 +12,11 @@ const
   lms            = $a010;
 
 var
-  dmactl        : byte absolute $D400;
-  chbas         : byte absolute $D409;
-  sdlstl        : word absolute $D402;
+  color4        : byte absolute $d01a;
+  gprior        : byte absolute $d01b;
+  dmactl        : byte absolute $d400;
+  sdlstl        : word absolute $d402;
+  chbas         : byte absolute $d409;
 
   procedure mode8;
   procedure mode4;
