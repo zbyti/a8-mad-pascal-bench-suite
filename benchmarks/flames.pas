@@ -41,15 +41,15 @@ end;
 
 procedure benchmark;
 var
-  ze         : byte absolute counterLms + $25;
-  zf         : byte absolute counterLms + $26;
-  zg         : byte absolute counterLms + $27;
-  b0i        : byte absolute $e0;
-  b1i        : byte absolute $e1;
-  tmp        : byte absolute $e2;
-  p0         : PByte absolute $f0;
-  p1         : PByte absolute $f2;
-  p2         : PByte absolute $f4;
+  ze       : byte absolute counterLms + $25;
+  zf       : byte absolute counterLms + $26;
+  zg       : byte absolute counterLms + $27;
+  b0i      : byte absolute $e0;
+  b1i      : byte absolute $e1;
+  tmp      : byte absolute $e2;
+  p0       : PByte absolute $f0;
+  p1       : PByte absolute $f2;
+  p2       : PByte absolute $f4;
 
 begin
   pOff := @g9off; pOn := @g9on;
