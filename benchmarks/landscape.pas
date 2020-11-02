@@ -14,14 +14,12 @@ const
 var
   pOff     : pointer absolute $e8;
   pOn      : pointer absolute $ea;
-  color4   : byte absolute $d01a;
-  gprior   : byte absolute $d01b;
 
 procedure g9off; assembler; interrupt;
 asm
 {
   pha
-  mva #0 gprior
+  mva #0 gr.gprior
   mwa pOn __dlivec
   pla
 };
@@ -31,7 +29,7 @@ procedure g9on; assembler; interrupt;
 asm
 {
   pha
-  mva #$40 gprior
+  mva #$40 gr.gprior
   mwa pOff __dlivec
   pla
 };
