@@ -7,9 +7,6 @@ unit flames;
 //---------------------- IMPLEMENTATION ----------------------------------------
 
 const
-  base: array[0..13] of byte = (
-    170,150,144,144,122,122,110,110,94,94,86,86,82,80
-  );
   fireScreen   = lms + $400;
   fireCharset  = lms - $10;
 
@@ -55,9 +52,6 @@ var
   p0         : PByte absolute $f0;
   p1         : PByte absolute $f2;
   p2         : PByte absolute $f4;
-  //p0, p1, p2 : PByte;
-
-  colheight: array[0..13] of byte;
 
 begin
   pOff := @g9off; pOn := @g9on;
