@@ -74,8 +74,6 @@ begin
 
   rtclok := 0;
   while rtclok < 250 do begin
-  //while true do begin
-
     p0 := pointer(fireScreen - 31);
     p1 := pointer(fireScreen - 31 + $100);
     p2 := pointer(fireScreen - 31 + $200);
@@ -84,10 +82,8 @@ begin
       p0^ := byte(p0[30] + p0[31] + p0[32] + p0[63]) shr 2;
       p1^ := byte(p1[30] + p1[31] + p1[32] + p1[63]) shr 2;
       p2^ := byte(p2[30] + p2[31] + p2[32] + p2[63]) shr 2;
-
       inc(p0); inc(p1); inc(p2);
     end;
-    //colbk := 10; pause;
 
     p0 := pointer(fireScreen + $2e0);
     for b0i := $1f downto 0 do p0[b0i] := rnd and 15;
