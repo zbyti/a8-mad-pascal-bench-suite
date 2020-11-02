@@ -52,7 +52,10 @@ var
   b0i        : byte absolute $e0;
   b1i        : byte absolute $e1;
   tmp        : byte absolute $e2;
-  p0, p1, p2 : PByte;
+  p0         : PByte absolute $f0;
+  p1         : PByte absolute $f2;
+  p2         : PByte absolute $f4;
+  //p0, p1, p2 : PByte;
 
   colheight: array[0..13] of byte;
 
