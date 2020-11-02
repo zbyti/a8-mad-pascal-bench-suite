@@ -5,17 +5,20 @@ unit gr;
 interface
 
 const
-  charset    = $8000;
-  counterLms = $20;
-  scoreLms   = $e000;
-  lms        = $a010;
+  charset        = $8000;
+  counterCharset = charset + $400;
+  counterLms     = $20;
+  scoreLms       = $e000;
+  lms            = $a010;
 
 var
+  dmactl        : byte absolute $D400;
   chbas         : byte absolute $D409;
   sdlstl        : word absolute $D402;
 
   procedure mode8;
   procedure mode4;
+  procedure mode2;
   procedure counterRow;
   procedure showScore;
 
@@ -80,6 +83,15 @@ const
     $41,lo(word(@dlScore)),hi(word(@dlScore))
   );
 
+  dl2: array [0..32] of byte = (
+    $f0,$70,$70,
+    $42,counterLms,$00,
+    $f0,
+    $42,lo(lms)-$10,hi(lms)+4,
+    2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,
+    $41,lo(word(@dl2)),hi(word(@dl2))
+  );
+
   dlCounter: array [0..8] of byte = (
     $70,$70,$70,
     $42,counterLms,$00,
@@ -94,6 +106,11 @@ end;
 procedure mode4;
 begin
   sdlstl := word(@dl4)
+end;
+
+procedure mode2;
+begin
+  sdlstl := word(@dl2)
 end;
 
 procedure counterRow;

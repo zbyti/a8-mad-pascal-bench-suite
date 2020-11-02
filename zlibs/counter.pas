@@ -49,7 +49,7 @@ end;
 
 procedure init;
 begin
-  charset := gr.charset + $400;
+  charset := counterCharset;
   Move(pointer(gr.charset), pointer(charset), $400);
   Move(pointer(gr.charset + $80), pointer(charset), 80);
   for i := 0 to 7 do

@@ -8,12 +8,13 @@ uses
   b_system, gr, counter,
   chessboard, lipsum, bsort, countdown_while, countdown_for,
   ludolphian, montecarlo, sieve1028, sieve1899, guessing, qr_2d, qr_1d,
-  matrix_trans, floating_single, md5_hash, landscape, yoshplus;
+  matrix_trans, floating_single, md5_hash, landscape, yoshplus, flames;
 
 //------------------------------------------------------------------------------
 
 procedure initSuite;
 begin
+  dmactl := $22;
   Move(pointer($e000), pointer(charset), $400);
   SystemOff;
   FillChar(pointer(counterLms), 40, 0);
@@ -24,6 +25,7 @@ end;
 
 procedure startRunners;
 begin
+  flames.run;
   landscape.run;
   chessboard.run;
   lipsum.run;
