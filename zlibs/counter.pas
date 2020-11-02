@@ -21,7 +21,7 @@ uses gr;
 
 var
   benchName         : string[25];
-  charset, position : word;
+  position          : word;
   i                 : byte;
 
 procedure vblCounter; interrupt;
@@ -49,12 +49,11 @@ end;
 
 procedure init;
 begin
-  charset := counterCharset;
-  Move(pointer(gr.charset), pointer(charset), $400);
-  Move(pointer(gr.charset + $80), pointer(charset), 80);
+  Move(pointer(gr.charset), pointer(gr.counterCharset), $400);
+  Move(pointer(gr.charset + $80), pointer(gr.counterCharset), 80);
   for i := 0 to 7 do
-    poke(charset + $400 - 8 + i, peek(gr.charset + $80 + i) xor $ff);
-  FillChar(pointer(charset + $400 - 16), 8, $ff);
+    poke(gr.counterCharset + $400 - 8 + i, peek(gr.charset + $80 + i) xor $ff);
+  FillChar(pointer(gr.counterCharset + $400 - 16), 8, $ff);
 end;
 
 procedure prepare(name: string[25]);
