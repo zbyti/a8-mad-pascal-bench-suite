@@ -47,7 +47,7 @@ const
 
 procedure benchmark;
 var
-  zb	    : byte absolute counterLms + $24;
+  zb	      : byte absolute counterLms + $24;
   zc        : byte absolute counterLms + $25;
   zd        : byte absolute counterLms + $26;
   ze        : byte absolute counterLms + $27;
@@ -64,7 +64,7 @@ begin
     for x := 0 to 174 do begin
       p[x] := qr[x];
 
-      y:=y shr 1;
+      y := y shr 1;
 
       if y = 0 then begin
         inc(p,5); y := %10000;
