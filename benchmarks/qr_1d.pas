@@ -62,10 +62,7 @@ begin
   while rtclok < 200 do begin
     p := pointer(lms);
     for x := 0 to 174 do begin
-      p[x] := qr[x];
-
-      y := y shr 1;
-
+      p[x] := qr[x]; y := y shr 1;
       if y = 0 then begin
         inc(p,5); y := %10000;
       end;
