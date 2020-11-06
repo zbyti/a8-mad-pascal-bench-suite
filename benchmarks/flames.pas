@@ -14,7 +14,7 @@ var
   pOff     : pointer absolute $e8;
   pOn      : pointer absolute $ea;
 
-procedure g9off; assembler; interrupt;
+procedure gtiaOff; assembler; interrupt;
 asm
 {
   pha
@@ -26,7 +26,7 @@ asm
 };
 end;
 
-procedure g9on; assembler; interrupt;
+procedure gtiaOn; assembler; interrupt;
 asm
 {
   pha
@@ -52,7 +52,7 @@ var
   p2       : PByte absolute $f4;
 
 begin
-  pOff := @g9off; pOn := @g9on;
+  pOff := @gtiaOff; pOn := @gtiaOn;
   EnableDLI(pOff); mode2;
   gprior := $40; color4 := $20; tmp := 0;
 
