@@ -10,10 +10,6 @@ const
   fireScreen   = lms + $400;
   fireCharset  = lms - $10;
 
-var
-  pOff     : pointer absolute $e8;
-  pOn      : pointer absolute $ea;
-
 procedure gtiaOff; assembler; interrupt;
 asm
 {
@@ -21,7 +17,10 @@ asm
   mva #0 gr.gprior
   mva #$22 DMACTL
   mva #>gr.counterCharset CHBASE
-  mwa pOn __dlivec
+  lda >GTIAON
+  sta __dlivec+1
+  lda <GTIAON
+  sta __dlivec
   pla
 };
 end;
@@ -33,7 +32,10 @@ asm
   mva #$40 gr.gprior
   mva #$21 DMACTL
   mva #>fireCharset CHBASE
-  mwa pOff __dlivec
+  lda >GTIAOFF
+  sta __dlivec+1
+  lda <GTIAOFF
+  sta __dlivec
   pla
 };
 end;
@@ -52,8 +54,7 @@ var
   p2       : PByte absolute $f4;
 
 begin
-  pOff := @gtiaOff; pOn := @gtiaOn;
-  EnableDLI(pOff); mode2;
+  EnableDLI(@gtiaOff); mode2;
   gprior := $40; color4 := $20; tmp := 0;
 
   p0 := pointer(fireCharset);

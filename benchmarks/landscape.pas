@@ -11,16 +11,15 @@ const
     170,150,144,144,122,122,110,110,94,94,86,86,82,80
   );
 
-var
-  pOff     : pointer absolute $e8;
-  pOn      : pointer absolute $ea;
-
 procedure g9off; assembler; interrupt;
 asm
 {
   pha
   mva #0 gr.gprior
-  mwa pOn __dlivec
+  lda >G9ON
+  sta __dlivec+1
+  lda <G9ON
+  sta __dlivec
   pla
 };
 end;
@@ -30,7 +29,10 @@ asm
 {
   pha
   mva #$40 gr.gprior
-  mwa pOff __dlivec
+  lda >G9OFF
+  sta __dlivec+1
+  lda <G9OFF
+  sta __dlivec
   pla
 };
 end;
@@ -49,8 +51,7 @@ var
   colheight: array[0..13] of byte;
 
 begin
-  pOff := @g9off; pOn := @g9on;
-  EnableDLI(pOff); mode8;
+  EnableDLI(@g9off); mode8;
   gprior := $40; color4 := $b0;
 
   for z := 9 downto 0 do begin
