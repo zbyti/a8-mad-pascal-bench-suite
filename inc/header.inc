@@ -4,8 +4,7 @@ interface
   procedure run;
 
   var
-    name   : string[25];
-    info   : byte;
+    name   : string[26];
 
 //---------------------- IMPLEMENTATION ----------------------------------------
 

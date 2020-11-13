@@ -96,6 +96,6 @@ end;
 //---------------------- INITIALIZATION ----------------------------------------
 
 initialization
-  name := 'Flames GTIA 250 frames'~; info := $5c;
+  name := #$5c'Flames GTIA 250 frames'~;
   isRewritable := true;
 end.

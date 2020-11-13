@@ -29,5 +29,5 @@ end;
 //---------------------- INITIALIZATION ----------------------------------------
 
 initialization
-  name := 'Matrix 64x64 Trans'~; info := $5d;
+  name := #$5d'Matrix 64x64 Trans'~;
 end.

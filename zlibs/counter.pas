@@ -4,7 +4,7 @@ unit counter;
 
 interface
   procedure init;
-  procedure prepare(name: string[25]; info: byte);
+  procedure prepare(name: string[26]);
   procedure print;
   procedure overwrite;
 
@@ -20,8 +20,7 @@ implementation
 uses gr;
 
 var
-  benchName         : string[25];
-  benchInfo         : byte;
+  benchName         : string[26];
   position          : word;
   i                 : byte;
 
@@ -57,16 +56,16 @@ begin
   FillChar(pointer(counterCharset + $400 - 16), 8, $ff);
 end;
 
-procedure prepare(name: string[25]; info: byte);
+procedure prepare(name: string[26]);
 begin
   pause; counterRow;
   chbas := hi(counterCharset);
-  benchName := name; benchInfo := info;
+  benchName := name;
   FillChar(pointer(counterLms), $28, $fe);
   FillChar(pointer(counterLms), 5, 0);
-  for i := 1 to length(name) do
+  for i := 2 to length(name) do
     if name[i] = chr(0) then name[i] := chr($fe);
-  Move(name[1], pointer(counterLms + 6), length(name));
+  Move(name[2], pointer(counterLms + 6), length(name)-1);
   pause;
 end;
 
@@ -75,9 +74,9 @@ var
   printRow    : word;
 begin
   printRow := position;
-  Move(benchName[1], pointer(printRow), length(benchName));
+  Move(benchName[2], pointer(printRow), length(benchName)-1);
   inc(printRow, 26);
-  poke(printRow, benchInfo);
+  poke(printRow, byte(benchName[1]));
   inc(printRow, 2);
   for i := 0 to 4 do
     poke(printRow + i, peek(counterLms + i) + 16);

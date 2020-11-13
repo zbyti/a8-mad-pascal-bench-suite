@@ -24,5 +24,5 @@ end;
 //---------------------- INITIALIZATION ----------------------------------------
 
 initialization
-  name := 'MD5 512B 5x'~; info := $5d;
+  name := #$5d'MD5 512B 5x'~;
 end.

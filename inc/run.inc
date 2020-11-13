@@ -1,7 +1,7 @@
 procedure run;
 begin
   FillChar(pointer(lms), $1ff0, 0);
-  counter.prepare(name, info);
+  counter.prepare(name);
   pause;
   counter.stop := false;
   benchmark;

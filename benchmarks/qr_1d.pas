@@ -81,6 +81,6 @@ end;
 //---------------------- INITIALIZATION ----------------------------------------
 
 initialization
-  name := 'QR 1D Array 200 frames'~; info := $5c;
+  name := #$5c'QR 1D Array 200 frames'~;
   isRewritable := true;
 end.
