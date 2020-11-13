@@ -96,6 +96,6 @@ end;
 //---------------------- INITIALIZATION ----------------------------------------
 
 initialization
-  name := 'Flames GTIA 250 frames'~;
+  name := 'Flames GTIA 250 frames'~; info := $5c;
   isRewritable := true;
 end.

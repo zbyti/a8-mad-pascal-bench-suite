@@ -46,6 +46,6 @@ end;
 //---------------------- INITIALIZATION ----------------------------------------
 
 initialization
-  name := 'Chessboard GR8 200 frames'~;
+  name := 'Chessboard GR8 200 frames'~; info := $5c;
   isRewritable := true;
 end.

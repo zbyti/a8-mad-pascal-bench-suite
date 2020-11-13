@@ -32,5 +32,5 @@ end;
 //---------------------- INITIALIZATION ----------------------------------------
 
 initialization
-  name := 'Countdown 2ML: FOR'~;
+  name := 'Countdown 2ML: FOR'~; info := $5d;
 end.

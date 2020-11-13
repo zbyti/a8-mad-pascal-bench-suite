@@ -34,5 +34,5 @@ end;
 //---------------------- INITIALIZATION ----------------------------------------
 
 initialization
-  name := 'Floating Point SINGLE'~;
+  name := 'Floating Point SINGLE'~; info := $5d;
 end.

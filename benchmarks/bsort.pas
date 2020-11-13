@@ -34,5 +34,5 @@ end;
 //---------------------- INITIALIZATION ----------------------------------------
 
 initialization
-  name := 'Bubble Sort: 255 elements'~;
+  name := 'Bubble Sort: 255 elements'~; info := $5d;
 end.

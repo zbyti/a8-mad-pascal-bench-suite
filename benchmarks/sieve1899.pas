@@ -40,5 +40,5 @@ end;
 //---------------------- INITIALIZATION ----------------------------------------
 
 initialization
-  name := 'Sieve 1899 10x'~;
+  name := 'Sieve 1899 10x'~; info := $5d;
 end.

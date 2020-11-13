@@ -77,6 +77,6 @@ end;
 //---------------------- INITIALIZATION ----------------------------------------
 
 initialization
-  name := 'QR 2D Array 200 frames'~;
+  name := 'QR 2D Array 200 frames'~; info := $5c;
   isRewritable := true;
 end.

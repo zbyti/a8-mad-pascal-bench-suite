@@ -54,5 +54,5 @@ end;
 //---------------------- INITIALIZATION ----------------------------------------
 
 initialization
-  name := 'Countdown 2ML: WHILE'~;
+  name := 'Countdown 2ML: WHILE'~; info := $5d;
 end.

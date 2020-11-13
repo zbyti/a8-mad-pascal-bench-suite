@@ -39,5 +39,5 @@ end;
 //---------------------- INITIALIZATION ----------------------------------------
 
 initialization
-  name := 'Lorem Ipsum GR8'~;
+  name := 'Lorem Ipsum GR8'~; info := $5d;
 end.

@@ -40,5 +40,5 @@ end;
 //---------------------- INITIALIZATION ----------------------------------------
 
 initialization
-  name := 'Guessing Game'~;
+  name := 'Guessing Game'~; info := $5d;
 end.

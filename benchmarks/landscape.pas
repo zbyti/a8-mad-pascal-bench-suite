@@ -98,5 +98,5 @@ end;
 //---------------------- INITIALIZATION ----------------------------------------
 
 initialization
-  name := 'Quatari Landscape GR9 10x'~;
+  name := 'Quatari Landscape GR9 10x'~; info := $5d;
 end.

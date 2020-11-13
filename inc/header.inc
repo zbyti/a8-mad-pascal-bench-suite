@@ -5,6 +5,7 @@ interface
 
   var
     name   : string[25];
+    info   : byte;
 
 //---------------------- IMPLEMENTATION ----------------------------------------
 

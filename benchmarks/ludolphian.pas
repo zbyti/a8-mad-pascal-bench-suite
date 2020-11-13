@@ -32,5 +32,5 @@ end;
 //---------------------- INITIALIZATION ----------------------------------------
 
 initialization
-  name := 'Ludolphian number 5K'~;
+  name := 'Ludolphian number 5K'~; info := $5d;
 end.

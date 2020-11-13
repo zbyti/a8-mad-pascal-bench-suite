@@ -36,5 +36,5 @@ end;
 //---------------------- INITIALIZATION ----------------------------------------
 
 initialization
-  name := 'Monte Carlo Pi 10K'~;
+  name := 'Monte Carlo Pi 10K'~; info := $5d;
 end.
