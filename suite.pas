@@ -8,7 +8,8 @@ uses
   b_system, gr, counter,
   chessboard, lipsum, bsort, countdown_while, countdown_for,
   ludolphian, montecarlo, sieve1028, sieve1899, guessing, qr_2d, qr_1d,
-  matrix_trans, floating_single, md5_hash, landscape, yoshplus, flames;
+  matrix_trans, floating_single, md5_hash, landscape, yoshplus,
+  flames_pointer, flames_array;
 
 //------------------------------------------------------------------------------
 
@@ -25,7 +26,8 @@ end;
 
 procedure startRunners;
 begin
-  flames.run;
+  flames_pointer.run;
+  flames_array.run;
   landscape.run;
   chessboard.run;
   lipsum.run;

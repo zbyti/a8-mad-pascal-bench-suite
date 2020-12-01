@@ -62,13 +62,13 @@ begin
         for c := 13 downto 0 do begin
 
           stop := colheight[c];
-          if start > stop then begin
+          if start >= stop then begin
             dec(p,(start - stop) * 40);
             stop := start;
             start := colheight[c];
           end;
 
-          if i = 1 then begin
+          if i > 0 then begin
             while start < stop do begin
               p^ := c;
               inc(p,40); inc(start);

@@ -47,7 +47,7 @@ const
 
 procedure benchmark;
 var
-  zb	      : byte absolute counterLms + $24;
+  zb        : byte absolute counterLms + $24;
   zc        : byte absolute counterLms + $25;
   zd        : byte absolute counterLms + $26;
   ze        : byte absolute counterLms + $27;

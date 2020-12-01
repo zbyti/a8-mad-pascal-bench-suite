@@ -1,4 +1,4 @@
-unit flames;
+unit flames_array;
 
 //---------------------- COMMON INTERFACE --------------------------------------
 
@@ -49,37 +49,35 @@ var
   b0i      : byte absolute $e0;
   b1i      : byte absolute $e1;
   tmp      : byte absolute $e2;
-  p0       : PByte absolute $f0;
-  p1       : PByte absolute $f2;
-  p2       : PByte absolute $f4;
+
+  row0: array [0..255] of byte absolute fireScreen - 31;
+  row1: array [0..255] of byte absolute fireScreen - 31 + $100;
+  row2: array [0..255] of byte absolute fireScreen - 31 + $200;
+
+  row3: array [0..255] of byte absolute fireScreen + $2e0;
+
 
 begin
   EnableDLI(@gtiaOff); mode2;
   gprior := $40; color4 := $20; tmp := 0;
 
-  p0 := pointer(fireCharset);
   for b0i := 0 to $f do begin
-    for b1i := 0 to 7 do p0[b1i] := tmp;
-    inc(tmp,$11); inc(p0,8);
+    for b1i := 0 to 7 do poke(fireCharset + b1i + b0i * 8, tmp);
+    inc(tmp,$11);
   end;
 
   FillChar(pointer(counterLms + $23), 5, 0);
 
   rtclok := 0;
   while rtclok < 250 do begin
-    p0 := pointer(fireScreen - 31);
-    p1 := pointer(fireScreen - 31 + $100);
-    p2 := pointer(fireScreen - 31 + $200);
 
-    for b0i := 255 downto 0 do begin
-      p0^ := byte(p0[30] + p0[31] + p0[32] + p0[63]) shr 2;
-      p1^ := byte(p1[30] + p1[31] + p1[32] + p1[63]) shr 2;
-      p2^ := byte(p2[30] + p2[31] + p2[32] + p2[63]) shr 2;
-      inc(p0); inc(p1); inc(p2);
+    for b0i := 0 to 255 do begin
+      row0[b0i] := byte(row0[30+b0i] + row0[31+b0i]+ row0[32+b0i]+ row0[63+b0i]) shr 2;
+      row1[b0i] := byte(row1[30+b0i] + row1[31+b0i]+ row1[32+b0i]+ row1[63+b0i]) shr 2;
+      row2[b0i] := byte(row2[30+b0i] + row2[31+b0i]+ row2[32+b0i]+ row2[63+b0i]) shr 2;
     end;
 
-    p0 := pointer(fireScreen + $2e0);
-    for b0i := $1f downto 0 do p0[b0i] := rnd and 15;
+    for b0i := $1f downto 0 do row3[b0i] := rnd and 15;
 
     inc(zg);
     if zg = 10 then begin inc(zf); zg := 0 end;
@@ -96,6 +94,6 @@ end;
 //---------------------- INITIALIZATION ----------------------------------------
 
 initialization
-  name := #$5c'Flames GTIA 250 frames'~;
+  name := #$5c'Flames A GTIA 250 frames'~;
   isRewritable := true;
 end.
