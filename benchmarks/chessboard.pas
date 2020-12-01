@@ -46,6 +46,6 @@ end;
 //---------------------- INITIALIZATION ----------------------------------------
 
 initialization
-  name := 'Chessboard GR8 200 frames'~;
+  name := #$5c'Chessboard GR8 200 frames'~;
   isRewritable := true;
 end.

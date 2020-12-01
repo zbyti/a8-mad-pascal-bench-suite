@@ -40,5 +40,5 @@ end;
 //---------------------- INITIALIZATION ----------------------------------------
 
 initialization
-  name := 'Guessing Game'~;
+  name := #$5d'Guessing Game'~;
 end.

@@ -32,6 +32,6 @@ end;
 //---------------------- INITIALIZATION ----------------------------------------
 
 initialization
-  name := 'YoshPlus 100 frames'~;
+  name := #$5c'YoshPlus 100 frames'~;
   isRewritable := true;
 end.

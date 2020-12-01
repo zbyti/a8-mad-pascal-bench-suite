@@ -16,11 +16,10 @@ var
   B         : array[0..size, 0..size] of byte absolute $b000;
 
 begin
-  for y := size downto 0 do
-    for x := size downto 0 do A[y][x] := rnd;
-
-  for y := size downto 0 do
-    for x := size downto 0 do B[x][y] := A[y][x];
+  for y := 0 to size do
+    for x := 0 to size do A[y][x] := rnd;
+  for y := 0 to size do
+    for x := 0 to size do B[x][y] := A[y][x];
 end;
 
 //---------------------- COMMON PROCEDURE --------------------------------------
@@ -30,5 +29,5 @@ end;
 //---------------------- INITIALIZATION ----------------------------------------
 
 initialization
-  name := 'Matrix 64x64 Trans'~;
+  name := #$5d'Matrix 64x64 Trans'~;
 end.

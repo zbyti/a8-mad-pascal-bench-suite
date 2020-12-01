@@ -47,7 +47,7 @@ const
 
 procedure benchmark;
 var
-  zb	    : byte absolute counterLms + $24;
+  zb	      : byte absolute counterLms + $24;
   zc        : byte absolute counterLms + $25;
   zd        : byte absolute counterLms + $26;
   ze        : byte absolute counterLms + $27;
@@ -62,10 +62,7 @@ begin
   while rtclok < 200 do begin
     p := pointer(lms);
     for x := 0 to 174 do begin
-      p[x] := qr[x];
-
-      y:=y shr 1;
-
+      p[x] := qr[x]; y := y shr 1;
       if y = 0 then begin
         inc(p,5); y := %10000;
       end;
@@ -84,6 +81,6 @@ end;
 //---------------------- INITIALIZATION ----------------------------------------
 
 initialization
-  name := 'QR 1D Array 200 frames'~;
+  name := #$5c'QR 1D Array 200 frames'~;
   isRewritable := true;
 end.

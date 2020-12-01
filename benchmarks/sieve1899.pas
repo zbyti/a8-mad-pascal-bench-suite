@@ -40,5 +40,5 @@ end;
 //---------------------- INITIALIZATION ----------------------------------------
 
 initialization
-  name := 'Sieve 1899 10x'~;
+  name := #$5d'Sieve 1899 10x'~;
 end.

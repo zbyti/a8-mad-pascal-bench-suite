@@ -34,5 +34,5 @@ end;
 //---------------------- INITIALIZATION ----------------------------------------
 
 initialization
-  name := 'Floating Point SINGLE'~;
+  name := #$5d'Floating Point SINGLE'~;
 end.

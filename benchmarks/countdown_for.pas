@@ -32,5 +32,5 @@ end;
 //---------------------- INITIALIZATION ----------------------------------------
 
 initialization
-  name := 'Countdown 2ML: FOR'~;
+  name := #$5d'Countdown 2ML: FOR'~;
 end.

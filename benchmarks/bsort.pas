@@ -9,7 +9,7 @@ unit bsort;
 procedure benchmark;
 var
   i         : byte absolute $f0;
-  a	    : byte absolute $f1;
+  a	        : byte absolute $f1;
   size      : byte absolute $f2;
   sorttable : array[0..254] of byte absolute $a000;
 begin
@@ -21,7 +21,7 @@ begin
       if sorttable[i+1] < sorttable[i] then begin
         a := sorttable[i+1];
         sorttable[i+1] := sorttable[i];
-	sorttable[i]:=a;
+        sorttable[i] := a;
       end;
     end;
   end;
@@ -34,5 +34,5 @@ end;
 //---------------------- INITIALIZATION ----------------------------------------
 
 initialization
-  name := 'Bubble Sort: 255 elements'~;
+  name := #$5d'Bubble Sort: 255 elements'~;
 end.

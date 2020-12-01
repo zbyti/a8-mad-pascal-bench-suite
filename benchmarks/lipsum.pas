@@ -39,5 +39,5 @@ end;
 //---------------------- INITIALIZATION ----------------------------------------
 
 initialization
-  name := 'Lorem Ipsum GR8'~;
+  name := #$5d'Lorem Ipsum GR8'~;
 end.
