@@ -6,10 +6,10 @@ program Suite;
 
 uses
   b_system, gr, counter,
-  chessboard, lipsum, bsort, countdown_while, countdown_for,
+  flames_array, flames_pointer, chessboard,
+  lipsum, bsort, countdown_while, countdown_for,
   ludolphian, montecarlo, sieve1028, sieve1899, guessing, qr_2d, qr_1d,
-  matrix_trans, floating_single, md5_hash, landscape, yoshplus,
-  flames_pointer, flames_array;
+  matrix_trans, floating_single, md5_hash, landscape, yoshplus;
 
 //------------------------------------------------------------------------------
 
@@ -26,8 +26,8 @@ end;
 
 procedure startRunners;
 begin
-  flames_pointer.run;
   flames_array.run;
+  flames_pointer.run;
   landscape.run;
   chessboard.run;
   lipsum.run;
