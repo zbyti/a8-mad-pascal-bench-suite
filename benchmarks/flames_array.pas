@@ -72,9 +72,9 @@ begin
   while rtclok < 250 do begin
 
     for b0i := 0 to 255 do begin
-      row0[b0i] := byte(row0[30+b0i] + row0[31+b0i]+ row0[32+b0i]+ row0[63+b0i]) shr 2;
-      row1[b0i] := byte(row1[30+b0i] + row1[31+b0i]+ row1[32+b0i]+ row1[63+b0i]) shr 2;
-      row2[b0i] := byte(row2[30+b0i] + row2[31+b0i]+ row2[32+b0i]+ row2[63+b0i]) shr 2;
+      row1[b0i] := byte(row1[30+b0i] + row1[31+b0i] + row1[32+b0i] + row1[63+b0i]) shr 2;
+      row2[b0i] := byte(row2[30+b0i] + row2[31+b0i] + row2[32+b0i] + row2[63+b0i]) shr 2;
+      row0[b0i] := byte(row0[30+b0i] + row0[31+b0i] + row0[32+b0i] + row0[63+b0i]) shr 2;
     end;
 
     for b0i := $1f downto 0 do row3[b0i] := rnd and 15;
