@@ -5,15 +5,16 @@
 program Suite;
 
 uses
-  b_system, gr, counter,
-  chessboard, lipsum, bsort, countdown_while, countdown_for,
+  landscape, b_system, gr, counter,
+  lipsum, bsort, chessboard, countdown_while, countdown_for,
   ludolphian, montecarlo, sieve1028, sieve1899, guessing, qr_2d, qr_1d,
-  matrix_trans, floating_single, md5_hash, landscape, yoshplus;
+  matrix_trans, floating_single, md5_hash, flames, flames2, yoshplus;
 
 //------------------------------------------------------------------------------
 
 procedure initSuite;
 begin
+  dmactl := $22;
   Move(pointer($e000), pointer(charset), $400);
   SystemOff;
   FillChar(pointer(counterLms), 40, 0);
@@ -24,6 +25,9 @@ end;
 
 procedure startRunners;
 begin
+
+  flames.run;
+  flames2.run;
   landscape.run;
   chessboard.run;
   lipsum.run;
@@ -39,8 +43,9 @@ begin
   yoshplus.run;
   guessing.run;
   floating_single.run;
-  matrix_trans.run;
   md5_hash.run;
+  matrix_trans.run;
+
 end;
 
 //------------------------------------------------------------------------------
