@@ -17,10 +17,7 @@ asm
   mva #0 gr.gprior
   mva #$22 DMACTL
   mva #>gr.counterCharset CHBASE
-  lda >GTIAON
-  sta __dlivec+1
-  lda <GTIAON
-  sta __dlivec
+  mwa #GTIAON __dlivec
   pla
 };
 end;
@@ -32,10 +29,7 @@ asm
   mva #$40 gr.gprior
   mva #$21 DMACTL
   mva #>fireCharset CHBASE
-  lda >GTIAOFF
-  sta __dlivec+1
-  lda <GTIAOFF
-  sta __dlivec
+  mwa #GTIAOFF __dlivec
   pla
 };
 end;

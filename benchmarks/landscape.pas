@@ -16,10 +16,7 @@ asm
 {
   pha
   mva #0 gr.gprior
-  lda >G9ON
-  sta __dlivec+1
-  lda <G9ON
-  sta __dlivec
+  mwa #G9ON __dlivec
   pla
 };
 end;
@@ -29,10 +26,7 @@ asm
 {
   pha
   mva #$40 gr.gprior
-  lda >G9OFF
-  sta __dlivec+1
-  lda <G9OFF
-  sta __dlivec
+  mwa #G9OFF __dlivec
   pla
 };
 end;
