@@ -20,8 +20,8 @@ begin
   for r := 1 to 1000 do begin
     g := 500; i := 0;
     while true do begin
-      if g > r then dec(g, 100-i) else
-      if g < r then inc(g, 100-i) else begin
+      if g > r then dec(g, byte(100-i)) else
+      if g < r then inc(g, byte(100-i)) else begin
         inc(zg);
         if zg = 10 then begin inc(zf); zg := 0 end;
         if zf = 10 then begin inc(ze); zf := 0 end;
