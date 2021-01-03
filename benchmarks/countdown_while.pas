@@ -16,8 +16,10 @@ var
   zf         : byte absolute counterLms + $26;
   zg         : byte absolute counterLms + $27;
 begin
-  za := 1; zb := 9; zc := 9; zd := 9;
+  zb := 9; zc := 9; zd := 9;
   ze := 9; zf := 9; zg := 9;
+
+  za:=1;
   while za <> $ff do begin
     zb := 9;
     while zb <> $ff do begin

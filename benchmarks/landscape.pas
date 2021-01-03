@@ -7,9 +7,7 @@ unit landscape;
 //---------------------- IMPLEMENTATION ----------------------------------------
 
 const
-  base: array[0..13] of byte = (
-    170,150,144,144,122,122,110,110,94,94,86,86,82,80
-  );
+  base: array[0..13] of byte = (170,150,144,144,122,122,110,110,94,94,86,86,82,80);
 
 procedure g9off; assembler; interrupt;
 asm
@@ -75,8 +73,8 @@ begin
           end;
 
           start := stop;
-          if boolean(rnd and 1) then dec(colheight[c]);
-          if boolean(rnd and 1) then inc(colheight[c]);
+          if rnd < 128 then dec(colheight[c]);
+          if rnd < 128 then inc(colheight[c]);
 
         end;
       end;
