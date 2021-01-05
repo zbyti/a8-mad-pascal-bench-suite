@@ -24,9 +24,7 @@ begin
     for i3b := 7 downto 0 do begin
       for i2b := 23 downto 0 do begin
         for i1b := 3 downto 0 do begin
-            p[0] := 255;
-            p[1] := 255;
-            p[2] := 255;
+            p[0] := 255; p[1] := 255; p[2] := 255;
             inc(p,6);
         end;
         inc(p,16);
