@@ -12,26 +12,22 @@ const
 
 procedure gtiaOff; assembler; interrupt;
 asm
-{
   pha
   mva #0 gr.gprior
   mva #$22 DMACTL
   mva #>gr.counterCharset CHBASE
   mwa #GTIAON __dlivec
   pla
-};
 end;
 
 procedure gtiaOn; assembler; interrupt;
 asm
-{
   pha
   mva #$40 gr.gprior
   mva #$21 DMACTL
   mva #>fireCharset CHBASE
   mwa #GTIAOFF __dlivec
   pla
-};
 end;
 
 

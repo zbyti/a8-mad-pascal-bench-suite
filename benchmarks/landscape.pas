@@ -11,22 +11,18 @@ const
 
 procedure g9off; assembler; interrupt;
 asm
-{
   pha
   mva #0 gr.gprior
   mwa #G9ON __dlivec
   pla
-};
 end;
 
 procedure g9on; assembler; interrupt;
 asm
-{
   pha
   mva #$40 gr.gprior
   mwa #G9OFF __dlivec
   pla
-};
 end;
 
 
