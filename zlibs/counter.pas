@@ -32,9 +32,9 @@ var
   d : byte absolute counterLms + 3;
   e : byte absolute counterLms + 4;
 begin
-  asm {
+  asm
     phr
-  };
+  end;
   if not stop then begin
     inc(e);
     if e = 10 then begin inc(d); e := 0 end;
@@ -42,9 +42,9 @@ begin
     if c = 10 then begin inc(b); c := 0 end;
     if b = 10 then begin inc(a); b := 0 end;
   end;
-  asm {
+  asm
     plr
-  };
+  end;
 end;
 
 procedure init;

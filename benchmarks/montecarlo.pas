@@ -6,7 +6,6 @@ unit montecarlo;
 
 //---------------------- IMPLEMENTATION ----------------------------------------
 
-
 procedure benchmark;
 var
   r         : word absolute $e0;
