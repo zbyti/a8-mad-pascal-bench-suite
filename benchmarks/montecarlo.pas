@@ -6,6 +6,8 @@ unit montecarlo;
 
 //---------------------- IMPLEMENTATION ----------------------------------------
 
+{$codealign proc = $100}
+
 procedure benchmark;
 var
   r         : word absolute $e0;
@@ -27,6 +29,8 @@ begin
   end;
   pi := 4 * bingo;
 end;
+
+{$codealign proc = 0}
 
 //---------------------- COMMON PROCEDURE --------------------------------------
 

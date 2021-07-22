@@ -6,6 +6,8 @@ unit matrix_trans;
 
 //---------------------- IMPLEMENTATION ----------------------------------------
 
+{$codealign proc = $100}
+
 procedure benchmark;
 const
   size = 63;
@@ -21,6 +23,8 @@ begin
   for y := 0 to size do
     for x := 0 to size do B[x][y] := A[y][x];
 end;
+
+{$codealign proc = 0}
 
 //---------------------- COMMON PROCEDURE --------------------------------------
 

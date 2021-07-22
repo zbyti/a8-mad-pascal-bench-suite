@@ -4,6 +4,8 @@ unit yoshplus;
 
 {$i '../inc/header.inc'}
 
+{$codealign proc = $100}
+
 //---------------------- IMPLEMENTATION ----------------------------------------
 
 procedure benchmark;
@@ -24,6 +26,8 @@ begin
     if zd = 10 then begin inc(zc); zd := 0 end;
   end;
 end;
+
+{$codealign proc = 0}
 
 //---------------------- COMMON PROCEDURE --------------------------------------
 

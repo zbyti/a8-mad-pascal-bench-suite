@@ -12,24 +12,35 @@ const
 
 procedure gtiaOff; assembler; interrupt;
 asm
+{
   pha
   mva #0 gr.gprior
   mva #$22 DMACTL
   mva #>gr.counterCharset CHBASE
-  mwa #GTIAON __dlivec
+  lda >GTIAON
+  sta __dlivec+1
+  lda <GTIAON
+  sta __dlivec
   pla
+};
 end;
 
 procedure gtiaOn; assembler; interrupt;
 asm
+{
   pha
   mva #$40 gr.gprior
   mva #$21 DMACTL
   mva #>fireCharset CHBASE
-  mwa #GTIAOFF __dlivec
+  lda >GTIAOFF
+  sta __dlivec+1
+  lda <GTIAOFF
+  sta __dlivec
   pla
+};
 end;
 
+{$codealign proc = $100}
 
 procedure benchmark;
 var
@@ -76,6 +87,8 @@ begin
 
   DisableDLI; gprior := 0; dmactl := $22;
 end;
+
+{$codealign proc = 0}
 
 //---------------------- COMMON PROCEDURE --------------------------------------
 

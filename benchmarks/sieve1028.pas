@@ -6,6 +6,8 @@ unit sieve1028;
 
 //---------------------- IMPLEMENTATION ----------------------------------------
 
+{$codealign proc = $100}
+
 procedure benchmark;
 var
   flags     : array [0..8191] of boolean absolute $a000;
@@ -31,6 +33,8 @@ begin
   for k := 2 to 8191 do
     if flags[k] then inc(count);
 end;
+
+{$codealign proc = 0}
 
 //---------------------- COMMON PROCEDURE --------------------------------------
 

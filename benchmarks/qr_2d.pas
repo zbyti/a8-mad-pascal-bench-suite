@@ -45,6 +45,8 @@ const
     (%11111111,%11111111,%11111111,%11111111,%11100000)
   );
 
+{$codealign proc = $100}
+
 procedure benchmark;
 var
   zc        : byte absolute counterLms + $25;
@@ -69,6 +71,8 @@ begin
     if zd = 10 then begin inc(zc); zd := 0 end;
   end;
 end;
+
+{$codealign proc = 0}
 
 //---------------------- COMMON PROCEDURE --------------------------------------
 

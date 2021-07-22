@@ -6,6 +6,8 @@ unit sieve1899;
 
 //---------------------- IMPLEMENTATION ----------------------------------------
 
+{$codealign proc = $100}
+
 procedure benchmark;
 var
   count     : word absolute $e0;
@@ -32,6 +34,8 @@ begin
     end;
   end;
 end;
+
+{$codealign proc = 0}
 
 //---------------------- COMMON PROCEDURE --------------------------------------
 

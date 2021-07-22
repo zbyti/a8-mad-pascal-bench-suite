@@ -11,32 +11,44 @@ const
 
 procedure g9off; assembler; interrupt;
 asm
+{
   pha
   mva #0 gr.gprior
-  mwa #G9ON __dlivec
+  lda >G9ON
+  sta __dlivec+1
+  lda <G9ON
+  sta __dlivec
   pla
+};
 end;
 
 procedure g9on; assembler; interrupt;
 asm
+{
   pha
   mva #$40 gr.gprior
-  mwa #G9OFF __dlivec
+  lda >G9OFF
+  sta __dlivec+1
+  lda <G9OFF
+  sta __dlivec
   pla
+};
 end;
 
+{$codealign proc = $100}
 
 procedure benchmark;
 var
   stop     : byte  absolute $e0;
   start    : byte  absolute $e1;
-  c        : byte  absolute $e2;
-  x        : byte  absolute $e3;
-  i        : byte  absolute $e4;
-  z        : byte  absolute $e5;
-  p        : PByte absolute $e6;
 
-  colheight: array[0..13] of byte;
+  c        : byte  register;
+  x        : byte  register;
+  i        : byte  register;
+  z        : byte  register;
+  p        : PByte register;
+
+  colheight: array[0..13] of byte absolute $e2;
 
 begin
   EnableDLI(@g9off); mode8;
@@ -46,7 +58,8 @@ begin
     move(@base, @colheight, 14);
     for x := 39 downto 0 do begin
       for i := 1 downto 0 do begin
-        p := pointer(lms + x); start := 0;
+        p := pointer(lms + x);
+	start := 0;
         for c := 13 downto 0 do begin
 
           stop := colheight[c];
@@ -78,6 +91,8 @@ begin
   end;
   DisableDLI; gprior := 0;
 end;
+
+{$codealign proc = 0}
 
 //---------------------- COMMON PROCEDURE --------------------------------------
 
