@@ -4,9 +4,9 @@ unit yoshplus;
 
 {$i '../inc/header.inc'}
 
-{$codealign proc = $100}
-
 //---------------------- IMPLEMENTATION ----------------------------------------
+
+{$codealign proc = $100}
 
 procedure benchmark;
 var

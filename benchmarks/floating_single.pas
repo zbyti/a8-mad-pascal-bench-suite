@@ -12,8 +12,6 @@ var
   s         : single absolute $e4;
   n         : byte absolute $e8;
   i         : byte absolute $e9;
-
-
 begin
   s := 0;
   for n := 1 to 100 do begin

@@ -12,32 +12,22 @@ const
 
 procedure gtiaOff; assembler; interrupt;
 asm
-{
   pha
   mva #0 gr.gprior
   mva #$22 DMACTL
   mva #>gr.counterCharset CHBASE
-  lda >GTIAON
-  sta __dlivec+1
-  lda <GTIAON
-  sta __dlivec
+  mwa #GTIAON __dlivec
   pla
-};
 end;
 
 procedure gtiaOn; assembler; interrupt;
 asm
-{
   pha
   mva #$40 gr.gprior
   mva #$21 DMACTL
   mva #>fireCharset CHBASE
-  lda >GTIAOFF
-  sta __dlivec+1
-  lda <GTIAOFF
-  sta __dlivec
+  mwa #GTIAOFF __dlivec
   pla
-};
 end;
 
 {$codealign proc = $100}
@@ -53,7 +43,6 @@ var
   p0       : PByte absolute $f0;
   p1       : PByte absolute $f2;
   p2       : PByte absolute $f4;
-
 begin
   EnableDLI(@gtiaOff); mode2;
   gprior := $40; color4 := $20; tmp := 0;

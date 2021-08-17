@@ -9,7 +9,7 @@ unit bsort;
 procedure benchmark;
 var
   i         : byte absolute $f0;
-  a	        : byte absolute $f1;
+  a         : byte absolute $f1;
   size      : byte absolute $f2;
   sorttable : array[0..254] of byte absolute $a000;
 begin

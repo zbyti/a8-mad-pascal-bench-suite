@@ -11,28 +11,18 @@ const
 
 procedure g9off; assembler; interrupt;
 asm
-{
   pha
   mva #0 gr.gprior
-  lda >G9ON
-  sta __dlivec+1
-  lda <G9ON
-  sta __dlivec
+  mwa #G9ON __dlivec
   pla
-};
 end;
 
 procedure g9on; assembler; interrupt;
 asm
-{
   pha
   mva #$40 gr.gprior
-  lda >G9OFF
-  sta __dlivec+1
-  lda <G9OFF
-  sta __dlivec
+  mwa #G9OFF __dlivec
   pla
-};
 end;
 
 {$codealign proc = $100}
@@ -58,8 +48,7 @@ begin
     move(@base, @colheight, 14);
     for x := 39 downto 0 do begin
       for i := 1 downto 0 do begin
-        p := pointer(lms + x);
-	start := 0;
+        p := pointer(lms + x); start := 0;
         for c := 13 downto 0 do begin
 
           stop := colheight[c];
