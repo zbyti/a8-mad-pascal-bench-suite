@@ -47,7 +47,7 @@ procedure benchmark;
 var
   i          : byte absolute $e1;
 begin
-  for i := 0 to pSize do Poke(pBoard + i, i);
+  for i := 0 to pSize do board[i] := i;
   FillChar(pointer(counterLms + $23), 5, 0);
   generate(pSize);
 end;
