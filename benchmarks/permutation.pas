@@ -7,18 +7,21 @@ unit permutation;
 //---------------------- IMPLEMENTATION ----------------------------------------
 
 const
-  pSize  = 6;
+  pSize  = 7;
   pBoard = $e2;
 
-procedure generate(n: byte);
 var
+  zc         : byte absolute counterLms + $23;
   zd         : byte absolute counterLms + $24;
   ze         : byte absolute counterLms + $25;
   zf         : byte absolute counterLms + $26;
   zg         : byte absolute counterLms + $27;
-  i          : byte;
   tmp        : byte absolute $e0;
   board      : array [0..pSize] of byte absolute pBoard;
+
+procedure generate(n: byte);
+var
+  i          : byte;
 begin
 
   if n = 0 then
@@ -27,6 +30,7 @@ begin
         if zg = 10 then begin inc(zf); zg := 0 end;
         if zf = 10 then begin inc(ze); zf := 0 end;
         if ze = 10 then begin inc(zd); ze := 0 end;
+        if zd = 10 then begin inc(zc); zd := 0 end;
     end
   else
     begin
@@ -55,5 +59,5 @@ end;
 //---------------------- INITIALIZATION ----------------------------------------
 
 initialization
-  name := #$5d'Recur.: Permutation 7 el.'~;
+  name := #$5d'Recur.: Permutation 8 el.'~;
 end.

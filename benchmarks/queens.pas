@@ -8,28 +8,27 @@ unit queens;
 
 const
   qSize  = 8;
-  qBoard = $e1;
+
+var
+  ze         : byte absolute counterLms + $25;
+  zf         : byte absolute counterLms + $26;
+  zg         : byte absolute counterLms + $27;
+  i          : byte absolute $e0;
+  qBoard     : array [0..qSize] of byte absolute $e1;
 
 function check(n, c : byte): boolean;
-var
-  i          : byte absolute $e0;
-  board      : array [0..qSize] of byte absolute qBoard;
 begin
   check := true;
   for i := 1 to (n - 1) do
-    if (board[i] = c) or
-       (byte(board[i] - i) = byte(c - n)) or
-       (byte(board[i] + i) = byte(c + n))
+    if (qBoard[i] = c) or
+       (byte(qBoard[i] - i) = byte(c - n)) or
+       (byte(qBoard[i] + i) = byte(c + n))
     then exit(false);
 end;
 
 procedure generate(n: byte);
 var
-  ze         : byte absolute counterLms + $25;
-  zf         : byte absolute counterLms + $26;
-  zg         : byte absolute counterLms + $27;
   c          : byte;
-  board      : array [0..qSize] of byte absolute qBoard;
 begin
 
   if n > qSize then begin
@@ -39,7 +38,7 @@ begin
   end else
     for c := 1 to qSize do
       if check(n, c) then begin
-        board[n] := c;
+        qBoard[n] := c;
         generate(n + 1);
       end;
 
@@ -48,8 +47,8 @@ end;
 procedure benchmark;
 begin
   FillChar(pointer(counterLms + $23), 5, 0);
-  FillChar(pointer(qBoard), 8, 0);
-  generate(qSize);
+  FillChar(qBoard, 8, 0);
+  generate(1);
 end;
 
 //---------------------- COMMON PROCEDURE --------------------------------------
