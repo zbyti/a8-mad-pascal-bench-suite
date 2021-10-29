@@ -8,7 +8,6 @@ unit permutation;
 
 const
   pSize  = 7;
-  pBoard = $e2;
 
 var
   zc         : byte absolute counterLms + $23;
@@ -18,7 +17,7 @@ var
   zg         : byte absolute counterLms + $27;
   tmp        : byte absolute $e0;
   i          : byte absolute $e1;
-  board      : array [0..pSize] of byte absolute pBoard;
+  board      : array [0..pSize] of byte absolute $e2;
 
 procedure generate(n: byte);
 var
