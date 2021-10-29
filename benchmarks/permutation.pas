@@ -17,6 +17,7 @@ var
   zf         : byte absolute counterLms + $26;
   zg         : byte absolute counterLms + $27;
   tmp        : byte absolute $e0;
+  i          : byte absolute $e1;
   board      : array [0..pSize] of byte absolute pBoard;
 
 procedure generate(n: byte);
@@ -44,8 +45,6 @@ begin
 end;
 
 procedure benchmark;
-var
-  i          : byte absolute $e1;
 begin
   for i := 0 to pSize do board[i] := i;
   FillChar(pointer(counterLms + $23), 5, 0);
