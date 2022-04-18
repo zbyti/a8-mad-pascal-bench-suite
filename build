@@ -5,7 +5,7 @@ mads="$HOME/Programs/mads/mads"
 base="$HOME/Programs/MadPascal/base"
 name="suite"
 
-$mp -data:6000 $name.pas -o
+$mp -data:6000 $name.pas
 
 if [ -f $name.a65 ]; then
   [ ! -d "output" ] && mkdir output
